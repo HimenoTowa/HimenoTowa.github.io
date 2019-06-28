@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="test,">
+  <meta name="keywords" content="Hexo, NexT">
 
 
 
@@ -79,18 +79,17 @@
 
 
 
-<meta name="description" content="what do we learn from school on earth?">
-<meta name="keywords" content="test">
+<meta name="description" content="%%:uuid=190627192722002 vscode：文件-&amp;gt;首选项-&amp;gt;设置{     “editor.renderIndentGuides”: false,    “workbench.colorTheme”: “Quiet Light”,    “files.autoSave”: “onFocusChange”,    “editor.fontSize”: 14,    “">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hello world">
-<meta property="og:url" content="http://yoursite.com/2019/06/23/第二篇/index.html">
+<meta property="og:title" content="land_blog">
+<meta property="og:url" content="http://yoursite.com/2019/06/28/vue2 note/index.html">
 <meta property="og:site_name" content="land_blog">
-<meta property="og:description" content="what do we learn from school on earth?">
+<meta property="og:description" content="%%:uuid=190627192722002 vscode：文件-&amp;gt;首选项-&amp;gt;设置{     “editor.renderIndentGuides”: false,    “workbench.colorTheme”: “Quiet Light”,    “files.autoSave”: “onFocusChange”,    “editor.fontSize”: 14,    “">
 <meta property="og:locale" content="Chinese">
-<meta property="og:updated_time" content="2019-06-23T15:16:16.130Z">
+<meta property="og:updated_time" content="2019-06-28T09:10:47.733Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="hello world">
-<meta name="twitter:description" content="what do we learn from school on earth?">
+<meta name="twitter:title" content="land_blog">
+<meta name="twitter:description" content="%%:uuid=190627192722002 vscode：文件-&amp;gt;首选项-&amp;gt;设置{     “editor.renderIndentGuides”: false,    “workbench.colorTheme”: “Quiet Light”,    “files.autoSave”: “onFocusChange”,    “editor.fontSize”: 14,    “">
 
 
 
@@ -120,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/06/23/第二篇/">
+  <link rel="canonical" href="http://yoursite.com/2019/06/28/vue2 note/">
 
 
 
 
 
-  <title>hello world | land_blog</title>
+  <title> | land_blog</title>
   
 
 
@@ -233,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/23/第二篇/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/28/vue2 note/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="land">
@@ -250,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">hello world</h1>
+          <h1 class="post-title" itemprop="name headline"></h1>
         
 
         <div class="post-meta">
@@ -262,8 +261,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-23T09:28:45+08:00">
-                2019-06-23
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-28T17:12:03+08:00">
+                2019-06-28
               </time>
             
 
@@ -300,9 +299,202 @@
       
 
       
-        <pre><code>what do we learn from school on earth?</code></pre><a id="more"></a>
-<p>没有 <br><br>什么 <br><br>说的 <br></p>
+        <p>%%:uuid=190627192722002</p>
+<p>vscode：<br>文件-&gt;首选项-&gt;设置<br>{
+    “editor.renderIndentGuides”: false,<br>    “workbench.colorTheme”: “Quiet Light”,<br>    “files.autoSave”: “onFocusChange”,<br>    “editor.fontSize”: 14,<br>    “terminal.integrated.fontSize”: 14<br>    “workbench.iconTheme”: “vscode-great-icons”,<br>}</p>
+<p>插件： ESLint<br>gitignore<br>language-stylus<br>Nunjucks<br>View In Browser<br>EditorConfig for VS Code<br>Copy Relative Path<br>Vue VScode Snipplets<br>ctrl+` 打开命令行<br>cd 项目文件夹（不能叫vue）<br>npm init<br>npm i webpack vue vue-loader<br>警告缺依赖的两个包 安装即可：npm i css-loader vue-template-compiler</p>
+<p>“scripts”: {<br>    “test”: “echo &quot;Error: no test specified&quot; &amp;&amp; exit 1”,<br>    “build”: “webpack –config webpack.config.js”<br>  },</p>
+<p>npm run builder</p>
+<p>按照他们的操作还报错，那你在上面的基础上加上<br>{
+test: /.css$/,<br>use: [<br>‘style-loader’,<br>‘css-loader’<br>]
+},</p>
+<p>然后在命令行里面安装这里面所需要的loader（style-loader,css-loader）好像就可以了,你可以试试</p>
+<p>npm i stylus stylus-loader</p>
+<p>npm i webpack-dev-server cross-env html-webpack-plugin</p>
+<p>npm run dev</p>
+<p>vue2介绍<br>vue 数据绑定框架<br>.vue文件开发方式   组件化的框架<br>render方法 数据控制视图MVVM</p>
+<p>API重点<br>生命周期方法<br>computed   是reactive框架  template依赖于data里的东西</p>
+<p>npm i post-css-loader autoprefixer babel-loader babel-core</p>
+<p>npm i babel-preset-env babel-plugin-transform-vue-jsx</p>
+<p>npm i babel-helper-vue-jsx-merge-props<br> npm i babel-plugin-syntax-jsx<br>npm i @babel/core@^7.0.0</p>
+<p>输入#app可以快速写出<div id="app"></div></p>
+<style lang="stylus" scoped> scoped 这里指定的样式只在本组件范围内生效 与别的地方的css的相同id，class不会冲突
 
+.vue中 （结构更清晰）
+<script>
+import Header from './todo/header.vue'
+export default {
+    components:{
+        Header,
+    }
+}
+</script>
+自定义了组件Header（大写为了不与header重复）
+
+<template>
+    <div id="app"> 
+        <div id="cover"></div>
+        <Header></Header>
+    </div>
+</template>
+在template中可使用
+
+.jsx  （功能更强大（js））
+使用js语法  和.vue不同的是
+template内容，也就是html内容 写在render的return里面
+export default {
+  data() {
+    return{
+      author: 'Yumeko'
+    }
+  },
+  render() {
+    return (
+      <div id="footer">
+        <span>Writtern by {this.author}</span>
+      </div>
+    )
+  }
+}
+
+  <div :class="['todo-item', todo.completed ? 'completed' : '']">
+动态class
+
+快捷输入：span.left  =>   <span class="left"></span>
+
+chrome里：
+chrome://apps   下载vue插件，f12可看vue数据
+
+父组件数据通过子组件的props传进子组件
+举例：
+父组件template
+<Item 
+      :todo="todo"
+      v-for="todo in todos"
+      :key="todo.id"
+      @del="deleteTodo"
+    ></Item>
+子组件script
+props: {
+    todo: {
+      type: Object,
+      required: true,
+    }
+}
+子组件可以事件的方式告诉父组件做某一个操作
+
+
+
+传递方法1 通过props把父组件的方法传进子组件
+        子组件在methods里调用传进来的方法
+更流行的： 2子组件 this.$emit触发一个事件 
+           父组件监听@ 或v-on
+2举例： 
+子组件 Item
+methods: {
+    deleteTodo(){
+      this.$emit('del',this.todo.id)
+    }
+  }
+父组件
+template \
+  <item
+    @del="deleteTodo"
+  />  
+methods: {
+    deleteTodo(id) {
+        this.todos.splice(this.todos.findIndex(todo => todo.id === id), 1)
+    }
+}
+优点：解除耦合性，父组件想监听就监听
+
+实在找不到错 ctrl+f5 清缓存刷新网页
+有逻辑更新，找不到错 最好ctrl+f5
+有配置更新，重启npm run dev
+
+尽量把所有数据操作放在顶层
+数据在哪一层声明就在哪一层操作
+
+webpack配置css单独分离打包
+直接 npm run build 发现bundle.js中css也是用的js写的
+要分离，下载 npm i extract-text-webpack-plugin
+
+关于webpack4.0的问题
+https://blog.csdn.net/harsima/article/details/80819747
+
+建议使用npm-check再次校验一下依赖库中有哪些不是最新的
+
+分离css的插件，webpack4.0里已经不适用，解决方法如图
+![图](res:\attach\190627192722002\图.png)
+
+npm uninstall extract-text-webpack-plugin 删除插件
+在之前版本中我们使用extract-text-webpack-plugin来提取CSS文件，不过在webpack 4.x中则应该使用mini-css-extract-plugin来提取CSS到单独文件中
+基于webpack 3.0的Vue项目
+
+const utils = require('./utils')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+module.exports = {
+    //...
+    new ExtractTextPlugin({
+        filename: utils.assetsPath('css/[name].[contenthash:7].css')
+    })
+}
+
+基于webpack 4.0的Vue项目
+
+const utils = require('./utils')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+module.exports = {
+    //...
+    new MiniCssExtractPlugin({
+        filename: utils.assetsPath('css/[name].[contenthash:7].css')
+    })
+}
+--------------------- 
+
+extract-text-webpack-plugin目前版本不支持webpack4。
+
+使用extract-text-webpack-plugin的最新的beta版
+
+npm install extract-text-webpack-plugin@next
+
+第二步 contenthash 改成 chunkhash 
+
+识别不了chunkhash的话，在config内添加：
+optimization: {
+        splitChunks: {
+            cacheGroups: {
+                commons: {
+                    chunks: 'initial',
+                    minChunks: 2, maxInitialRequests: 5,
+                    minSize:0,
+                },
+                vendor: {
+                    test: /node_module/,
+                    chunks: 'initial',
+                    name: 'vendor',
+                    priority: 10,
+                    enforce: true,
+                }
+            }
+        }
+    }
+
+vendor 包含类库代码
+
+hash 每次每个模块的hash值一样
+chunkhash 每个模块不一样  （用来给类库命名）
+
+ config.output.filename = 'vendor.[chunkhash:8].js'  //此处一定是chunkhash,因为用hash时app和vendor的hash码是一样的了,这样每次业务代码更新,vendor也会更新,也就没chunk有了意义.
+
+ '[name].[chunkhash:8].js' 这样写不得行
+
+ chunkhash只能用在生产环境不能用在开发环境
+
+ 从你的图我是看不出什么问题，google了一下都在说热替换影响了chunkhash的使用，你要确保hotModuleReplacementPlugin(）函数没在生产环境下执行，还有个小问题不知道有没有影响，就是图中代码第4行，视频里好像加了#号的
+
+ 解决了吗？是怎么回事呢？
+ 去掉热更新，不要让webpack.HotModuleReplacementPlugin()在plugins里运行 hot:true也注释掉</style>
       
     </div>
     
@@ -317,12 +509,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/test/" rel="tag"># test</a>
-          
-        </div>
-      
 
       
       
@@ -332,8 +518,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/06/23/webpack4.0/" rel="next" title="webpack4.0 changes integration">
-                <i class="fa fa-chevron-left"></i> webpack4.0 changes integration
+              <a href="/2019/06/23/first/" rel="next" title="hello world">
+                <i class="fa fa-chevron-left"></i> hello world
               </a>
             
           </div>
@@ -341,10 +527,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/06/23/first/" rel="prev" title="hello world">
-                hello world <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
