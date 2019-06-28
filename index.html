@@ -251,7 +251,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/06/28/vue2 note/" itemprop="url">Untitled</a></h1>
+                <a class="post-title-link" href="/2019/06/28/vue2 note/" itemprop="url">vue2 note</a></h1>
         
 
         <div class="post-meta">
@@ -263,7 +263,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-28T17:12:03+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-28T09:28:45+08:00">
                 2019-06-28
               </time>
             
@@ -302,204 +302,16 @@
 
       
         
-          
-            <p>%%:uuid=190627192722002</p>
+          <p>%%:uuid=190627192722002</p>
 <p>vscode：<br>文件-&gt;首选项-&gt;设置<br>{
     “editor.renderIndentGuides”: false,<br>    “workbench.colorTheme”: “Quiet Light”,<br>    “files.autoSave”: “onFocusChange”,<br>    “editor.fontSize”: 14,<br>    “terminal.integrated.fontSize”: 14<br>    “workbench.iconTheme”: “vscode-great-icons”,<br>}</p>
-<p>插件： ESLint<br>gitignore<br>language-stylus<br>Nunjucks<br>View In Browser<br>EditorConfig for VS Code<br>Copy Relative Path<br>Vue VScode Snipplets<br>ctrl+` 打开命令行<br>cd 项目文件夹（不能叫vue）<br>npm init<br>npm i webpack vue vue-loader<br>警告缺依赖的两个包 安装即可：npm i css-loader vue-template-compiler</p>
-<p>“scripts”: {<br>    “test”: “echo &quot;Error: no test specified&quot; &amp;&amp; exit 1”,<br>    “build”: “webpack –config webpack.config.js”<br>  },</p>
-<p>npm run builder</p>
-<p>按照他们的操作还报错，那你在上面的基础上加上<br>{
-test: /.css$/,<br>use: [<br>‘style-loader’,<br>‘css-loader’<br>]
-},</p>
-<p>然后在命令行里面安装这里面所需要的loader（style-loader,css-loader）好像就可以了,你可以试试</p>
-<p>npm i stylus stylus-loader</p>
-<p>npm i webpack-dev-server cross-env html-webpack-plugin</p>
-<p>npm run dev</p>
-<p>vue2介绍<br>vue 数据绑定框架<br>.vue文件开发方式   组件化的框架<br>render方法 数据控制视图MVVM</p>
-<p>API重点<br>生命周期方法<br>computed   是reactive框架  template依赖于data里的东西</p>
-<p>npm i post-css-loader autoprefixer babel-loader babel-core</p>
-<p>npm i babel-preset-env babel-plugin-transform-vue-jsx</p>
-<p>npm i babel-helper-vue-jsx-merge-props<br> npm i babel-plugin-syntax-jsx<br>npm i @babel/core@^7.0.0</p>
-<p>输入#app可以快速写出<div id="app"></div></p>
-<style lang="stylus" scoped> scoped 这里指定的样式只在本组件范围内生效 与别的地方的css的相同id，class不会冲突
-
-.vue中 （结构更清晰）
-<script>
-import Header from './todo/header.vue'
-export default {
-    components:{
-        Header,
-    }
-}
-</script>
-自定义了组件Header（大写为了不与header重复）
-
-<template>
-    <div id="app"> 
-        <div id="cover"></div>
-        <Header></Header>
-    </div>
-</template>
-在template中可使用
-
-.jsx  （功能更强大（js））
-使用js语法  和.vue不同的是
-template内容，也就是html内容 写在render的return里面
-export default {
-  data() {
-    return{
-      author: 'Yumeko'
-    }
-  },
-  render() {
-    return (
-      <div id="footer">
-        <span>Writtern by {this.author}</span>
-      </div>
-    )
-  }
-}
-
-  <div :class="['todo-item', todo.completed ? 'completed' : '']">
-动态class
-
-快捷输入：span.left  =>   <span class="left"></span>
-
-chrome里：
-chrome://apps   下载vue插件，f12可看vue数据
-
-父组件数据通过子组件的props传进子组件
-举例：
-父组件template
-<Item 
-      :todo="todo"
-      v-for="todo in todos"
-      :key="todo.id"
-      @del="deleteTodo"
-    ></Item>
-子组件script
-props: {
-    todo: {
-      type: Object,
-      required: true,
-    }
-}
-子组件可以事件的方式告诉父组件做某一个操作
-
-
-
-传递方法1 通过props把父组件的方法传进子组件
-        子组件在methods里调用传进来的方法
-更流行的： 2子组件 this.$emit触发一个事件 
-           父组件监听@ 或v-on
-2举例： 
-子组件 Item
-methods: {
-    deleteTodo(){
-      this.$emit('del',this.todo.id)
-    }
-  }
-父组件
-template \
-  <item
-    @del="deleteTodo"
-  />  
-methods: {
-    deleteTodo(id) {
-        this.todos.splice(this.todos.findIndex(todo => todo.id === id), 1)
-    }
-}
-优点：解除耦合性，父组件想监听就监听
-
-实在找不到错 ctrl+f5 清缓存刷新网页
-有逻辑更新，找不到错 最好ctrl+f5
-有配置更新，重启npm run dev
-
-尽量把所有数据操作放在顶层
-数据在哪一层声明就在哪一层操作
-
-webpack配置css单独分离打包
-直接 npm run build 发现bundle.js中css也是用的js写的
-要分离，下载 npm i extract-text-webpack-plugin
-
-关于webpack4.0的问题
-https://blog.csdn.net/harsima/article/details/80819747
-
-建议使用npm-check再次校验一下依赖库中有哪些不是最新的
-
-分离css的插件，webpack4.0里已经不适用，解决方法如图
-![图](res:\attach\190627192722002\图.png)
-
-npm uninstall extract-text-webpack-plugin 删除插件
-在之前版本中我们使用extract-text-webpack-plugin来提取CSS文件，不过在webpack 4.x中则应该使用mini-css-extract-plugin来提取CSS到单独文件中
-基于webpack 3.0的Vue项目
-
-const utils = require('./utils')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-module.exports = {
-    //...
-    new ExtractTextPlugin({
-        filename: utils.assetsPath('css/[name].[contenthash:7].css')
-    })
-}
-
-基于webpack 4.0的Vue项目
-
-const utils = require('./utils')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-module.exports = {
-    //...
-    new MiniCssExtractPlugin({
-        filename: utils.assetsPath('css/[name].[contenthash:7].css')
-    })
-}
---------------------- 
-
-extract-text-webpack-plugin目前版本不支持webpack4。
-
-使用extract-text-webpack-plugin的最新的beta版
-
-npm install extract-text-webpack-plugin@next
-
-第二步 contenthash 改成 chunkhash 
-
-识别不了chunkhash的话，在config内添加：
-optimization: {
-        splitChunks: {
-            cacheGroups: {
-                commons: {
-                    chunks: 'initial',
-                    minChunks: 2, maxInitialRequests: 5,
-                    minSize:0,
-                },
-                vendor: {
-                    test: /node_module/,
-                    chunks: 'initial',
-                    name: 'vendor',
-                    priority: 10,
-                    enforce: true,
-                }
-            }
-        }
-    }
-
-vendor 包含类库代码
-
-hash 每次每个模块的hash值一样
-chunkhash 每个模块不一样  （用来给类库命名）
-
- config.output.filename = 'vendor.[chunkhash:8].js'  //此处一定是chunkhash,因为用hash时app和vendor的hash码是一样的了,这样每次业务代码更新,vendor也会更新,也就没chunk有了意义.
-
- '[name].[chunkhash:8].js' 这样写不得行
-
- chunkhash只能用在生产环境不能用在开发环境
-
- 从你的图我是看不出什么问题，google了一下都在说热替换影响了chunkhash的使用，你要确保hotModuleReplacementPlugin(）函数没在生产环境下执行，还有个小问题不知道有没有影响，就是图中代码第4行，视频里好像加了#号的
-
- 解决了吗？是怎么回事呢？
- 去掉热更新，不要让webpack.HotModuleReplacementPlugin()在plugins里运行 hot:true也注释掉</style>
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/06/28/vue2 note/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -860,8 +672,7 @@ chunkhash 每个模块不一样  （用来给类库命名）
 
       
         
-          
-            <div class="blog-content-box">
+          <div class="blog-content-box">
   <div class="article-header-box">
     <div class="article-header">
       <div class="article-title-box">
@@ -893,331 +704,13 @@ chunkhash 每个模块不一样  （用来给类库命名）
   &lt;path stroke-linecap=&quot;round&quot; d=&quot;M5,0 0,2.5 5,5z&quot; id=&quot;raphael-marker-block&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);&quot;&gt;&lt;/path&gt;
 &lt;/svg&gt;
 &lt;h1 id=&quot;前言&quot;&gt;&lt;a name=&quot;t0&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;</code></pre><p>Webpack 4.x发布已经有很长时间，听说其性能又有较大的提升。所以在5月中的时候手贱的升级到了最新版本，果不其然出现大量报错。经过一段时间的折腾，解决了很多升级时遇到的坑。原本那时候就打算出个博文的，结果工作一直忙到现在，写文几乎不可能。今天总算是有了时间，所以就分享一下在升级过程中遇到的坑以及我的解决方法。以下将会对涉及到的坑进行逐步说明，其中大部分以Vue项目为例。</p>
-
-
-
-<h1 id="环境及依赖库更新"><a name="t1"></a>环境及依赖库更新</h1>
-
-<p>由于Webpack的更新，很多Loader也必须更新才能适应Webpack的最新版本，在Vue项目中以下Loader必须更新（可能会有遗漏）！！</p>
-
-<div class="table-box"><table>
-<thead>
-<tr>
-  <th align="left">必须更新的loader</th>
-  <th align="right">最低要求版本</th>
-  <th align="right">功能说明</th>
-</tr>
-</thead>
-<tbody><tr>
-  <td align="left">babel-loader</td>
-  <td align="right">7.1.3</td>
-  <td align="right">对最新的ES语法进行转换</td>
-</tr>
-<tr>
-  <td align="left">eslint-loader</td>
-  <td align="right">2.0.0</td>
-  <td align="right">代码检查</td>
-</tr>
-<tr>
-  <td align="left">file-loader</td>
-  <td align="right">1.1.10</td>
-  <td align="right">批量修改文件路径，或者指定编译后文件存储路径</td>
-</tr>
-<tr>
-  <td align="left">vue-loader</td>
-  <td align="right">15.0.0</td>
-  <td align="right">解析、编译vue单文件组件</td>
-</tr>
-<tr>
-  <td align="left">vue-style-loader</td>
-  <td align="right">4.1.0</td>
-  <td align="right">解析、编译vue单文件组件中的样式</td>
-</tr>
-</tbody></table></div>
-
-
-<p>更新以上Loader后，个人建议使用<code>npm-check</code>再次校验一下依赖库中有哪些不是最新的，一些破坏性或重大变更请自行在github上查找，以保证不会出现重大错误。</p>
-
-
-
-<h1 id="webpack-4x-的破坏性变更"><a name="t2"></a>Webpack 4.x 的破坏性变更</h1>
-
-<p>由于Webpack 4.x的重大变更，导致其不再支持部分插件和Loader，其中最闹心的是Chunk分离及文件分离。</p>
-
-<div class="table-box"><table>
-<thead>
-<tr>
-  <th align="center">失效的插件或loader</th>
-  <th align="center">类型</th>
-  <th align="right">功能说明</th>
-</tr>
-</thead>
-<tbody><tr>
-  <td align="center">webpack.optimize.CommonsChunkPlugin</td>
-  <td align="center">内置插件</td>
-  <td align="right">分离Chunk。将多次出现的代码统一打包到一个文件中。Vue工程中用来打包vendor及mainfest</td>
-</tr>
-<tr>
-  <td align="center">webpack.optimize.UglifyJsPlugin</td>
-  <td align="center">内置插件</td>
-  <td align="right">压缩JS</td>
-</tr>
-<tr>
-  <td align="center">extract-text-webpack-plugin</td>
-  <td align="center">Loader</td>
-  <td align="right">分离文件。将部分代码或文件提取到单独文件中。Vue工程里用来分离CSS到指定文件</td>
-</tr>
-</tbody></table></div>
-
-
-<p>如果你之前的项目中使用的是webpack 3.x版本，那么恭喜你，升级到webpack 4.x后，以上列举的这些请在Webpack配置中全部删除相关代码，因为他们已经没用了（摊手）。</p>
-
-
-
-<h2 id="使用configoptimization代替"><a name="t3"></a>使用config.optimization代替</h2>
-
-<p>在Webpack 4.x中，新增了optimization的选项来代替之前版本中的<code>webpack.optimize</code>等。在optimization选项中，我们可以进行详细的设置，以达到分离CSS，分离Chunk，压缩文件等等操作。<a href="https://webpack.js.org/configuration/optimization/" rel="nofollow" target="_blank">点我查看官方文档</a></p>
-
-<p>webpack 4.0</p>
-
-
-
-<pre class="prettyprint" name="code"><code class="language-js hljs has-numbering" onclick="mdcp.copyCode(event)">module.exports = {
-    <span class="hljs-comment">//...</span>
-    optimization: {}
-};<div class="hljs-button {2}" data-title="复制"></div></code><ul class="pre-numbering" style><li style="color: rgb(153, 153, 153);">1</li><li style="color: rgb(153, 153, 153);">2</li><li style="color: rgb(153, 153, 153);">3</li><li style="color: rgb(153, 153, 153);">4</li></ul></pre>
-
-<p>基于webpack 4.0的Vue项目</p>
-
-
-
-<pre class="prettyprint" name="code"><code class="language-js hljs has-numbering" onclick="mdcp.copyCode(event)"><span class="hljs-keyword">const</span> webpackConfig = merge(baseWebpackConfig, {
-    <span class="hljs-comment">//...</span>
-    optimization: {}
-})<div class="hljs-button {2}" data-title="复制"></div></code><ul class="pre-numbering" style><li style="color: rgb(153, 153, 153);">1</li><li style="color: rgb(153, 153, 153);">2</li><li style="color: rgb(153, 153, 153);">3</li><li style="color: rgb(153, 153, 153);">4</li></ul></pre>
-
-
-
-<h2 id="压缩js及css文件"><a name="t4"></a>压缩JS及CSS文件</h2>
-
-<p>由于Webpack 4.x中取消了其内置插件，所以之前的方法都不管用了。这里我推荐大家使用<code>UglifyJsPlugin</code>及<code>OptimizeCSSPlugin</code>插件来代替之前的内置插件，当然如果你只是想简单的压缩，而不做任何配置的话，可以按照官方文档中给出的方法使用<code>optimization.minimizer: true</code>即可。</p>
-
-
-
-<pre class="prettyprint" name="code"><code class="language-js hljs has-numbering" onclick="mdcp.copyCode(event)"><span class="hljs-keyword">const</span> UglifyJsPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">"uglifyjs-webpack-plugin"</span>)
-<span class="hljs-keyword">const</span> OptimizeCSSPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">'optimize-css-assets-webpack-plugin'</span>)
-
-module.exports = {
-    <span class="hljs-comment">//...</span>
-    optimization: {
-        minimizer: [
-            <span class="hljs-comment">// js mini</span>
-            <span class="hljs-keyword">new</span> UglifyJsPlugin({
-              cache: <span class="hljs-literal">true</span>,
-              parallel: <span class="hljs-literal">true</span>,
-              sourceMap: <span class="hljs-literal">false</span> <span class="hljs-comment">// set to true if you want JS source maps</span>
-            }),
-            <span class="hljs-comment">// css mini</span>
-            <span class="hljs-keyword">new</span> OptimizeCSSPlugin({})
-        ]
-    }
-}<div class="hljs-button {2}" data-title="复制"></div></code><ul class="pre-numbering" style><li style="color: rgb(153, 153, 153);">1</li><li style="color: rgb(153, 153, 153);">2</li><li style="color: rgb(153, 153, 153);">3</li><li style="color: rgb(153, 153, 153);">4</li><li style="color: rgb(153, 153, 153);">5</li><li style="color: rgb(153, 153, 153);">6</li><li style="color: rgb(153, 153, 153);">7</li><li style="color: rgb(153, 153, 153);">8</li><li style="color: rgb(153, 153, 153);">9</li><li style="color: rgb(153, 153, 153);">10</li><li style="color: rgb(153, 153, 153);">11</li><li style="color: rgb(153, 153, 153);">12</li><li style="color: rgb(153, 153, 153);">13</li><li style="color: rgb(153, 153, 153);">14</li><li style="color: rgb(153, 153, 153);">15</li><li style="color: rgb(153, 153, 153);">16</li><li style="color: rgb(153, 153, 153);">17</li><li style="color: rgb(153, 153, 153);">18</li></ul></pre>
-
-
-
-<h2 id="分离js文件"><a name="t5"></a>分离JS文件</h2>
-
-<p>在之前版本中，我们使用<code>CommonsChunkPlugin</code>进行文件分离，而在Webpack 4.x中，我们则借助于<code>config.optimization</code>来实现。</p>
-
-<p>webpack 3.0</p>
-
-
-
-<pre class="prettyprint" name="code"><code class="language-js hljs has-numbering" onclick="mdcp.copyCode(event)">module.exports = {
-    <span class="hljs-comment">//...</span>
-    plugins:[
-         <span class="hljs-keyword">new</span> webpack.optimize.CommonsChunkPlugin({
-            name: <span class="hljs-string">'vendor'</span>,
-            minChunks: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(module)</span> {</span>
-                <span class="hljs-comment">// any required modules inside node_modules are extracted to vendor</span>
-                <span class="hljs-keyword">return</span> (
-                    module.resource &amp;&amp;
-                    <span class="hljs-regexp">/\.js$/</span>.test(module.resource) &amp;&amp;
-                    module.resource.indexOf(
-                        path.join(__dirname, <span class="hljs-string">'../node_modules'</span>)
-                    ) === <span class="hljs-number">0</span>
-                )
-            }
-        }),
-    ]
-}<div class="hljs-button {2}" data-title="复制"></div></code><ul class="pre-numbering" style><li style="color: rgb(153, 153, 153);">1</li><li style="color: rgb(153, 153, 153);">2</li><li style="color: rgb(153, 153, 153);">3</li><li style="color: rgb(153, 153, 153);">4</li><li style="color: rgb(153, 153, 153);">5</li><li style="color: rgb(153, 153, 153);">6</li><li style="color: rgb(153, 153, 153);">7</li><li style="color: rgb(153, 153, 153);">8</li><li style="color: rgb(153, 153, 153);">9</li><li style="color: rgb(153, 153, 153);">10</li><li style="color: rgb(153, 153, 153);">11</li><li style="color: rgb(153, 153, 153);">12</li><li style="color: rgb(153, 153, 153);">13</li><li style="color: rgb(153, 153, 153);">14</li><li style="color: rgb(153, 153, 153);">15</li><li style="color: rgb(153, 153, 153);">16</li><li style="color: rgb(153, 153, 153);">17</li><li style="color: rgb(153, 153, 153);">18</li></ul></pre>
-
-<p>webpack 4.0</p>
-
-
-
-<pre class="prettyprint" name="code"><code class="language-js hljs has-numbering" onclick="mdcp.copyCode(event)">module.exports = {
-    <span class="hljs-comment">//...</span>
-    optimization: {
-        splitChunks: {
-            chunks: <span class="hljs-string">'async'</span>,
-            <span class="hljs-comment">// 大于30KB才单独分离成chunk</span>
-            minSize: <span class="hljs-number">30000</span>,
-            maxAsyncRequests: <span class="hljs-number">5</span>,
-            maxInitialRequests: <span class="hljs-number">3</span>,
-            name: <span class="hljs-literal">true</span>,
-            cacheGroups: {
-                <span class="hljs-keyword">default</span>: {
-                    priority: -<span class="hljs-number">20</span>,
-                    reuseExistingChunk: <span class="hljs-literal">true</span>,
-                },
-                vendors: {
-                    name: <span class="hljs-string">'vendors'</span>,
-                    test: <span class="hljs-regexp">/[\\/]node_modules[\\/]/</span>,
-                    priority: -<span class="hljs-number">10</span>,
-                    chunks: <span class="hljs-string">"all"</span>
-                },
-                echarts: {
-                    name: <span class="hljs-string">'echarts'</span>,
-                    chunks: <span class="hljs-string">'all'</span>,
-                    <span class="hljs-comment">// 对echarts进行单独优化，优先级较高</span>
-                    priority: <span class="hljs-number">20</span>,
-                    test: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(module)</span>{</span>
-                        <span class="hljs-keyword">var</span> context = module.context;
-                        <span class="hljs-keyword">return</span> context &amp;&amp; (context.indexOf(<span class="hljs-string">'echarts'</span>) &gt;= <span class="hljs-number">0</span> || context.indexOf(<span class="hljs-string">'zrender'</span>) &gt;= <span class="hljs-number">0</span>)
-                    }
-                }
-            }
-        }
-    }
-}    <div class="hljs-button {2}" data-title="复制"></div></code><ul class="pre-numbering" style><li style="color: rgb(153, 153, 153);">1</li><li style="color: rgb(153, 153, 153);">2</li><li style="color: rgb(153, 153, 153);">3</li><li style="color: rgb(153, 153, 153);">4</li><li style="color: rgb(153, 153, 153);">5</li><li style="color: rgb(153, 153, 153);">6</li><li style="color: rgb(153, 153, 153);">7</li><li style="color: rgb(153, 153, 153);">8</li><li style="color: rgb(153, 153, 153);">9</li><li style="color: rgb(153, 153, 153);">10</li><li style="color: rgb(153, 153, 153);">11</li><li style="color: rgb(153, 153, 153);">12</li><li style="color: rgb(153, 153, 153);">13</li><li style="color: rgb(153, 153, 153);">14</li><li style="color: rgb(153, 153, 153);">15</li><li style="color: rgb(153, 153, 153);">16</li><li style="color: rgb(153, 153, 153);">17</li><li style="color: rgb(153, 153, 153);">18</li><li style="color: rgb(153, 153, 153);">19</li><li style="color: rgb(153, 153, 153);">20</li><li style="color: rgb(153, 153, 153);">21</li><li style="color: rgb(153, 153, 153);">22</li><li style="color: rgb(153, 153, 153);">23</li><li style="color: rgb(153, 153, 153);">24</li><li style="color: rgb(153, 153, 153);">25</li><li style="color: rgb(153, 153, 153);">26</li><li style="color: rgb(153, 153, 153);">27</li><li style="color: rgb(153, 153, 153);">28</li><li style="color: rgb(153, 153, 153);">29</li><li style="color: rgb(153, 153, 153);">30</li><li style="color: rgb(153, 153, 153);">31</li><li style="color: rgb(153, 153, 153);">32</li><li style="color: rgb(153, 153, 153);">33</li><li style="color: rgb(153, 153, 153);">34</li><li style="color: rgb(153, 153, 153);">35</li></ul></pre>
-
-<h2 id="提取css到单独文件"><a name="t6"></a>提取CSS到单独文件</h2>
-
-<p>在之前版本中我们使用<code>extract-text-webpack-plugin</code>来提取CSS文件，不过在webpack 4.x中则应该使用<code>mini-css-extract-plugin</code>来提取CSS到单独文件中</p>
-
-<p>基于webpack 3.0的Vue项目</p>
-
-
-
-<pre class="prettyprint" name="code"><code class="language-js hljs has-numbering" onclick="mdcp.copyCode(event)"><span class="hljs-keyword">const</span> utils = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./utils'</span>)
-<span class="hljs-keyword">const</span> ExtractTextPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">'extract-text-webpack-plugin'</span>)
-module.exports = {
-    <span class="hljs-comment">//...</span>
-    <span class="hljs-keyword">new</span> ExtractTextPlugin({
-        filename: utils.assetsPath(<span class="hljs-string">'css/[name].[contenthash:7].css'</span>)
-    })
-}<div class="hljs-button {2}" data-title="复制"></div></code><ul class="pre-numbering" style><li style="color: rgb(153, 153, 153);">1</li><li style="color: rgb(153, 153, 153);">2</li><li style="color: rgb(153, 153, 153);">3</li><li style="color: rgb(153, 153, 153);">4</li><li style="color: rgb(153, 153, 153);">5</li><li style="color: rgb(153, 153, 153);">6</li><li style="color: rgb(153, 153, 153);">7</li><li style="color: rgb(153, 153, 153);">8</li></ul></pre>
-
-<p>基于webpack 4.0的Vue项目</p>
-
-
-
-<pre class="prettyprint" name="code"><code class="language-js hljs has-numbering" onclick="mdcp.copyCode(event)"><span class="hljs-keyword">const</span> utils = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./utils'</span>)
-<span class="hljs-keyword">const</span> MiniCssExtractPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">'mini-css-extract-plugin'</span>)
-module.exports = {
-    <span class="hljs-comment">//...</span>
-    <span class="hljs-keyword">new</span> MiniCssExtractPlugin({
-        filename: utils.assetsPath(<span class="hljs-string">'css/[name].[contenthash:7].css'</span>)
-    })
-}<div class="hljs-button {2}" data-title="复制"></div></code><ul class="pre-numbering" style><li style="color: rgb(153, 153, 153);">1</li><li style="color: rgb(153, 153, 153);">2</li><li style="color: rgb(153, 153, 153);">3</li><li style="color: rgb(153, 153, 153);">4</li><li style="color: rgb(153, 153, 153);">5</li><li style="color: rgb(153, 153, 153);">6</li><li style="color: rgb(153, 153, 153);">7</li><li style="color: rgb(153, 153, 153);">8</li></ul></pre>
-
-
-
-<h1 id="使用vue-loader-15x"><a name="t7"></a>使用Vue-loader 15.x</h1>
-
-<p>如果你升级到了Webpack 4.x，那么Vue项目的<code>vue-loader</code>也必须更新到15.0以上版本。在Webpack 3.0时，我们不需要对Vue-loader做任何复杂的设置即可达到项目要求，然而如果你是从Webpack 3.0升级上来的旧Vue项目，并且未使用<code>vue-cli</code>来重新设置Webpack配置文件的话，那这个改动量可是很大的。<a href="https://vue-loader.vuejs.org/guide/" rel="nofollow" target="_blank">点我查看官方文档</a></p>
-
-<p>首先，在Webpack 4.x中我们必须显性的引入<code>vue-loader</code>插件</p>
-
-
-
-<pre class="prettyprint" name="code"><code class="language-js hljs has-numbering" onclick="mdcp.copyCode(event)"><span class="hljs-comment">// webpack.base.conf.js</span>
-<span class="hljs-keyword">const</span> VueLoaderPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">'vue-loader/lib/plugin'</span>)
-module.exports = {
-    <span class="hljs-comment">//...</span>
-    plugins: [
-        <span class="hljs-keyword">new</span> VueLoaderPlugin()
-    ]
-}<div class="hljs-button {2}" data-title="复制"></div></code><ul class="pre-numbering" style><li style="color: rgb(153, 153, 153);">1</li><li style="color: rgb(153, 153, 153);">2</li><li style="color: rgb(153, 153, 153);">3</li><li style="color: rgb(153, 153, 153);">4</li><li style="color: rgb(153, 153, 153);">5</li><li style="color: rgb(153, 153, 153);">6</li><li style="color: rgb(153, 153, 153);">7</li><li style="color: rgb(153, 153, 153);">8</li></ul></pre>
-
-<p>其次，我们仍需要修改<code>utils.js</code>文件，满足全新的webpack 4.x语法，防止其出现错误。这里我只放当前修改的代码，其实有些细节还是有待商榷。</p>
-
-
-
-<pre class="prettyprint" name="code"><code class="language-js hljs has-numbering" onclick="mdcp.copyCode(event)"><span class="hljs-comment">//...</span>
-exports.cssLoaders = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(options)</span> {</span>
-    options = options || {}
-
-    <span class="hljs-keyword">const</span> cssLoader = {
-        loader: <span class="hljs-string">'css-loader'</span>,
-        options: {
-            minimize: process.env.NODE_ENV === <span class="hljs-string">'production'</span>,
-            sourceMap: options.sourceMap,
-            importLoaders: <span class="hljs-number">1</span>
-        }
-    }
-
-    <span class="hljs-comment">// generate loader string to be used with extract text plugin</span>
-    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">generateLoaders</span><span class="hljs-params">(loader, loaderOptions)</span> {</span>
-        <span class="hljs-keyword">let</span> loaders = []
-        <span class="hljs-keyword">if</span> (loader) {
-            loaders = [{
-                loader: loader + <span class="hljs-string">'-loader'</span>,
-                options: <span class="hljs-built_in">Object</span>.assign({}, loaderOptions, {
-                    sourceMap: options.sourceMap
-                })
-            }]
-        }
-
-        <span class="hljs-keyword">if</span> (options.extract) {
-            <span class="hljs-keyword">let</span> extractLoader = {
-                loader: MiniCssExtractPlugin.loader,
-                options: {}
-            }
-            <span class="hljs-comment">// 不清楚先后顺序是否影响编译，但当前顺序是正确的</span>
-            <span class="hljs-keyword">return</span> [extractLoader, <span class="hljs-string">'css-loader'</span>].concat([<span class="hljs-string">'postcss-loader'</span>], loaders)
-        } <span class="hljs-keyword">else</span> {
-            <span class="hljs-comment">// 不清楚先后顺序是否影响编译，但当前顺序是正确的</span>
-            <span class="hljs-keyword">return</span> [<span class="hljs-string">'vue-style-loader'</span>, <span class="hljs-string">'css-loader'</span>].concat([<span class="hljs-string">'postcss-loader'</span>], loaders)
-        }
-    }
-
-    <span class="hljs-keyword">return</span> {
-        css: generateLoaders(),
-        postcss: generateLoaders(),
-        less: generateLoaders(<span class="hljs-string">'less'</span>),
-        sass: generateLoaders(<span class="hljs-string">'sass'</span>, { indentedSyntax: <span class="hljs-literal">true</span> }),
-        scss: generateLoaders(<span class="hljs-string">'sass'</span>),
-        stylus: generateLoaders(<span class="hljs-string">'stylus'</span>),
-        styl: generateLoaders(<span class="hljs-string">'stylus'</span>)
-    }
-}
-
-<span class="hljs-comment">// Generate loaders for standalone style files (outside of .vue)</span>
-exports.styleLoaders = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(options)</span> {</span>
-    <span class="hljs-keyword">const</span> output = []
-    <span class="hljs-keyword">const</span> loaders = exports.cssLoaders(options)
-    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> extension <span class="hljs-keyword">in</span> loaders) {
-        <span class="hljs-keyword">const</span> loader = loaders[extension]
-        output.push({
-            test: <span class="hljs-keyword">new</span> <span class="hljs-built_in">RegExp</span>(<span class="hljs-string">'\\.'</span> + extension + <span class="hljs-string">'$'</span>),
-            use: loader
-        })
-    }
-    <span class="hljs-keyword">return</span> output
-}<div class="hljs-button {2}" data-title="复制"></div></code><ul class="pre-numbering" style><li style="color: rgb(153, 153, 153);">1</li><li style="color: rgb(153, 153, 153);">2</li><li style="color: rgb(153, 153, 153);">3</li><li style="color: rgb(153, 153, 153);">4</li><li style="color: rgb(153, 153, 153);">5</li><li style="color: rgb(153, 153, 153);">6</li><li style="color: rgb(153, 153, 153);">7</li><li style="color: rgb(153, 153, 153);">8</li><li style="color: rgb(153, 153, 153);">9</li><li style="color: rgb(153, 153, 153);">10</li><li style="color: rgb(153, 153, 153);">11</li><li style="color: rgb(153, 153, 153);">12</li><li style="color: rgb(153, 153, 153);">13</li><li style="color: rgb(153, 153, 153);">14</li><li style="color: rgb(153, 153, 153);">15</li><li style="color: rgb(153, 153, 153);">16</li><li style="color: rgb(153, 153, 153);">17</li><li style="color: rgb(153, 153, 153);">18</li><li style="color: rgb(153, 153, 153);">19</li><li style="color: rgb(153, 153, 153);">20</li><li style="color: rgb(153, 153, 153);">21</li><li style="color: rgb(153, 153, 153);">22</li><li style="color: rgb(153, 153, 153);">23</li><li style="color: rgb(153, 153, 153);">24</li><li style="color: rgb(153, 153, 153);">25</li><li style="color: rgb(153, 153, 153);">26</li><li style="color: rgb(153, 153, 153);">27</li><li style="color: rgb(153, 153, 153);">28</li><li style="color: rgb(153, 153, 153);">29</li><li style="color: rgb(153, 153, 153);">30</li><li style="color: rgb(153, 153, 153);">31</li><li style="color: rgb(153, 153, 153);">32</li><li style="color: rgb(153, 153, 153);">33</li><li style="color: rgb(153, 153, 153);">34</li><li style="color: rgb(153, 153, 153);">35</li><li style="color: rgb(153, 153, 153);">36</li><li style="color: rgb(153, 153, 153);">37</li><li style="color: rgb(153, 153, 153);">38</li><li style="color: rgb(153, 153, 153);">39</li><li style="color: rgb(153, 153, 153);">40</li><li style="color: rgb(153, 153, 153);">41</li><li style="color: rgb(153, 153, 153);">42</li><li style="color: rgb(153, 153, 153);">43</li><li style="color: rgb(153, 153, 153);">44</li><li style="color: rgb(153, 153, 153);">45</li><li style="color: rgb(153, 153, 153);">46</li><li style="color: rgb(153, 153, 153);">47</li><li style="color: rgb(153, 153, 153);">48</li><li style="color: rgb(153, 153, 153);">49</li><li style="color: rgb(153, 153, 153);">50</li><li style="color: rgb(153, 153, 153);">51</li><li style="color: rgb(153, 153, 153);">52</li><li style="color: rgb(153, 153, 153);">53</li><li style="color: rgb(153, 153, 153);">54</li><li style="color: rgb(153, 153, 153);">55</li><li style="color: rgb(153, 153, 153);">56</li><li style="color: rgb(153, 153, 153);">57</li><li style="color: rgb(153, 153, 153);">58</li><li style="color: rgb(153, 153, 153);">59</li><li style="color: rgb(153, 153, 153);">60</li><li style="color: rgb(153, 153, 153);">61</li><li style="color: rgb(153, 153, 153);">62</li></ul></pre>
-
-<h1 id="总结"><a name="t8"></a>总结</h1>
-
-<p>以上就是我在探索Webpack 4.x时遇到的问题及其解决方法。在最开始探索的时候真的是什么文档也没有，<code>vue-loader</code>的文档中细节也没有现在这么全面，现在文档逐步全面了，大家可能看看官方文档就能知道怎么搞了。不管这篇文章对大家是否起到一定作用，我最后都要说一句：“Webpack的文档真的是烂透了”。</p>
-
-<p>于2018年6月26日 21:15:00</p>          </div>
-          <link href="https://csdnimg.cn/release/phoenix/mdeditor/markdown_views-e44c3c0e64.css" rel="stylesheet">
-                  </div>
-  </article>
-</div></div></div></div>
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/06/23/webpack4.0/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1251,7 +744,7 @@ exports.styleLoaders = <span class="hljs-function"><span class="hljs-keyword">fu
 
 
     
-  </section>
+  </div></div></div></div></div></div></article></section>
 
   
 
@@ -1310,7 +803,7 @@ exports.styleLoaders = <span class="hljs-function"><span class="hljs-keyword">fu
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
