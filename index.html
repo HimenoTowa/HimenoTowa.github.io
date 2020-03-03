@@ -232,6 +232,143 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/03/Atomcpp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yumeko">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yumeko">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/03/03/Atomcpp/" itemprop="url">Atom c++ 环境</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-03T09:14:01+08:00">
+                2020-03-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>devc++用的好好的，不知为何突然就扯拐了，吃着火锅唱着歌就被劫了，源文件未编译，无法解决。<br>devc++确实很好用，界面简洁，反应迅速，十分Great，但有问题就很无奈。<br>只有换颜值更高的Atom了。<br>打开Atom，file-&gt;setting，下载gcc-make-run这个包即可。<br>如果下载不了，报npm cb() can’t callback，就打开cmd，自己输入apm install gcc-make-run，等会儿可看到atom里安装好了。<br>为什么是apm不是npm？因为我不知道什么时候用了淘宝镜像，就变成只能手动下载这个b样了。<br>重启atom，进入gcc-make-run的setting。<br>看这个包的说明可知：若为windows系统，需要下载TDM-GCC这个十分好用的C++ compiler，进入官网，下载64位版，一键安装next到底，它会很贴心地帮你把环境变量添加好。（下载和安装速度都非常快，比某MinGW高到不知道哪里去了）<br>继续按照说明，把这个包的setting里的make utility的内容改为：mingw32-make<br>到此，万事大吉。在文件里右键可以看到编译并运行的快捷键是F6。<br><code>#include &lt;cstdio&gt;
+int main()
+{
+  printf(&quot;hello,world!&quot;);
+  return 0;
+}</code></p>
+<p>以上实测可用。</p>
+<p>//事实上踩了很多坑，但记录坑很没意思，心情都弄的很差，所以仅记录一本道的方法。</p>
+<p>//淘宝镜像：</p>
+<ol>
+<li><p>在 C:\Users\用户名.atom 目录下，新建文件名为 .apmrc 的文本文件，添加:<br>registry=<a href="https://registry.npm.taobao.org/" target="_blank" rel="noopener">https://registry.npm.taobao.org/</a><br>strict-ssl=false</p>
+</li>
+<li><p>通过命令行：npm config set registry <a href="https://registry.npm.taobao.org" target="_blank" rel="noopener">https://registry.npm.taobao.org</a><br>因为 apm 走 npm 源，所以需要更改 npm 源</p>
+</li>
+<li><p>apm install –check // 检查安装环境</p>
+</li>
+</ol>
+<p><img src="./Atomcpp/pic.jpg" alt></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/23/第一篇/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -389,7 +526,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -402,7 +539,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
@@ -439,7 +576,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -472,7 +609,7 @@
 
         
       </div>
-    </footer> 
+    </footer>
 
     
       <div class="back-to-top">
