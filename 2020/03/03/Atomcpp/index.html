@@ -79,19 +79,19 @@
 
 
 
-<meta name="description" content="devc++用的好好的，不知为何突然就扯拐了，吃着火锅唱着歌就被劫了，源文件未编译，无法解决。devc++确实很好用，界面简洁，反应迅速，十分Great，但有问题就很无奈。只有换颜值更高的Atom了。打开Atom，file-&amp;gt;setting，下载gcc-make-run这个包即可。如果下载不了，报npm cb() can’t callback，就打开cmd，自己输入apm install g">
+<meta name="description" content="1 open Atom2 ctrl + ,3 download following packagelinterlinter-gcclinter-ui-defaultgcc-make-run(dowload TDM-GCC if you use Atom on Windows.Then enter gcc-make-run‘s setting, edit  make utility as mingw">
 <meta name="keywords" content="code">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Atom c++ 环境">
 <meta property="og:url" content="http://yoursite.com/2020/03/03/Atomcpp/index.html">
 <meta property="og:site_name" content="Yumeko">
-<meta property="og:description" content="devc++用的好好的，不知为何突然就扯拐了，吃着火锅唱着歌就被劫了，源文件未编译，无法解决。devc++确实很好用，界面简洁，反应迅速，十分Great，但有问题就很无奈。只有换颜值更高的Atom了。打开Atom，file-&amp;gt;setting，下载gcc-make-run这个包即可。如果下载不了，报npm cb() can’t callback，就打开cmd，自己输入apm install g">
+<meta property="og:description" content="1 open Atom2 ctrl + ,3 download following packagelinterlinter-gcclinter-ui-defaultgcc-make-run(dowload TDM-GCC if you use Atom on Windows.Then enter gcc-make-run‘s setting, edit  make utility as mingw">
 <meta property="og:locale" content="Chinese">
 <meta property="og:image" content="http://yoursite.com/images/pics/pic.jpg">
-<meta property="og:updated_time" content="2020-03-04T22:32:27.629Z">
+<meta property="og:updated_time" content="2020-04-27T20:53:06.953Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Atom c++ 环境">
-<meta name="twitter:description" content="devc++用的好好的，不知为何突然就扯拐了，吃着火锅唱着歌就被劫了，源文件未编译，无法解决。devc++确实很好用，界面简洁，反应迅速，十分Great，但有问题就很无奈。只有换颜值更高的Atom了。打开Atom，file-&amp;gt;setting，下载gcc-make-run这个包即可。如果下载不了，报npm cb() can’t callback，就打开cmd，自己输入apm install g">
+<meta name="twitter:description" content="1 open Atom2 ctrl + ,3 download following packagelinterlinter-gcclinter-ui-defaultgcc-make-run(dowload TDM-GCC if you use Atom on Windows.Then enter gcc-make-run‘s setting, edit  make utility as mingw">
 <meta name="twitter:image" content="http://yoursite.com/images/pics/pic.jpg">
 
 
@@ -302,24 +302,29 @@
       
 
       
-        <p>devc++用的好好的，不知为何突然就扯拐了，吃着火锅唱着歌就被劫了，源文件未编译，无法解决。<br>devc++确实很好用，界面简洁，反应迅速，十分Great，但有问题就很无奈。<br>只有换颜值更高的Atom了。<br>打开Atom，file-&gt;setting，下载gcc-make-run这个包即可。<br>如果下载不了，报npm cb() can’t callback，就打开cmd，自己输入apm install gcc-make-run，等会儿可看到atom里安装好了。<br>为什么是apm不是npm？因为我不知道什么时候用了淘宝镜像，就变成只能手动下载这个b样了。<br>重启atom，进入gcc-make-run的setting。<br>看这个包的说明可知：若为windows系统，需要下载TDM-GCC这个十分好用的C++ compiler，进入官网，下载64位版，一键安装next到底，它会很贴心地帮你把环境变量添加好。<br>继续按照说明，把这个包的setting里的make utility的内容改为：mingw32-make<br>到此，万事大吉。在文件里右键可以看到编译并运行的快捷键是F6。<br><code>#include &lt;cstdio&gt;
-int main()
-{
-  printf(&quot;hello,world!&quot;);
-  return 0;
-}</code></p>
-<p>以上实测可用。</p>
-<p>//事实上踩了很多坑，但记录坑很没意思，心情都弄的很差，所以仅记录一本道的方法。</p>
-<p>//淘宝镜像：</p>
-<ol>
-<li><p>在 C:\Users\用户名.atom 目录下，新建文件名为 .apmrc 的文本文件，添加:<br>registry=<a href="https://registry.npm.taobao.org/" target="_blank" rel="noopener">https://registry.npm.taobao.org/</a><br>strict-ssl=false</p>
-</li>
-<li><p>通过命令行：npm config set registry <a href="https://registry.npm.taobao.org" target="_blank" rel="noopener">https://registry.npm.taobao.org</a><br>因为 apm 走 npm 源，所以需要更改 npm 源</p>
-</li>
-<li><p>apm install –check // 检查安装环境</p>
-</li>
-</ol>
-<p>PS： Atom运行c++代码，终端输出utf-8的中文会乱码，解决方法：atom里的setting-&gt;core-&gt;encode改成GBK就不会乱码了。</p>
+        <p>1 open Atom<br>2 ctrl + ,<br>3 download following package<br><strong>linter</strong><br><strong>linter-gcc</strong><br><strong>linter-ui-default</strong><br><strong>gcc-make-run</strong><br>(dowload <a href="https://jmeubank.github.io/tdm-gcc/download/" target="_blank" rel="noopener">TDM-GCC</a> if you use Atom on Windows.<br>Then enter <strong>gcc-make-run</strong>‘s <strong>setting</strong>,
+edit  <strong>make utility</strong> as <em>mingw32-make</em> )<br>4 shutdown 360/电脑管家</p>
+<p><br><br><br><br><br></p>
+<p>FAQ:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">注 若在Atom中下载包失败。自行打开cmd输入apm install gcc-make-run。</span><br><span class="line">注注 &gt;更改为淘宝镜像：</span><br><span class="line">&gt;1. 在 C:\Users\用户名\.atom 目录下，新建文件名为 .apmrc 的文本文件，添加:</span><br><span class="line">&gt;registry=https://registry.npm.taobao.org/</span><br><span class="line">&gt;strict-ssl=false</span><br><span class="line">&gt;2. 通过命令行：npm config set registry https://registry.npm.taobao.org</span><br><span class="line">&gt;因为 apm 走 npm 源，所以需要更改 npm 源</span><br><span class="line">&gt;3.  apm install --check // 检查安装环境</span><br></pre></td></tr></table></figure>
+
+<p>a键新建文件。键入test.cpp。<br>实例代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"hello,world!"</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>press <strong>f6</strong> to compile and run.</p>
+<p>PS： Atom运行c++代码，终端输出utf-8的中文会乱码，解决方法：atom里的setting-&gt;core-&gt;encode改成GBK就不会乱码了。<br>或者在这个文件的右下角点击UTF-8，改成GBK也可。</p>
+<p>PS2：实时检测代码的语法错误：<br><strong>三个包： linter ;  linter-gcc ; linter-ui-default;</strong><br>打开cmd用 apm install xxx 安装。<br><strong>当按ctrl+s保存文件时检查语法错误。</strong><br><strong>关闭360/电脑管家。</strong>（解决卡顿，编译巨慢，甚至ra3启动延迟两分钟等问题，没错，就是红警3）</p>
+<ul>
+<li>随时检查：可以打开linter-gcc的设置中的linter on-the-fly.（但要停用Atom自带的autosave这个包。autosave的功能是重启Atom时项目文件还在，停用的话每次要重开项目文件）</li>
+<li>阻止底部弹窗：可以关闭linter-ui-default的设置中的Show panel.</li>
+<li>有和.cpp一致的最新的.exe文件时，不重复编译，直接运行：可以关闭gcc-make-run中的unconditional build。</li>
+</ul>
+<p>出现问题：<br>linter on-the-fly不实时检测代码错误，甚至不显示代码错误。<br>解决：<br>停用autosave这个包<br>退出所有已经打开的文件，退出项目文件，文件夹名不要带中文，关闭atom，重启atom。</p>
+<p>PS3：按了F6之后，等个七八秒才编译成功。linter on-the-fly也极度地卡，没法用。<br>解决：<strong>关闭360/电脑管家。</strong><br>PS of PS3: 这个问题可真是困扰我好久咧。</p>
+<p>PS4：若需要使用auto（c++11）<br>比如循环</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; vt;</span><br><span class="line">vt.push_back(<span class="number">1</span>);</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> x:vt)<span class="built_in">cout</span>&lt;&lt;x&lt;&lt;<span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+
+<p>在gcc-make-run里link libraries栏中加入 -std=c++11</p>
 <p><img src="/images/pics/pic.jpg" alt></p>
 
       
