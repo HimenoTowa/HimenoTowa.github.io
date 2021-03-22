@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="Chinese">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="扩散问题的重叠局部指数时间差分方法 摘要 ​        最近，基于重叠区域分解的局部指数时间差分（ETD）被引入到粗化动力学的极端尺度相场模拟中，在超级计算机上显示出良好的并行可扩展性。本文是为建立这种方法建立坚实的数学基础的第一步。研究了用标准中心差分在空间离散的含时扩散方程的重叠局部化ETD格式。本文提出并分析了求解完全离散局部化ETD系统的两种方法：第一种是基于施瓦兹迭代的方法，每次迭代">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Yumeko">
+<meta property="og:url" content="http://yoursite.com/20210303/并行计算项目/ETD/区域计算 看有无帮助.html">
+<meta property="og:site_name" content="Yumeko">
+<meta property="og:description" content="扩散问题的重叠局部指数时间差分方法 摘要 ​        最近，基于重叠区域分解的局部指数时间差分（ETD）被引入到粗化动力学的极端尺度相场模拟中，在超级计算机上显示出良好的并行可扩展性。本文是为建立这种方法建立坚实的数学基础的第一步。研究了用标准中心差分在空间离散的含时扩散方程的重叠局部化ETD格式。本文提出并分析了求解完全离散局部化ETD系统的两种方法：第一种是基于施瓦兹迭代的方法，每次迭代">
+<meta property="og:locale" content="Chinese">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315233338070.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315233355693.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315233426234.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315233444018.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315233501744.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315233516852.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315233539770.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315233553904.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315233607857.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315233648253.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315233722390.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315233737648.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315233807297.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315233826193.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315233844871.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315234011491.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315234038048.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315234108381.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315234125624.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315234211644.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315234454236.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315234526865.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315234614380.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315234650560.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315234704571.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315234721662.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315234736758.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315234749721.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315234758921.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315234804274.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315234829239.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315234900570.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315234918666.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315234947139.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315235025181.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315235034606.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315235057847.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210316000318055.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210316000334190.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210316000346525.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210316000354263.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210316000402544.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210316000419580.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210316000436008.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210316000453616.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210316000538939.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210316000624974.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210316000636453.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210316001018317.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210316001025710.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210316001034697.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210316001129084.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210316001143477.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210316001227460.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210316001311903.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210316001322867.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210316001339124.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210319103630190.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210319103713087.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210319103727012.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210319103758742.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210319103829243.png">
+<meta property="og:updated_time" content="2021-03-22T07:23:07.450Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Yumeko">
+<meta name="twitter:description" content="扩散问题的重叠局部指数时间差分方法 摘要 ​        最近，基于重叠区域分解的局部指数时间差分（ETD）被引入到粗化动力学的极端尺度相场模拟中，在超级计算机上显示出良好的并行可扩展性。本文是为建立这种方法建立坚实的数学基础的第一步。研究了用标准中心差分在空间离散的含时扩散方程的重叠局部化ETD格式。本文提出并分析了求解完全离散局部化ETD系统的两种方法：第一种是基于施瓦兹迭代的方法，每次迭代">
+<meta name="twitter:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315233338070.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/20210303/并行计算项目/ETD/区域计算 看有无帮助.html">
+
+
+
+
+
+  <title> | Yumeko</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="Chinese">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yumeko</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+    
+    
+    <div class="post-block page">
+      <header class="post-header">
+
+	<h1 class="post-title" itemprop="name headline"></h1>
+
+
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+        
+        
+          <p>扩散问题的重叠局部指数时间差分方法</p>
+<p>摘要</p>
+<p>​        最近，基于重叠区域分解的局部指数时间差分（ETD）被引入到粗化动力学的极端尺度相场模拟中，在超级计算机上显示出良好的并行可扩展性。本文是为建立这种方法建立坚实的数学基础的第一步。研究了用标准中心差分在空间离散的含时扩散方程的重叠局部化ETD格式。本文提出并分析了求解完全离散局部化ETD系统的两种方法：第一种是基于施瓦兹迭代的方法，每次迭代都在子域内求解平稳问题；第二种是基于施瓦兹波形松弛算法的方法，每次迭代都在子域内求解时变问题每次迭代都会解决问题。严格证明了关联迭代解对相应的全离散局部化ETD解和精确半离散解的收敛性。数值实验验证了理论结果，并对两种方法的性能进行了比较。</p>
+<p>关键词。指数时间差分，重叠区域分解，扩散方程，局部化，并行Schwarz迭代，波形松弛</p>
+<p>1 介绍</p>
+<p>​    指数时间差分（ETD）方法是基于指数积分器和常数变分公式的演化偏微分方程组时间积分的数值方法。许多研究者已经针对不同类型的问题研究了这些方法，例如见[3,5,13,15,16,24,25,27]和其中的参考文献。[14]中给出了这一方向的合理回顾和其他参考文献。除了保持离散意义下系统的指数行为外，这些方法最重要的特性之一是，大时间步长可用于刚性问题，而不影响解的稳定性，而显式方法通常需要很小的时间步长，这在计算成本方面通常非常昂贵。一些快速ETD算法，基于空间算子的紧凑表示和使用线性分裂技术来实现进一步的数值稳定，在[18,19]中成功地应用于材料科学中晶粒粗化现象的数值模拟。</p>
+<p>   ETD方法的主要计算工作是计算矩阵指数和向量的乘法。为了加快ETD模拟的速度，<strong>文[29]首次提出了一种基于重叠区域分解（DD）的局部化紧凑ETD算法，</strong>用于在超级计算机上进行三维粗化动力学的极端尺度相场模拟。在这种方法中，ETD在每个子域中并行地局部执行，然后重叠区域的数据被传递到相应的相邻子域进行时间步进。数值结果表明，该方法具有较高的计算效率和良好的并行可扩展性。</p>
+<p>注意，<strong>这种方法的并行性是基于域（即分区域实现并行）</strong>的，这与[22]中提出的并行自适应Krylov指数解算器完全不同。据我们所知，<strong>对DD的收敛性分析和误差估计都没有进行过理论研究-基于局部ETD方法</strong>。作为建立局部化ETD方法的数学基础的第一步，<strong>我们考虑了一个模型时变扩散方程，并首次对这些方法进行了数值分析，并与空间离散的中心差分方法进行了比较。</strong>然而，我们强调这个方程只作为一个原型问题，其他的空间离散化方法，可能是更高阶的，以及不同类型的半线性抛物问题将在我们未来的研究中考虑。</p>
+<p>特别地，我们研究了重叠子域上具有并行Schwarz-DD的局部化ETD方法。并行Schwarz算法及其序列版本，即交替Schwarz算法，最早由Lions提出[20，21]对于平稳问题，可以直接推广到演化问题，首先对问题进行时间离散化，然后在每个时间步长水平上执行Schwarz迭代（因此，在整个域上使用相同的时间步长）。并行Schwarz算法的一种离散形式称为加法Schwarz算法，该算法已在[1,17]中对抛物问题进行了研究。众所周知，这种算法的收敛性是线性的，并且直接依赖于重叠的大小。基于波形松弛的思想，文[6,9,10,12]提出并研究了一类新的求解抛物型问题的DD方法，即时空DD或重叠Schwarz波形松弛方法。与传统方法不同的是，在每次迭代时，对域进行空间和时间的分解，并在每个子域中求解与时间相关的问题。这种方法，也称为“时间上的全局”方法，允许在不同的子域中使用不同的时间步长，这在不同子域中的时间尺度显著不同的某些应用中非常重要。此外，对于较短的时间间隔，证明了算法的收敛速度是超线性的。因此，可以通过使用时间窗口进行长期计算来利用这一特性。<br>值得注意的是，多域局部化ETD系统与相应的单域ETD系统在代数上是不等价的，这与大多数求解含时问题的数值DD方法不同。利用一阶ETD（ETD1）或二阶ETD-Runge-Kutta（ETD2）逼近，构造了一个完全离散的多域系统，证明了该系统的解收敛于精确的半离散解。为了在实际中求解这样一个系统，我们提出了两种迭代DD方法：第一种是基于施瓦兹迭代的方法，在每个时间步上应用，每次迭代都要在子域上求解平稳问题，而第二种方法是基于Schwarz波形松弛算法，在每次迭代时在子域中求解时间相关问题。然后我们严格地证明了迭代解以与并行Schwarz算法相同的线性率收敛到完全离散的多域局部化ETD解。分析是针对一维问题的，主要基于极大值原理。注意，收敛速度的显式表示只能在这样低维的情况下确定。通过使用[10]中的技术（见备注4.3），对于高维问题可以得到类似的收敛结果。</p>
+<p>第二节介绍了模型问题和分解为两个重叠子域的并行Schwarz方法。为了完整性，我们回顾了文献[6,9,10,12]中给出的Schwarz波形松弛方法的线性和超线性收敛结果。<strong>在第三节中，我们首先利用空间上的中心差分近似和时间上的局部化ETD近似导出了完全离散的多域问题，然后给出了求解多域问题的各种基于DD的Schwarz迭代算法的公式。</strong></p>
+<p>第四节给出了收敛性分析，证明了迭代解收敛于多域局部化ETD解，并进一步沿时间步长收敛于精确半离散解。在第五节中，我们进行了一维和二维的数值实验，研究了所提算法的收敛性，并比较了它们的性能。第6节最后得出了一些结论。</p>
+<p>2模型问题与并行Schwarz波形松弛法</p>
+<p>由于超级计算机和并行计算技术的发展，在过去的几十年中，区域分解方法引起了许多研究者的极大关注（见[4,23,26,28]和DD方法年会论文集）。其主要思想是将计算域分解为大小较小的（重叠或不重叠）子域，然后并行求解子域问题，并在子域之间的接口上施加一些传输条件。在这一节中，我们提出了模型扩散问题的重叠区域分解公式，并回顾了Schwarz波形松弛算法的理论结果。<br>考虑以下具有Dirichlet边界条件的含时一维（空间）扩散方程：</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315233338070.png" alt="image-20210315233338070"></p>
+<p>式中，ν是正常数扩散系数。假设数据足够光滑，存在一个经典解u∈c1（0，T；c2（0，L））。<br>让我们将域Ω=（0，L）分解为两个重叠的子域：Ω1=（0，βL）和Ω2=（αL，L），其中0&lt;α&lt;β&lt;1。可以直接扩展到更多的子域（见[10]和第5节）。</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315233355693.png" alt="image-20210315233355693"></p>
+<p>等价于（2.1）的多域问题包括在子域中求解下列耦合问题：</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315233426234.png" alt="image-20210315233426234"></p>
+<p>（以及子域接口上的传输条件2.4）</p>
+<p>这个多域问题可以用一个Schwarz型迭代迭代求解，如椭圆情况[20]，即并行Schwarz波形松弛算法，它在每次迭代k=0,1，…，时包含</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315233444018.png" alt="image-20210315233444018"></p>
+<p>其中u（0）1（αL，t）和u（0）2（βL，t）是初始猜测。Schwarz算法（2.5）-（2.6）的收敛性由以下定理[9]保证。<br>定理2.1。Schwarz迭代（2.5）-（2.6）在L∞（0，T；L∞（0，L））中以线性速率收敛到（2.2）-（2.4）的解（u 1，u 2）：</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315233501744.png" alt="image-20210315233501744"></p>
+<p>收敛速度类似于平稳情形[20]，并且取决于两个子域之间重叠的大小。此外，对于短时间间隔，收敛速度可能是超线性的（见[6,10,11]）：定理2.2。对于有界时间间隔，（2.5）（2.6）中的迭代序列（u（k）1，u（k）2）超线性收敛：</p>
+<p>定理2.2。对于有界时间间隔，（2.5）（2.6）中的迭代序列（u（k）1，u（k）2）超线性收敛：</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315233516852.png" alt="image-20210315233516852"></p>
+<p>三。基于重叠区域分解的局部ETD算法</p>
+<p>让我们考虑在空间中使用标准的二阶中心差分进行离散，网格大小为h=L/（N+1）。表示为</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315233539770.png" alt="image-20210315233539770"></p>
+<p>这个向量函数表示空间网格点{jh}1≤j≤N处的u的值。<br>对于模型方程（2.1）的相应半离散单域问题，我们得到以下线性常微分方程组： </p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315233553904.png" alt="image-20210315233553904"></p>
+<p>其中u u 0=（u u 0（j））1≤j≤N=（u 0（h），u 0（2h），······，u 0（Nh））&gt;，矩阵A：=A A A（N）是大小为N的对称三对角矩阵，定义为</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315233607857.png" alt="image-20210315233607857"></p>
+<p>除非另有规定，为了简单起见，我们写F（t）：=F（t），ψ1（t），ψ2（t）</p>
+<p>3.1. 单域ETD方案</p>
+<p>对于时间离散化，考虑时间间隔[0，T]：0=T 0&lt;T 1&lt;…&lt;T M=T的划分，步长为∆T=T/M。（3.1）在每个时间水平上的精确（时间）解由常数变化公式给出：</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315233648253.png" alt="image-20210315233648253"></p>
+<p>基于（3.1）求解模型问题（2.1）的一阶（单域）ETD格式（也称为指数Euler方法），用ETD1表示，通过假设F（t）在（t m，t m+1）上是常数得到：</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315233722390.png" alt="image-20210315233722390"></p>
+<p>二阶（单域）ETD-Runge-Kutta格式ETD2通过其线性插值多项式在每个时间间隔（tm，tm+1）上逼近F（t）得到：</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315233737648.png" alt="image-20210315233737648"></p>
+<p>对于高阶指数求积（线性问题）和指数RungeKutta（半线性问题）以及指数多步方法，我们参考了[3,14,27]和其中的参考文献。在本文中，我们将使用ETD1（3.2）或ETD2（3.3）。</p>
+<p>3.2. 局部ETD格式的半离散多域问题和完全离散解</p>
+<p>对于重叠区域分解方法，假设αL=Nαh和βL=Nβh表示一些整数1&lt;Nα&lt;Nβ&lt;N。设置n1：=Nβ−1，n2：=N−Nα和Nβ，α：=Nβ−Nα。与连续问题（2.2）-（2.4）相对应的半离散多域问题包括求解以下两个耦合子域问题（相当于半离散单域问题（3.1））：</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315233807297.png" alt="image-20210315233807297"></p>
+<p>在单域问题中，采用了ETD时间步进法。可以使用ETD1，通过分别求解在Ω1和Ω2中定义的以下耦合局部方程，获得半离散多域问题（3.4）-（3.5）的完全离散解：</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315233826193.png" alt="image-20210315233826193"></p>
+<p>或者，也可以使用ETD2，通过分别求解Ω1和Ω2中定义的以下耦合局部方程，获得半离散多域问题（3.4）-（3.5）的完全离散解：</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315233844871.png" alt="image-20210315233844871"></p>
+<p>对于m=0，…，m−1。我们特别指出，多域局部化ETD格式并不能给出与相应的单域ETD格式完全相同的完全离散解。第4节将证明局域ETD1（3.6）-（3.7）或局域ETD2（3.8）-（3.9）解与（3.4）-（3.5）产生的精确半离散解的收敛性。</p>
+<p>3.3. 基于Schwarz迭代的重叠区域分解算法</p>
+<p>为了计算由局部化ETD格式（3.6）-（3.7）或（3.8）-（3.9）产生的完全离散的多域系统的解，需要用迭代算法在子域中解耦系统。椭圆问题的经典并行Schwarz方法的一个直接扩展是在每一时间步t m处执行Schwarz迭代，并在t m处的{x=αL}和{x=βL}界面上施加传输条件。另一种方法是对连续问题使用第2节中介绍的全局时域分解，其中时间相关问题在子域中求解，信息在时空接口{x=αL∪x=βL}×（0，T）上交换。对于每种方法，我们都使用ETD1或ETD2作为时间推进格式来推导公式。</p>
+<p>3.3.1. 方法1：迭代，局部ETD算法</p>
+<p>对于每个0≤m≤m−1，假设U 1（·，m）和U 2（·，m），我们将通过应用（并行）Schwarz迭代在时间t m+1处找到解。接下来我们构造了两个算法，分别对应于使用ETD1和ETD2格式进行时间积分。</p>
+<p>迭代、局部ETD1算法</p>
+<p>在给定的U（0）1（Nα，m+1）和U（0）2（Nβ，α，m+1）的初始猜测下，我们计算了U（k+1）1（·，m+1）和U（k+1）2（·，m+1）的子域解，其中k=0,1，······························································，</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315234011491.png" alt="image-20210315234011491"></p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315234038048.png" alt="image-20210315234038048"></p>
+<p>迭代、局部ETD2算法</p>
+<p>为了在t m+1处找到解，我们首先从U U 1（·，m）和U U 2（·，m）的已知值计算e U U U 1（·，m+1）和e U U U 2（·，m+1），如下所示</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315234108381.png" alt="image-20210315234108381"></p>
+<p>然后我们设置U U（0）1（Nα，m+1）=e U U 1（Nα，m+1）和U U（0）2（Nβ，α，m+1）=e U U U U 2（Nβ，α，m+1）。<br>根据这个初始猜测，我们可以开始迭代：对于k=0,1，·····， </p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315234125624.png" alt="image-20210315234125624"></p>
+<p>当它收敛（即满足停止准则（3.12））时，我们进入下一时间步。</p>
+<p>3.3.2. 方法2：时间上的全局迭代局部ETD算法</p>
+<p>与方法1不同的是，我们可以在每次迭代中作为更通用的方法来解决与时间相关的问题。对于给定的U（0）1（Nα，·）和U（0）2（Nβ，α，·）在所有时间步上的初始猜测，我们将在（k+1）迭代中计算出U（k+1）1（·，·）和U（k+1）2（·，·，·）在时间上的全局解。</p>
+<p>时间上的全局迭代局部化ETD1算法</p>
+<p>利用ETD1格式，我们并行计算了所有时间步上每个子域的近似解：对于k=0,1，····，</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315234211644.png" alt="image-20210315234211644"></p>
+<p>在这里，每次迭代都涉及到整个时间间隔（0，T）上的子域问题的解，并且信息通过一个时空接口进行全局交换，而不是像方法1中那样在每个时间步按顺序进行。当满足下列条件时，我们停止迭代：</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315234454236.png" alt="image-20210315234454236"></p>
+<p>时间上的全局迭代局部化ETD2算法</p>
+<p>二阶格式可以类似地导出，特别是我们并行地解决了以下子域问题：对于k=0,1，···，·在子域Ω1中：第一次计算</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315234526865.png" alt="image-20210315234526865"></p>
+<p>备注3.1。随着时间相关问题在子域中得到解决，人们可以在子域中使用不同的时间步长，并通过使用l2投影来强制非协调时间网格上的传输条件[7,8]。这种可能性对于时间尺度在子域之间变化几个数量级的应用是非常重要和有用的。</p>
+<p>4收敛性分析</p>
+<p>我们将证明局部ETD1或ETD2解（U U 1（·，m），U 2（·，m））到精确半离散解（U 1（t m），U 2（t m））的收敛性为∆t→0，以及迭代解的收敛性？<br>U（k）1（·，·），U（k）2（·，·）？<br>对应的局域ETD解为k→∞。这些结果保证了两种方法的迭代解收敛到模型问题的精确解。证据主要是</p>
+<p>基于ETD方案的极大值原理和一些类似于[9]的技术。我们将定义以下离散无穷范数：</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315234614380.png" alt="image-20210315234614380"></p>
+<p>4.1. 初步结果</p>
+<p>我们首先给出一些有用的结果。特别地，引理4.1和4.2是定理2.5和[9]推论2.6的完全离散对应物（在时间上用ETD1离散化）。引理4.2对ETD2时间离散化的推广在推论4.1中给出。</p>
+<p>引理4.1。（离散非负性）假设U（·，m），1≤m≤m是以下问题的解：</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315234650560.png" alt="image-20210315234650560"></p>
+<p>其中U（·，0）=U U 0，F F F（t m）=（ψ1（t m），0，…，0，ψ2（t m））&gt;。如果ψ1（t）和ψ2（t）在[0，t]上是非负的，且u0（j）≥0，∀1≤j≤N，则</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315234704571.png" alt="image-20210315234704571"></p>
+<p>证明。在第一次水平t1=∆t时，我们得到：</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315234721662.png" alt="image-20210315234721662"></p>
+<p>矩阵e t A，t≥0具有非负项，因为A A=−2νh 2 I I+M M（I I I I I是单位矩阵，M M M仅包含非负项）和</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315234736758.png" alt="image-20210315234736758"></p>
+<p>利用这一点和（4.2），我们得出结论，当U U 0≥0，F F F（s）≥0，且0≤s≤∆t时，U U（·，1）≥0。通过归纳，证明是完整的。<br>引理4.2。（离散极大值原理）假设U（·，m），1≤m≤m，求解离散扩散方程（4.1），F（t m）=？<br>νh2ψ1（tm），0，…，0，νh2ψ2（tm）？&gt;U（·，0）=0。那么U满足以下不等式：</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315234749721.png" alt="image-20210315234749721"></p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315234758921.png" alt="image-20210315234758921"></p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315234804274.png" alt="image-20210315234804274"></p>
+<p>我们回顾了中心差分格式矩阵A的以下性质：</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315234829239.png" alt="image-20210315234829239"></p>
+<p>备注4.1。如果（4.1）中的U（·，m）近似于ETD1（3.2）或ETD2（3.3），引理4.1和4.2中的结果显然成立。<br>我们进一步提出引理4.2的一个有用的推论。</p>
+<p>推论4.1。假设U（·，m）满足</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315234900570.png" alt="image-20210315234900570"></p>
+<p>证明。用归纳法证明了（4.6）的界。对于m=1，（4.6）作为引理4.2的结果成立。现在假设（4.6）对某个固定m成立，定义一个辅助解</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315234918666.png" alt="image-20210315234918666"></p>
+<p>4.2. 局部化ETD解到精确半离散解的收敛性</p>
+<p>接下来我们给出了一阶ETD方法在非零源项和非齐次Dirichlet边界条件下的详细证明（见定理4.1）。然后将结果推广到二阶情形（见定理4.2）。<br>我们的证明依赖于半离散多域问题（3.4）-（3.5）的精确（时间）解的表示，通过常数变化公式：</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315234947139.png" alt="image-20210315234947139"></p>
+<p>对于m=0，…，m−1，初始条件如（3.4）-（3.5）所示。<br>用e e e i（·，m）=u i（·，t m）−u i（·，m）表示半离散多域问题精确解与完全离散局部化ETD1解之间的误差（3.6）（3.7），满足： </p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315235025181.png" alt="image-20210315235025181"></p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315235034606.png" alt="image-20210315235034606"></p>
+<p>定理4.1。对于足够平滑的数据，局部ETD1方法收敛于∆t趋于0。更准确地说，以下错误界限成立：</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210315235057847.png" alt="image-20210315235057847"></p>
+<p>其中C是一个常数，取决于T、重叠大小、网格大小h、u 0 1（Nα，T）、u 0 2（Nβ，α，T）、源项f和边界数据。</p>
+<p>证明。由（4.7）可知，对于任何0≤m≤m−1：</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210316000318055.png" alt="image-20210316000318055"></p>
+<p>对于所有j=1，…，n1，因为keta1k2≤1。这是由于对称矩阵a1的所有特征值都是负的。使用（4.11），我们可以将（4.10）的最后一项约束为</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210316000334190.png" alt="image-20210316000334190"></p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210316000346525.png" alt="image-20210316000346525"></p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210316000354263.png" alt="image-20210316000354263"></p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210316000402544.png" alt="image-20210316000402544"></p>
+<p>这给了我们（4.9）。如果数据足够平滑，当∆t接近0时，误差将趋于零。<br>局部化ETD2方法的收敛性可以用类似的方法证明。用beei，m表示由（3.4）-（3.5）产生的精确半离散解与完全离散的局部化ETD2解（3.8）-（3.9）之间的误差。我们得到以下结果。<br>定理4.2。对于足够平滑的数据，局部ETD2方法收敛于∆t趋于0。更准确地说，以下错误界限成立：</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210316000419580.png" alt="image-20210316000419580"></p>
+<p>其中C是一个常数，取决于T、重叠大小、网格大小h、u 00 1（Nα，T）、u 00 2（Nβ，α，T）、源项f和边界数据。<br>证明。我们遵循与定理4.1相似的论点，但忽略了一些细节。为简单起见，假设f=0且ψ1=ψ2=0，我们使用泰勒级数两次，余数为积分形式，并写出精确解，例如，在Ω1中，如下所示：</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210316000436008.png" alt="image-20210316000436008"></p>
+<p>注意，γ1，m+1（j），1≤j≤n1，以C∗（∆t）3为界，其中C∗依赖于t∈（0，t）的u 00 2（Nβ，α，t）的上确界。利用注4.1和推论4.1，我们可以得到be1，m的一个界，如下所示：</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210316000453616.png" alt="image-20210316000453616">.</p>
+<p>对于某些常数c1。类似地，我们可以导出be2（·，m）的一个界。遵循与（4.15）等相同的论点，我们最终得到（1-κ（α，β））（kbe e 1（·，·）k∞，T+kbe e e 2（·，·）k∞，T）≤CT（∆T）2，对于某些常数C，取决于网格尺寸h，u u 00 1（Nα，T）和u u 00 2（Nβ，α，T）的上确界在（0，T）上。</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210316000538939.png" alt="image-20210316000538939"></p>
+<p>4.3. Schwarz迭代解对相应局部化ETD解的收敛性</p>
+<p>我们将在定理4.3中证明方法2以类似于连续问题的线性速率收敛（参见定理2.1）。速度只取决于重叠的大小，而不取决于网格大小和时间步长。方法1的收敛性是根据定理4.3得到的（见备注4.2）。<br>定理4.3。迭代的顺序？<br>U（k）1（·，·），U（k）2（·，·）？<br>由方法2给出，局部ETD1算法（3.15）-（3.16）（或局部ETD2（3.17）-（3.18））收敛到（3.6）-（3.7）（或（3.8）-（3.9））中的离散解（U U 1（·，·），U 2（·，·）），如k→∞：</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210316000624974.png" alt="image-20210316000624974"></p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210316000636453.png" alt="image-20210316000636453"></p>
+<p>对于w2也可以证明类似的结果。<br>备注4.2。方法1可视为方法2，只有一个时间步长T=∆T。<br>因此，方法1的收敛性是直接从定理4.3。此外，根据连续Schwarz波形松弛法在短时间间隔内的超线性收敛性（见定理2.2），人们预计在这种情况下，方法1的收敛速度也将取决于时间步长∆t。我们将在下一节研究这两种方法的收敛性与时间步长的关系时进行数值验证。<br>备注4.3。为了便于理解，我们考虑了一维情形，导出了全离散解的收敛常数和迭代解的收敛速度的显式公式。上述分析可再次利用极大值原理扩展到高维问题，并根据重叠δ的大小，用K（δ）&lt;1替换κ（α，β）（连续问题见[10]）。我们将在下一节给出一维和二维例子的数值结果。</p>
+<p>5数值实验</p>
+<p>在本节中，我们数值研究了第3.3节中提出的局部化ETD算法的收敛性和精度。在5.1小节中，一维误差方程研究了方法1（迭代局部化ETD）和方法2（时间上全局迭代局部化ETD）中Schwarz迭代的收敛速度与重叠大小、时间步长和时间间隔长度的关系子域。我们也证明了收敛的情况下，许多子域。<br>在第5.2小节中，我们考虑了一个具有解析解的一维例子，并验证了局部化ETD解的时间精度。最后，我们在第5.3小节中给出了一个2D测试用例的数值结果。</p>
+<p>5.1. 检验Schwarz迭代收敛性的一维误差方程</p>
+<p>空间域Ω=[0,2]被分成两个不重叠的子域eΩ1=[0,1]和eΩ2=[1,2]，具有接口Γ={x=1}。我们将每个eΩi放大一个距离δ∈（0,1），得到重叠的子域Ω1=[0,1+δ]和Ω2=[1-δ，2]。重叠尺寸等于2δ，并与网格尺寸成比例。为了研究这两种方法的收敛性，我们考虑了具有零解的误差方程，即求解具有零源项、零初始条件和齐次Dirichlet边界条件的模型问题。我们从子域间接口的随机初始猜测开始迭代。特别地，对于方法1和在时间步t m（m≥1）处，初始界面猜测值是U（0）1（Nα，m）和U（0）2（Nβ，α，m），而对于方法2，初始猜测包括大小为m的两个向量U（0）1（Nα，·）和U（0）2（Nβ，α，·）。在区间（0,1）中随机选择所有分量。<br>在每次迭代中，我们分别计算方法1和方法2的L∞（Ω）-范数和L∞（0，T，L∞（Ω））范数的误差。请注意，为了显示错误减少，我们将通过第一次迭代的错误来规范化每次迭代的错误。</p>
+<p>收敛与不同重叠尺寸</p>
+<p>我们确定最终时间T=1，网格尺寸h=1/128≈0.0078，时间步长∆T=0.01，取各种δ∈{h，2h，4h，8h，16h}。为了观察重叠大小对收敛速度的影响，我们绘制了不同重叠大小的Schwarz迭代的对数尺度归一化误差。对于方法1，第一时间水平t=∆t的误差如图5.1所示（以下时间水平的迭代次数通常小于第一时间水平，但其收敛行为相似）。<br>显然，重叠的大小越大，收敛的速度就越快。此外，如果使用局部化的ETD2而不是局部化的ETD1，则误差衰减得相当快（几乎为2倍）。<br>对于方法2，整个时间间隔内的误差如图5.2所示。<br>Schwarz迭代的次数是针对整个时间间隔的，而不是方法1中的每个时间级别。我们观察到，在这种情况下，重叠的大小有着深远的影响。<br>然而，我们没有观察到局部ETD1和局部ETD2在获得类似误差减少所需的迭代次数方面的显著差异。<br>在表5.1中，我们比较了方法1的归一化误差| w w（2k）1（Nα，1）| | w w（0）1（Nα，1）|（在第一时间水平t=∆t）的理论和模拟衰减率，以及方法2的| w w（2k）1（Nα，·）| t | w w（0）1（Nα，·）| t（在整个时间间隔内）的衰减率，与不同尺寸的迭代次数有关重叠。我们看到方法2的数值速率与理论相当一致，而对于方法1，误差以线性速率衰减，但比理论预测快得多。对于演化问题，空间区域分解的行为与椭圆问题不同，而且还应考虑</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210316001018317.png" alt="image-20210316001018317"></p>
+<p>图5.1：局部ETD1（左）或局部ETD2（右）的不同重叠尺寸下，方法1的归一化L∞（Ω）误差在t=∆t时的衰减曲线。</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210316001025710.png" alt="image-20210316001025710"></p>
+<p>图5.2：方法2的归一化L∞（0，T，L∞（Ω））误差在[0，T]上对不同尺寸重叠的衰减曲线，局部ETD1（左）或局部ETD2（右）。</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210316001034697.png" alt="image-20210316001034697"></p>
+<p>表5.1：两种方法归一化误差的理论和模拟衰减率。</p>
+<p>时间步长的影响。接下来的结果进一步证实了这种效应。</p>
+<p>收敛与不同时间步长</p>
+<p>我们固定h=1/128，δ=8h，T=1，取不同的时间步长∆T∈{0.2,0.1,0.05,0.025,0.0125}。我们在图5.3中显示了不同时间步长的误差演化曲线（方法1，其中首先计算归一化误差）</p>
+<p>时间水平）和图5.4（方法2，其中在整个时间间隔内计算归一化误差）。对于方法1，很容易发现收敛对时间步长非常敏感-时间步长越小，速度越快；同样，在迭代局部化ETD2的情况下，误差衰减速度比迭代局部化ETD1快得多（现在是3倍）。然而，对于方法2，结果表明它与时间步长无关，特别是当使用局部化ETD2时。<br>因此，可以在不显著增加迭代次数的情况下使用大的时间步长。此外，在相同的迭代次数下，本地化ETD2总是比本地化ETD1产生更小的错误。</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210316001129084.png" alt="image-20210316001129084"></p>
+<p>图5.3：局部ETD1（左）或局部ETD2（右）下，不同时间步长下方法1第一时间水平t=∆t的归一化L∞（Ω）误差衰减曲线</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210316001143477.png" alt="image-20210316001143477"></p>
+<p>图5.4：不同时间步长下方法2归一化L∞（0，T，L∞（Ω））误差在[0，T]上的衰减曲线，局部ETD1（左）或局部ETD2（右）。</p>
+<p>收敛与不同的最终时间</p>
+<p>为了观察方法2的Schwarz迭代的超线性收敛区域，我们确定h=1/128，δ=8h，∆t=0.01，并在图5.5中显示了不同最终时间t∈{0.25,0.5,1,2,4}的误差演化曲线。根据理论预测，如果</p>
+<p>区间变大，收敛速度变为线性。为了在考虑长时间间隔[0，T]时利用超线性收敛性，应该首先将[0，T]划分成更小的子间隔，称为时间窗，然后在每个时间窗上执行Schwarz迭代（连续的时间窗在时间上不重叠）。此外，对于全局时间方法，局部ETD1和ETD2在迭代过程中的衰减率似乎非常相似。</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210316001227460.png" alt="image-20210316001227460"></p>
+<p>图5.5：不同T∈{0.25,0.5,1,2,4}，局部ETD1（左）或局部ETD2（右），方法2的归一化L∞（0，T，L∞（Ω））误差在[0，T]上的衰减曲线。</p>
+<p>不同子域数下的收敛性</p>
+<p>空间域Ω=[0,2]被分成P个不重叠的均匀子域eΩi。然后，将eΩi内部的每个边界点扩大一个距离δ∈（0,1），形成重叠的子域Ωi，重叠的均匀大小等于2δ。在本试验中，我们确定T=0.25，∆T=0.01，δ=4h，h=1/256≈0.0039。我们增加了子域的数目，并观察了子域数目对Schwarz迭代收敛速度的影响。对于P∈{2,4,8,16}，误差衰减曲线的结果如图5.6和5.7所示。我们看到，随着子域数目的增加，收敛性恶化，而ETD2的使用有助于减少这种恶化。请注意，这是区域分解方法的一个众所周知的行为，然后通常还可以使用粗网格来帮助获得与子域数无关的收敛性[2]。</p>
+<p>5.2. 用解析解检验局域ETD解时间精度的一维算例</p>
+<p>考虑空间域Ω=[-1,1]，对于0&lt;δ&lt;1，它被分成两个重叠的子域Ω1=[-1，δ]和Ω2=[-δ，1]。我们解决问题</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210316001311903.png" alt="image-20210316001311903"></p>
+<p>精确解为</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210316001322867.png" alt="image-20210316001322867"></p>
+<p>由精确解相应地确定了非齐次Dirichlet边界条件和初始条件。我们确定网格尺寸h=2/512≈</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210316001339124.png" alt="image-20210316001339124"></p>
+<p>图5.6：方法1的归一化L∞（Ω）误差在不同子域数（P）下的衰减曲线，局部ETD1（左）或局部ETD2（右）。</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210319103630190.png" alt="image-20210319103630190"></p>
+<p>图5.7：方法2的归一化L∞（0，T，L∞（Ω））误差在不同子域数（P）下的衰减曲线，局部ETD1（左）或局部ETD2（右）。</p>
+<p>0.0039，变化∆t∈{1/40,1/80,1/160,1/320}和δ∈{h，2h，4h，8h，16h}。我们想验证两种局部化ETD方法的时间准确性。对于这两种情况，只要相对残差小于给定公差ε，就定义了收敛的局部ETD解：如果使用局部ETD1，则ε=10−4；如果使用局部ETD2，则ε=10−6。局部ETD解（由（3.6）-（3.7）或（3.8）-（3.9））与精确解之间的L∞（0，T，L∞（Ω））-范数的相对误差分别在表5.2和表5.3中针对局部ETD1和局部ETD2进行了计算和呈现，其中括号中的数字是两个连续时间步的误差收敛速度优化级别。我们注意到，一旦完全收敛，两种迭代区域分解算法（方法1和方法2）计算的局部ETD解是相同的。<br>很容易看出，单域（全局）ETD方法和多域局部化ETD方法产生的误差是不同的，这与第4节的讨论是一致的。不同尺寸重叠对应的局域ETD解也不完全相同。我们观察到时间上的精确顺序</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210319103713087.png" alt="image-20210319103713087"></p>
+<p>表5.2：两个子域的局部化ETD1解的相对误差和收敛速度。</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210319103727012.png" alt="image-20210319103727012"></p>
+<p>表5.3：具有两个子区域的局部化ETD2解的相对误差和收敛速度。</p>
+<p>如果重叠的大小足够大，局部ETD格式中的大部分都能得到很好的保留。此外，多域局部化ETD方法给出的误差通常大于单域ETD方法给出的误差，除非使用足够大的重叠和较小的时间步长。</p>
+<p>5.3. 一个二维例子</p>
+<p>空间域为Ω=[0，π]2，T=0.5，精确解为</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210319103758742.png" alt="image-20210319103758742"></p>
+<p>从精确解出发，相应地确定了非齐次Dirichlet边界条件和初始条件。在空间上，我们使用笛卡尔网格，h=π/128；在时间上，我们使用统一的时间步长∆t=t/128。我们考虑将Ω分解为大小相等的重叠正方形，固定重叠大小等于9h。我们改变子域的数量，并对局部化ETD2应用方法1和方法2。在一定的Schwarz迭代次数后，计算了“收敛”的局部化ETD解，并与精确解进行了比较。表5.4给出了不同子域数（每个方向上均匀划分的P×P子域总数）下t=t时局部ETD解与L∞（Ω）-范数精确解之间的误差。括号中列出了相应的迭代次数。</p>
+<p>可以看出，对于足够大的重叠大小，方法1在经过几次迭代（仅P，一个方向上的子域数）后收敛，尽管子域数是多少，并且达到了单域ETD解的精度。然而，对于方法2，收敛速度较慢。需要更多的迭代才能达到预期的效果</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210319103829243.png" alt="image-20210319103829243"></p>
+<p>表5.4：具有不同子域数的局部化ETD解（使用局部化ETD2）与精确解在时间t=t时的L∞（Ω）误差；所使用的Schwarz迭代次数显示在括号中。</p>
+<p>准确度。特别地，如果迭代次数固定为P，则数值误差远大于单域ETD解给出的误差。至少在这个时间步长一致的例子中，方法1似乎比方法2更有效。</p>
+<p>6结论</p>
+<p>本文介绍了两种基于重叠区域分解的含时扩散方程迭代局部化ETD方法：每个时间步迭代的方法1和每次迭代求解含时问题的方法2。对一维（空间）问题的收敛性进行了严格的研究，讨论了高维问题的推广。在一维和二维空间的数值实验表明，两种迭代区域分解算法在每个时间步长或整个时间窗内都是线性收敛的，收敛速度与重叠的大小有关。对于方法1，收敛速度也依赖于时间步长。对于时间窗较短的方法2，它可以超线性收敛。这项工作的结果将有助于进一步研究更复杂、更僵硬的其他离散化问题的局部化ETD方法，其中矩阵指数向量积的计算成本由于较小的子域问题而显著降低。</p>
+
+        
+      </div>
+      
+      
+      
+    </div>
+    
+    
+    
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">yumeko</p>
+              <p class="site-description motion-element" itemprop="description">a blog</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yumeko</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

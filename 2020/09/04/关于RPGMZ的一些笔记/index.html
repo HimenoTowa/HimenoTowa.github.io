@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="Chinese">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="测试中 按住ctrl穿墙跑 F4全屏  F123456789都有用  F5地图 F6事件（ctrl+F搜索事件）  游戏运行中F9查看事件和变量状态  事件中最多20事件页，最右侧优先级最高，如果右边的条件满足，则实现右边的，覆盖左边的 实现黑底白字：画面淡出 显示文字 画面淡入  开启游戏时主角透明（system） 每个格子48x48 推荐： 画面宽度 1296 画面高度 720 人物行走图是4">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Yumeko">
+<meta property="og:url" content="http://yoursite.com/2020/09/04/关于RPGMZ的一些笔记/index.html">
+<meta property="og:site_name" content="Yumeko">
+<meta property="og:description" content="测试中 按住ctrl穿墙跑 F4全屏  F123456789都有用  F5地图 F6事件（ctrl+F搜索事件）  游戏运行中F9查看事件和变量状态  事件中最多20事件页，最右侧优先级最高，如果右边的条件满足，则实现右边的，覆盖左边的 实现黑底白字：画面淡出 显示文字 画面淡入  开启游戏时主角透明（system） 每个格子48x48 推荐： 画面宽度 1296 画面高度 720 人物行走图是4">
+<meta property="og:locale" content="Chinese">
+<meta property="og:image" content="f:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904151239307.png">
+<meta property="og:image" content="f:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904152544213.png">
+<meta property="og:image" content="f:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904153401520.png">
+<meta property="og:image" content="f:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904153437041.png">
+<meta property="og:image" content="f:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904153926820.png">
+<meta property="og:image" content="f:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904160232783.png">
+<meta property="og:image" content="f:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904172833705.png">
+<meta property="og:image" content="f:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904173002197.png">
+<meta property="og:image" content="f:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904173744470.png">
+<meta property="og:image" content="f:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904174535491.png">
+<meta property="og:image" content="f:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904203748969.png">
+<meta property="og:image" content="f:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904203923933.png">
+<meta property="og:image" content="f:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904210123707.png">
+<meta property="og:image" content="f:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904210310652.png">
+<meta property="og:image" content="f:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904210547510.png">
+<meta property="og:image" content="f:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904210920176.png">
+<meta property="og:image" content="f:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904211507560.png">
+<meta property="og:image" content="f:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904211735698.png">
+<meta property="og:image" content="f:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904211913010.png">
+<meta property="og:image" content="f:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904212120454.png">
+<meta property="og:image" content="f:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904212715698.png">
+<meta property="og:image" content="f:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904212911965.png">
+<meta property="og:image" content="f:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904213242555.png">
+<meta property="og:image" content="f:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904213302969.png">
+<meta property="og:image" content="f:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904213840913.png">
+<meta property="og:image" content="f:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904214943560.png">
+<meta property="og:image" content="f:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904215330086.png">
+<meta property="og:image" content="f:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904215507506.png">
+<meta property="og:image" content="f:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904215607855.png">
+<meta property="og:image" content="f:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904215732044.png">
+<meta property="og:updated_time" content="2020-09-04T13:57:57.577Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Yumeko">
+<meta name="twitter:description" content="测试中 按住ctrl穿墙跑 F4全屏  F123456789都有用  F5地图 F6事件（ctrl+F搜索事件）  游戏运行中F9查看事件和变量状态  事件中最多20事件页，最右侧优先级最高，如果右边的条件满足，则实现右边的，覆盖左边的 实现黑底白字：画面淡出 显示文字 画面淡入  开启游戏时主角透明（system） 每个格子48x48 推荐： 画面宽度 1296 画面高度 720 人物行走图是4">
+<meta name="twitter:image" content="f:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904151239307.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/09/04/关于RPGMZ的一些笔记/">
+
+
+
+
+
+  <title> | Yumeko</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="Chinese">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yumeko</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/04/关于RPGMZ的一些笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yumeko">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yumeko">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-04T14:26:14+08:00">
+                2020-09-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>测试中 按住ctrl穿墙跑</p>
+<p>F4全屏  F123456789都有用  F5地图 F6事件（ctrl+F搜索事件）  游戏运行中<strong>F9</strong>查看事件和变量状态 </p>
+<p>事件中最多20事件页，最右侧优先级最高，如果右边的条件满足，则实现右边的，覆盖左边的</p>
+<p>实现黑底白字：画面淡出 显示文字 画面淡入 </p>
+<p>开启游戏时主角透明（system）</p>
+<p>每个格子48x48</p>
+<p>推荐：</p>
+<p>画面宽度 1296</p>
+<p>画面高度 720</p>
+<p>人物行走图是4行3列，分别是上左右下</p>
+<p>通过：（用玩家开透明，开穿透，移动玩家 ）来操控相机移动，隐形的玩家来触发事件使其切换场景。</p>
+<p>移动路线可以预览</p>
+<p>说话的时候文本加\操作、气泡、行走、更加生动</p>
+<p>画地图，右键取区块，右键按住拖动取多块，按住shift选取可单取一个图块，不跟随旁边的变形</p>
+<p>character文件夹里的图片，<strong>带!的</strong>是稍微向下挪位置的图，比如宝箱，<strong>带$的</strong>是大小超过48x48的图，图像上可以超过多个格子，但判定还是单个格子。</p>
+<p>步行动画、踏步动画、固定朝向全打勾，那么行走图就在某一行循环</p>
+<p>人物对话选择肢，通过<strong>标签</strong>和<strong>转到标签</strong>来控制，相当于goto语句</p>
+<p><strong>在地图某角落建一个事件</strong>，自动执行，相当于一个全局控制器，操控各个事件进行剧场表演，比如移动，隐形玩家控制相机移动，冒出气泡，对话，操控开关（如：离开酒馆on，出门后，如果离开酒馆为on，则继续全局控制剧场）</p>
+<p>追逐战中的全局控制器，并行执行，给某个单位<strong>（显示动画）</strong>，再等待180帧，这样就实现循环播放动画，增加追逐者的压迫感。在动画数据库改大小和音量。</p>
+<p>开关的另一种实现：选择支</p>
+<p>如果 获得钥匙 为 ON</p>
+<p>  干嘛</p>
+<p>否则</p>
+<p>  干嘛</p>
+<p>这样就不用开两个事件页了。</p>
+<p>暂时消除事件：本场景里暂时消失，切换场景后又恢复</p>
+<p>独立开关：阅后即焚。该开关只在本事件的最多20个事件页里生效</p>
+<p>中止事件处理：直接结束事件，但事件不消失</p>
+<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><p>比如四把钥匙才能开门，那么整个钥匙变量，&gt;=4时开门。</p>
+<p><img src="F:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904151239307.png" alt="image-20200904151239307"></p>
+<p>\V[1] 取变量编号为1的值</p>
+<p><img src="F:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904152544213.png" alt="image-20200904152544213"></p>
+<p>帐篷九个图块，用九个事件块，上边三个事件设置优先级在人物上方，这样可以遮住主角，可以通过。</p>
+<p>当收集完成时，播放动画，九个图块凑成的帐篷出现。</p>
+<p>角落设一个事件，并行处理，计时器，2分钟。</p>
+<blockquote>
+<p>分支条件  当 计时器 &lt;= 0分0秒</p>
+<p>  计时停止</p>
+<p>  失败</p>
+<p>  game over</p>
+<p>当  收集 &gt; 目标</p>
+<p>  计时停止</p>
+<p>  成功</p>
+<p>  独立开关A = ON</p>
+</blockquote>
+<p>system1 ： 启用自动保存（战斗胜利或者场所转移）</p>
+<p><img src="F:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904153401520.png" alt="image-20200904153401520"></p>
+<p><img src="F:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904153437041.png" alt="image-20200904153437041"></p>
+<p>要自动保存，让玩家原地转移即可。</p>
+<p><img src="F:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904153926820.png" alt="image-20200904153926820"></p>
+<p>通过事件页切换手动将事件搞成动画</p>
+<p>1 (开关左)            -&gt;            2 （开关中）             -&gt;           3（开关右）</p>
+<p>独立开关A ON                 wait20帧  A OFF B  ON        wait20帧        B OFF</p>
+<p>  确定键                                 并行处理                                   确定键</p>
+<p>音效switch1                                                                           音效switch2</p>
+<p>抽卡系统</p>
+<p>变量随机数1~100</p>
+<p>变量 &gt;=1      </p>
+<p>   动画   等待</p>
+<p>   木头箱子</p>
+<p>变量 &gt;=10</p>
+<p>   铁箱子</p>
+<p>变量 &gt;= 44</p>
+<p>   铜箱子</p>
+<p>变量 &gt;= 97</p>
+<p>  黄金箱子</p>
+<p>变量 &gt;= 100</p>
+<p>   特殊队友</p>
+<p>小艇不能去深水区（图块第二列，如果是水，就是深水区）</p>
+<p>MZ可以直接变量获取人物位置（区域），MV是变量获取玩家位置X和Y</p>
+<p><img src="F:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904160232783.png" alt="image-20200904160232783"></p>
+<p>当前所在的区域是\V[9]</p>
+<p>–技能</p>
+<p>保留—-</p>
+<p>将来高级的技能写在这里  因为对于半回合制和即时制，高级技能在最后一页太难翻了，所以保留前面的空位</p>
+<p>—ddd</p>
+<p><img src="F:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904172833705.png" alt="image-20200904172833705"></p>
+<p>人物特殊技能可以设置免疫死亡，物理%1000防御，保留tp等等</p>
+<p><img src="F:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904173002197.png" alt="image-20200904173002197"></p>
+<p>武器可以给角色增加技能</p>
+<p>技能的需要武器1、2，只要有1或者2都可以使用该技能</p>
+<p><img src="F:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904173744470.png" alt></p>
+<p>不死之身，但是如果回合结束生命值为0也会死，所以加一个自动回复生命</p>
+<p><img src="F:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904174535491.png" alt="image-20200904174535491"></p>
+<h2 id="公共事件-共通事件-common-event"><a href="#公共事件-共通事件-common-event" class="headerlink" title="公共事件 共通事件 common event"></a>公共事件 共通事件 common event</h2><p>名字               自动执行/并行执行/无                  开关</p>
+<p>公共事件写好后，相当于一个函数，可以在普通事件中调用。（直接调用）</p>
+<p>或者通过开关条件，比如第三栏开关里写 哈哈=ON， 那么普通事件设定哈哈=ON就会执行这个公共事件。</p>
+<p>如果没有满足哈哈=ON，直接调用公共事件呢？答案：也会执行。</p>
+<p>公共事件里的独立开关作用范围？答案：调用该公共事件的普通事件内。</p>
+<p>比如 </p>
+<p>普通事件：</p>
+<p>选择支如果   </p>
+<p>​      打开天气系统=ON                                                      公共事件：xxx  ， 独立开关=ON</p>
+<p>否则</p>
+<p>​      该事件已经触发过啦</p>
+<p><img src="F:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904203748969.png" alt="image-20200904203748969"><img src="F:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904203923933.png" alt="image-20200904203923933"></p>
+<p>一些指令：</p>
+<p>数值输入指令（密码箱）最多八位</p>
+<p>物品选择器</p>
+<p><strong>循环</strong></p>
+<p>​     if   木头 &gt;= 10</p>
+<p>​           伐木结束</p>
+<p>​            <strong>跳出循环</strong></p>
+<p>​    否则</p>
+<p>​          等待10s</p>
+<p>​          艾说话正在伐木</p>
+<p>​          木头+=1</p>
+<p>ID：右键点击地图，可以看到ID</p>
+<p><img src="F:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904210123707.png" alt="image-20200904210123707"></p>
+<p>PS的信息功能，可以看到当前的坐标，然后MZ里显示图片</p>
+<p>左上/中间为0,0  就可以根据这个位置设定位置</p>
+<p><img src="F:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904210310652.png" alt="image-20200904210310652"></p>
+<p>这样实现图片的淡入</p>
+<p><img src="F:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904210547510.png" alt="image-20200904210547510"></p>
+<p>还可以在plugin里找到官方自添加的ZOOM，缩放相机镜头</p>
+<p>MZ支持视频为webm和mp4（最好是h264）</p>
+<p><img src="F:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904210920176.png" alt="image-20200904210920176"></p>
+<p>可以在事件里取消显示名称</p>
+<p>让游戏里玩家可以输入中文名字，<strong>改代码！</strong>：</p>
+<p><img src="F:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904211507560.png" alt="image-20200904211507560"></p>
+<p><img src="F:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904211735698.png" alt="image-20200904211735698"></p>
+<p><img src="F:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904211913010.png" alt="image-20200904211913010"></p>
+<p><img src="F:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904212120454.png" alt="image-20200904212120454"></p>
+<p>直接召唤载具乘上去</p>
+<p>effectseer 软件  可以浏览特效文件</p>
+<p>改游戏图标，直接改icon.png 128*128</p>
+<p>plugin 在 js 文件夹里</p>
+<p><img src="F:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904212715698.png" alt="image-20200904212715698"></p>
+<p>battlebacks需要比游戏画面大，否则用画面震动会产生不融洽感，建议比画面大个15%</p>
+<p><img src="F:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904212911965.png" alt="image-20200904212911965"></p>
+<p>行走图等比例放大可行</p>
+<p>图片前加! 下沉12像素   加$代表大图</p>
+<p><img src="F:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904213242555.png" alt="image-20200904213242555"></p>
+<p><img src="F:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904213302969.png" alt="image-20200904213302969"></p>
+<p><img src="F:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904213840913.png" alt="image-20200904213840913"></p>
+<p>物品每行个数固定，可以增加行数</p>
+<p><img src="F:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904214943560.png" alt="image-20200904214943560"></p>
+<p>上一代教程教了安卓打包</p>
+<p>MZ的话可以用相同方法。先部署成浏览器用文件，然后打包安卓。（<strong>现在这些方法比如apache ant、crosswalk之类的，已经比较过时了</strong>）</p>
+<p>推荐使用：apache cordova</p>
+<p><img src="F:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904215330086.png" alt="image-20200904215330086"></p>
+<p>云打包</p>
+<p>推荐<img src="F:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904215507506.png" alt="image-20200904215507506"></p>
+<p><img src="F:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904215607855.png" alt="image-20200904215607855"></p>
+<p>上面是云端打包，下面是本地。标准版比较简单</p>
+<p>往Hbuilder导入之前导出的浏览器项目。发行、本地app</p>
+<p><img src="F:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200904215732044.png" alt="image-20200904215732044"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/09/03/Godot notes 2/" rel="next" title>
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/09/07/Godot notes 3/" rel="prev" title>
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">yumeko</p>
+              <p class="site-description motion-element" itemprop="description">a blog</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#变量"><span class="nav-number">1.</span> <span class="nav-text">变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#公共事件-共通事件-common-event"><span class="nav-number">2.</span> <span class="nav-text">公共事件 共通事件 common event</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yumeko</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

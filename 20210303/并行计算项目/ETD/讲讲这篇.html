@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="Chinese">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="辐射诱导缺陷动力学的有效模拟：团簇动力学方法 摘要 ​        团簇动力学已被证明是模拟长时间尺度辐照下微观结构演化的一种有效方法，特别是当速率方程以确定性方法求解时。然而，当方程的个数较大时（即除了自身缺陷之外，还存在溶质原子时），数值求解就会变得困难。我们展示了如何将速率方程与Fokker-Planck方程无缝耦合，并显著提高数值算法的效率。我们将这些方法应用于【氦注入α-铁，然后高温退">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Yumeko">
+<meta property="og:url" content="http://yoursite.com/20210303/并行计算项目/ETD/讲讲这篇.html">
+<meta property="og:site_name" content="Yumeko">
+<meta property="og:description" content="辐射诱导缺陷动力学的有效模拟：团簇动力学方法 摘要 ​        团簇动力学已被证明是模拟长时间尺度辐照下微观结构演化的一种有效方法，特别是当速率方程以确定性方法求解时。然而，当方程的个数较大时（即除了自身缺陷之外，还存在溶质原子时），数值求解就会变得困难。我们展示了如何将速率方程与Fokker-Planck方程无缝耦合，并显著提高数值算法的效率。我们将这些方法应用于【氦注入α-铁，然后高温退">
+<meta property="og:locale" content="Chinese">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311111630415.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311111915186.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311111938957.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311112153687.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311112219934.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311112255053.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311112330183.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311112416717.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311112452816.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311112516153.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311112538887.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311112624236.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311112645580.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311112727648.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311112754388.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311112836069.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311112929099.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311112957357.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311113023568.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311113100977.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311113329933.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311113358481.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311113407125.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311113429596.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311113515841.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311113533547.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311113603496.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311113650032.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311113659373.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311113740965.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311113809033.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311113827623.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311113906799.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311113929943.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311113947155.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311114236591.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311114305206.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311114321100.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311114449446.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311114509510.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311115016493.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311115036322.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311115056313.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311115112424.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311115130477.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311115149860.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311115225339.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311115240458.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311115303004.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311115328991.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311115346246.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311115434559.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311115451521.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311115514718.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311115530235.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311115547463.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311115603109.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311115617304.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311115645625.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311115702965.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311115716612.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311115730618.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311115745060.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311115804224.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311115828505.png">
+<meta property="og:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311115844176.png">
+<meta property="og:updated_time" content="2021-03-15T10:31:19.985Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Yumeko">
+<meta name="twitter:description" content="辐射诱导缺陷动力学的有效模拟：团簇动力学方法 摘要 ​        团簇动力学已被证明是模拟长时间尺度辐照下微观结构演化的一种有效方法，特别是当速率方程以确定性方法求解时。然而，当方程的个数较大时（即除了自身缺陷之外，还存在溶质原子时），数值求解就会变得困难。我们展示了如何将速率方程与Fokker-Planck方程无缝耦合，并显著提高数值算法的效率。我们将这些方法应用于【氦注入α-铁，然后高温退">
+<meta name="twitter:image" content="c:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311111630415.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/20210303/并行计算项目/ETD/讲讲这篇.html">
+
+
+
+
+
+  <title> | Yumeko</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="Chinese">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yumeko</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+    
+    
+    <div class="post-block page">
+      <header class="post-header">
+
+	<h1 class="post-title" itemprop="name headline"></h1>
+
+
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+        
+        
+          <p>辐射诱导缺陷动力学的有效模拟：团簇动力学方法</p>
+<p>摘要</p>
+<p>​        团簇动力学已被证明是模拟长时间尺度辐照下微观结构演化的一种有效方法，特别是当速率方程以确定性方法求解时。然而，当方程的个数较大时（即除了自身缺陷之外，还存在溶质原子时），数值求解就会变得困难。<u>我们展示了如何将<strong>速率方程</strong>与<strong>Fokker-Planck方程</strong>无缝耦合，并显著提高数值算法的效率。</u>我们将这些方法应用于【氦注入α-铁，然后高温退火】的情况，以分析对其表面气泡粗化的影响。<br>关键词：团簇动力学，速率理论，福克-普朗克方程，辐照，铁，氦</p>
+<p>1 介绍</p>
+<pre><code>材料在辐照下微观结构演化的**模拟** **需要**能够有效模拟长时间尺度现象的**方法**，如形成沉淀，气泡的结晶、长大和粗化。这些现象是在很短的时间尺度上发生的基本事件的结果，应该对其进行适当的描述以再现最终的微观结构。这种现象的一个显著例子是位移级联中缺陷的不断产生和演化，**其典型的时间尺度是跨距几个数量级**[1]，从级联初始发展的皮秒到缺陷长程扩散的秒。</code></pre><p>​        原子尺度动力学蒙特卡罗（AKMC）等精确的模拟技术<strong>无法达到大的辐照剂量</strong>，部分<strong>原因</strong>是系统中的<strong>所有原子都是模拟的</strong>。</p>
+<p>一些粗粒度方法，如对象动力学蒙特卡罗（OKMC）[2,3]，<strong>只保留缺陷</strong>，因此效率更高。即使在这种情况下，【<strong>一些现象在很短的时间尺度上发生</strong>】的事实也大大<strong>降低了方法的效率</strong>，因为它们所用的时间步长很小。</p>
+<p>如果仅使用缺陷集中来进一步近似建模，则问题可以表示为<strong>常微分方程组（ODEs）</strong>。这是<strong>集群动力学（CD）</strong>中使用的形式主义，它模拟所有集群类型的演化，<strong>每个集群类型使用一个速率方程</strong>。虽然比OKMC更有效率，但是随机求解速率方程[4，5]并没有带来计算时间的巨大改进，因为时间尺度仍然是由最频繁的事件所强加的。因此，确定性求解是一个特别有趣的问题。然而，一<strong>些事件比其他事件发生得更频繁的事实可能是ODE系统僵硬的原因之一</strong>，这使得它们难以用<strong>显式</strong>方法求解。为了<strong>避免太小的积分时间步长</strong>，<strong>隐式</strong>方法是必要的，这需要求解<strong>线性方程组</strong>。对于包含<strong>大量簇</strong>类型的物理系统，这些线性系统可能会变大，因此计算时间和内存需求会使模拟变得不可行。//</p>
+<p>​        由于CD方程的数值求解，可以设想<strong>两种方法来减少计算负担</strong>。</p>
+<p>1通过将速率方程近似为Fokker-Planck方程[6]，或将速率方程分为若干类[7]，可以<strong>减少要求解的方程的数量</strong>。这种近似允许解决复杂的问题，但是当例如引入空间维度时，仍然需要很长的模拟时间。</p>
+<p>2另一种提高效率的方法是<strong>利用线性系统中矩阵的稀疏性</strong>。</p>
+<p><u>在本文中，我们给出了<strong>这两种方法的示例</strong>，它们<strong>都已在CD代码CRESCENDO 1中实现</strong>。在简要介绍了本程序中包含的物理模型之后，我们证明了将严格的速率方程与Fokker-Planck方程的离散化相耦合是可能的，并且极大地加快了计算速度。</u></p>
+<p>作为一个例子，我们使用CRESCENDO来模拟氦注入α-铁时的注量为1016cm−2，然后在1073k下退火两种情况，具有薄箔几何形状和大块。讨论了表面对氦注入气泡粗化的影响。</p>
+<p>2 CRESCENDO（渐强）的总体描述</p>
+<p>​        CRESCENDO是一个CD代码，旨在<strong>模拟</strong>由于各种现象（如辐照、团簇之间的反应以及与sinks（主要是位错和晶界）的相互作用）导致的大剂量<strong>团簇的演化</strong>。CD模拟包括<strong>求解团簇浓度Cν的微分方程组，其中ν表示团簇类型</strong>。团簇<strong>类型</strong>（或类别）通常由构成团簇的<strong>基本组分</strong>的<strong>数量</strong>来定义，例如<strong>间隙interstitials、空位vacancies和溶质solute或气体原子gas atoms。</strong></p>
+<p>​        代码由不同的模型组成，这些模型共享一个通用部分。<strong>通用部分</strong>主要包括<strong>速率方程空间相关性的处理</strong>（见第2.1节）。目前，代码包含<strong>两个模型</strong>：Sizmann[8]的<strong>简单速率理论模型</strong>（仅描述单空位和单间隙的演化）和一个更复杂的模型，称为<strong>IVS模型</strong>，该模型在第2.2节中描述，将在本文的其余部分使用。</p>
+<p>2.1. 速率方程的空间相关性</p>
+<p>​        在最简单的情况下，CD方程是<strong>常微分方程</strong>，这意味着模拟材料的微观结构是<strong>均匀</strong>的。有时有必要放宽这一假设，例如当模拟系统是一个薄箔时。表面对团簇空间分布的影响非常重要，因此必须引入速率方程的<strong>一维空间相关性</strong>。值得注意的是，团簇浓度的变化不应太陡，这样系统<strong>仍然可以被认为是局部均匀</strong>的，并在平均场形式中处理。因此，<strong>在箔厚度w箔上求解偏微分方程（PDE）是可行的</strong></p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311111630415.png" alt="image-20210311111630415"></p>
+<p>式中，Cµ是 流动 物种 的浓度µ，它是浓度矢量~C的一部分，Dµ是局部扩散系数，Jd是扩散通量，Rmodel，µ是特定于给定模型的方程的反应部分（见第2.2节）。</p>
+<p>为了<strong>求解</strong>这个偏微分方程系统，空间算子在非均匀网格上离散化。网格点从k=1到k=N网格进行索引，两个网格点zk和zk+1之间的距离为hk（图1），因此对于给定的物种，方程读取（Cµ和Jd对t的依赖性已被删除）</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311111915186.png" alt="image-20210311111915186"></p>
+<p>以确保通量的连续性。因此，浓度现在由（µ，k）索引，并且离散化的PDE可以被转换成以下ODE：</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311111938957.png" alt="image-20210311111938957"></p>
+<p>​                                                                        图1：非均匀空间网格的示意图。文中解释了符号。</p>
+<p>类似地，由于<strong>溶质</strong>沿<strong>位错和晶界</strong>扩散，溶质在这些汇sink中的浓度可以通过Fick定律与相邻切片中的浓度耦合。<br>两种边界条件可在系统两侧独立使用： </p>
+<p>•浓度等于自缺陷和自缺陷团簇的热平衡浓度，溶质和含溶质团簇的浓度为零（狄利克雷条件）。这对应于表面作为缺陷的完美水槽(sink)和缺陷源的情况；</p>
+<p>•边界上的零通量jd（Neumann条件）。例如，它可以对应于金属样品表面的氧化层作为缺陷扩散的屏障的情况。</p>
+<p>2.2. IVS模型</p>
+<p>​        在这一部分中，我们重点讨论了IVS模型在给定<strong>系统切片中的反应</strong>部分。为清楚起见，本节省略了变量对空间的任何依赖性。如果团簇包含<strong>间隙（I）</strong>或<strong>空位（V）</strong>以及单一类型的<strong>溶质（S）</strong>，则可以使用IVS模型。因此，每个簇类型由偶ν=（n，p）确定，其中| n |是间隙数（如果n&gt;0）或空位数（如果n&lt;0），p（p&gt;0）是该簇中溶质的数量。本模型中使用CRESCENDO的α-铁的例子包括模拟以碳为杂质的α-铁的电阻率恢复[9]、热老化下的铜沉淀[10]和氦注入的模拟[11]。每一个例子都构成了IVS模型的一个子模型。此外，还可以复制只包含自缺陷的簇群，并赋予它们不同的性质。此功能将在后面的第2.2.3节中解释。</p>
+<p>2.2.1. 一类簇群的速率方程</p>
+<p>​        所有IVS子模型共享相同类型的速率方程。<strong>对于不可移动的团簇</strong>，<strong>速率方程</strong>为</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311112153687.png" alt="image-20210311112153687"></p>
+<p>在这个方程中，Gν是<strong>辐射引起的源项</strong>，Jν，ν+µ是簇ν和簇ν+µ<strong>之间的净反应通量</strong>，这是由于簇µ的迁移率引起的。它的定义是</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311112219934.png" alt="image-20210311112219934"></p>
+<p>集合M包含所有可移动物种，Mν是M的子集，以确保通量Jν-µ，ν中涉及的物种在模拟中得到很好的定义（例如，ν-µ的溶质数量必须为非负）。</p>
+<p>absorption<strong>吸收率</strong>βν，µ由稳态下的连续扩散定律得出，</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311112255053.png" alt="image-20210311112255053"></p>
+<p>其中Dµ和rµ分别是团簇的<strong>扩散系数</strong>和<strong>有效半径</strong>µ，Dν，µ是<strong>反应距离</strong>，Zν，µ是说明<strong>团簇几何形状和弹性效应</strong>的效率因子。根据团簇的类型和移动物种(mobile species)可能的各向异性扩散，例如[12,13]，可以使用各种表达式。</p>
+<p>emission<strong>发射率</strong>αν+µ，µ由平衡时的条件Jν，ν+µ=0推导得出，因此</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311112330183.png" alt="image-20210311112330183"></p>
+<p>式中，Fbν+µ，µ是团簇µ与团簇ν的<strong>结合自由能</strong>，其中显著地包括<strong>构型熵贡献</strong>configurational entropy contribution，Vat是原子体积volume，kb是玻耳兹曼常数，T是温度。</p>
+<p>尽管结合自由能可以通过原子计算来确定包含几百种元素的团簇[14，10]，但对于较大的团簇，需要解析表达式。对于球形空隙和气泡，通常使用毛细管近似值[15]，可能会因空腔内存在气体而改变[16]。在没有气体的情况下，我们可以用它的自缺陷含量来表示团簇，注意ν=n和µ=m。在这种情况下，温度的影响常常被忽略，单个空位的发射表达式是（n&lt;0）</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311112416717.png" alt="image-20210311112416717"></p>
+<p>应该注意的是，我们可以直接使用实验或原子计算给出的表面能，而不是求助于Ef−1和Eb−2，−1。使用式（10）的优点是它确保了双空位的结合能是正确的，并且结合能平稳地演化 对于大团簇尺寸的空位形成能。此外，这种近似已被证明能正确估计α-铁的表面能[16]。<br>如果团簇是圆形位错环，如果材料可以在各向同性线弹性的框架下处理，则形成能由[17]给出</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311112452816.png" alt="image-20210311112452816"></p>
+<p>式中，µs是剪切模量，νp是泊松比，b⊥是垂直于环平面的Burgers矢量分量，b||是环平面中的分量，γsf是层错能stacking fault energy，ρc是截止参数，可在原子计算中用作拟合参数，以特别说明核心贡献不包括在这个公式中。<br>例如，单填隙材料的结合能可以从环的形成能推导出来，对于大环，它可以读出 </p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311112516153.png" alt="image-20210311112516153"></p>
+<p>在CRESCENDO中，隐含地假设移动团簇只能是足够小的团簇。更准确地说，如果ν=（n，p）满足−mv≤n≤mi和p≤ms，这种类型的簇可以是移动的。还有两个附加项，速率方程显示</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311112538887.png" alt="image-20210311112538887"></p>
+<p>整个簇类型集合Ω的总和说明了所有簇对移动簇ν的吸收和发射。另一个术语与汇sinks的相互作用有关。汇sinks是通过它们的i型（例如：位错、晶界）来识别的；同一i型有N（i）个sink子类型，它们可能具有不同的性质（例如：溶质原子结合能不同的位错）。浓度Cm i，j，ν是靠近sink的基质中物种的浓度。对于自缺陷，C m i，j，ν=C eqν，其中C eqν是热平衡浓度。</p>
+<p>所有其他浓度都假定在sink附近为零，这也意味着它们不能从sink中发射，除了单个间隙溶质原子（ν=（0,1））。例如，各种金属材料中的氦原子就是这样。假设sink附近存在局部热力学平衡，则基质matrix中溶质原子和sink中溶质原子的化学势必须相同。对于位错，在稀dilute极限下，我们得到</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311112624236.png" alt="image-20210311112624236"></p>
+<p>其中，b是Burgers矢量，Cd，j是位错中溶质的线性浓度（m−1），Fd，j是溶质原子与j类位错的结合能（j=1，…，nd）。同样，对于晶界，我们得到</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311112645580.png" alt="image-20210311112645580"></p>
+<p>式中，C gb，j是晶界中溶质的表面浓度（m−2），F gb，j是溶质原子与j类晶界的结合能（j=1，…，N gb）。</p>
+<p>2.2.2. 汇(sink)强度和汇sink中溶质浓度</p>
+<p>吸收强度的表达式是经典的，其中包括hcp材料的移动团簇通过参数pa，ν的各向异性扩散</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311112727648.png" alt="image-20210311112727648"></p>
+<p>式中，Dν，c和Dν，a是hcp晶格沿c轴和a轴的扩散系数[18]。<br><strong>两种不同类型的sink可被使用：</strong></p>
+<p>1。<strong>位错</strong>(<strong>dislocation</strong>)。汇(sink)强度为</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311112754388.png" alt="image-20210311112754388"></p>
+<p>式中，ρd，j是j类的位错密度，Z d，j，ν是效率因子。在有效介质近似的框架内，效率因子取决于总的下沉强度[19]。由于这种多重汇效应在实际应用中没有得到考虑 对于团簇的效率因子，我们不考虑它们的位错。另一个通常的简化是取zd，j，ν与位错密度无关，所以我们最后得到了</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311112836069.png" alt="image-20210311112836069"></p>
+<p>式中，zd，ν为常数，λd，j为位错线与c轴之间的夹角。<br>目前所有位错密度都是恒定的。<br>给定j类位错中溶质浓度的线性方程为（ν=（n，p）） </p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311112929099.png" alt="image-20210311112929099"></p>
+<p>2<strong>晶界 Grain boundaries</strong>。一般来说，多重阱效应不能忽略，这意味着阱强度取决于单晶k2sc，ν，即不包括晶界的总阱强度[20]。当单晶的下沉强度较大时，晶界的下沉强度由下式给出</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311112957357.png" alt="image-20210311112957357"></p>
+<p>为了导出给定晶界类别j的表面溶质浓度cgb，j的方程，需要该类别晶界的浓度。它大约是3x j/l gb，因此我们最终得到（ν=（n，p））</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311113023568.png" alt="image-20210311113023568"></p>
+<p>2.2.3. 其他团簇集群</p>
+<p>​        到目前为止，我们已经考虑了一个单一的团簇集群，它可以包含间隙或空位和溶质。在CRESCENDO中，也可以<strong>根据需要多次复制不含溶质原子的簇类型（n，0）</strong>。当两个团簇构型的物理性质如此不同，以至于不必通过构型熵项来考虑它们时，这是有用的（第2.2.1节）。例如，当人们想要模拟h100i和h111i间隙环时，这种间隙环已知在一定温度下共存于α-铁[21]，锆[22]中的hai和hci型空位环，或奥氏体不锈钢中的层错四面体和空洞[23]。<strong>不同类型的团簇被认为是由内部位移级联或均匀成核产生的。移动团簇不重复，因此有必要提供两个相互反应的移动团簇产生给定种群i的团簇的概率wi</strong>（图2）。</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311113100977.png" alt="image-20210311113100977"></p>
+<p>图2：当使用三个团簇且不存在溶质时，团簇空间的示意图。每个团簇类型用一个蓝色正方形表示，并用一对（n，p）表示，其中| n |是自缺陷数，p是总体指数。当两个移动集群相互反应时，它们产生i型集群的概率为wi。绿线环绕着集群可以移动的部分。</p>
+<p>3 大规模团簇的模拟：福克-普朗克公式 Fokker-Planck formulation</p>
+<p><strong>通过直接求解ODE系统（5）来模拟感兴趣的系统通常是不可行的</strong>，即使使用高效的数值求解器和处理器也是如此。<strong>因此，提出了几种方法来减少要求解的方程的数量</strong>。它们中的一些包括<strong>对团簇类进行分组和在组之间执行团簇交换</strong>。这种方法由Kiritani[24]开发，Hayns[25]使用。后来，Golubov等人改进了分组方法[7]，并将其<strong>推广到同时存在自缺陷和溶质原子的情况</strong>[26]。正如Wolfer等人[6]所注意到的，<strong>对于足够大的团簇，速率方程可以很好地用团簇空间中的Fokker-Planck方程来近似。</strong>这种偏微分方程在粗网格上的离散化为确定团簇动力学随时间的变化提供了一种有效的方法。从物理学的观点来看，将速率方程转化为福克普朗克方程也是一个有趣的问题，因为对流项和扩散项与团簇的增长和团簇大小的波动有关。福克-普朗克公式已被用于模拟各种问题，如空位和填隙物的聚集[27]，可能与氦[28]或二元合金中的沉淀[29]。<br>在使用福克-普朗克公式时出现了<strong>两个问题</strong>。第一个是关于<strong>离散格式的使用</strong>。众所周知，对平流项使用中心差分[27，30]会导致稳定性问题。第二个问题是如何将离散化的福克-普朗克方程与用于小团簇的速率方程<strong>耦合</strong>起来。为了达到这个目的，已经制定了一个原始的方案，它确保了物质的守恒。</p>
+<p>3.1. Fokker-Planck方程的数值格式</p>
+<p>为了简单起见，我们在下面的例子中考虑一个<strong>只有自缺陷</strong>的系统，所以ν可以用它的第一个指数n来表示，并且它的源项被设置为零。负指数和正指数分别代表空位团簇和间隙团簇。如果我们假设移动簇是小簇，使得−mv≤n≤mi，那么对于不移动簇，等式（6）读取</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311113329933.png" alt="image-20210311113329933"></p>
+<p>浓度cn（t）可以看作是网格点x=xn处标量场C（x，t）的特定值。对于吸收和发射系数βn，m和αn，m，也有同样的推论，可以写成βm（xn）和αm（xn）。假设n？m、 与（27）有关的偏微分方程可由泰勒展开到二阶而得到，它给出</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311113358481.png" alt="image-20210311113358481"></p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311113407125.png" alt="image-20210311113407125"></p>
+<p>正如在本节导言中所讨论的，F（x）是一个漂移（或平流）项，与大小为x的团簇的增长或收缩有关，取决于它的符号。相反，D（x）总是正的，并且在团簇空间中充当扩散项。它与团簇大小的波动有关，是团簇成核的主要原因。<br><strong>福克-普朗克方程的离散化是在团簇空间的非均匀网格上用有限体积法完成的</strong>（图3）。将式（28）积分到元素n的“体积”上，得到</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311113429596.png" alt="image-20210311113429596"></p>
+<p>图3：用于福克-普朗克方程有限体积计算的非均匀网格示意图。<br>这里只设想了一维福克-普朗克方程。</p>
+<p>jn+1/2的表达式来自公式（29）的离散化。扩散项用中心格式离散，中心格式依赖于（DC）n和（DC）n+1。漂移项（FC）n+1/2的最简单方案在于使用（FC）n和（FC）n+1之间的平均值，这导致偏微分方程的整体中心方案。这种对称模板会很有趣，特别是因为对于宽度为∆x的均匀网格，它显示为（∆x）2的数量级，而两点不对称方案则显示为∆x的数量级。此外，如果∆x=1并且只有单体是可移动的，则可以显示初始速率方程是可恢复的[30]。然而，众所周知，对于具有强平流项的偏微分方程，平流项的中心格式是不稳定的[31]。这在CD中可能是有问题的，在CD中，平流通量可能大到足以发展不稳定性，从而导致大的振荡和负浓度。</p>
+<p>为了导出通量（29）的实用方案，我们遵循Chang和Cooper对某些Fokker-Planck方程[32]提出的方法，并将其适用于目前的情况。其基本思想是，一个精确的格式至少应该恰当地描述Fokker-Planck方程的稳态解</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311113515841.png" alt="image-20210311113515841"></p>
+<p>当我们考虑大簇时，F和D的表达式可以简化如下。方程中的系数αm和βm。（30）和（31）可以渐近展开为r的函数，根据所考虑的簇类型，使用公式（11）或（14）。在这两种情况下，前导项与r成正比。如果只保留这一项，我们发现DC≈γFC，其中γ是一个常数。如果公式（33）中报告了这种关系，我们得到</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311113533547.png" alt="image-20210311113533547"></p>
+<p>其中A和B是两个常数。通过施加（FC）（xn）=（FC）n和（FC）（xn+1）=（FC）n+1，在离散化间隔[xn，xn+1]上确定它们。因此，在这个间隔上，通量是</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311113603496.png" alt="image-20210311113603496"></p>
+<p>这个量给出了平流项和扩散项的相对强度。如果接近零，δn≈1/2，通量的平流部分是（FC）n和（FC）n+1的平均值。我们恢复了适用于纯扩散过程的中心格式。如果平流项乘以∆x n远大于扩散项，则δn趋向于1或0，具体取决于FC的符号，平流项仅为（FC）n（如果FC&gt;0）或（FC）n+1（如果FC&lt;0）。我们得到了对流项的迎风格式，它是稳定的。</p>
+<p>3.2. <strong>连接速率方程与福克-普朗克方程</strong></p>
+<p><strong>离散格式中的另一个困难</strong>是由于<strong>Fokker-Planck方程不适用于整个团簇空间</strong>。<strong>对于小团簇</strong>，保留了速率方程，因此<strong>需要一种特殊的方案来耦合这两种形</strong>式。聚类空间中使用初始速率方程的部分称为“离散部分”，使用福克-普朗克方程的部分称为“连续部分”。如前一节所述，当在∆x=1的网格上使用中心格式时，以及当只有单体是可移动的时，两部分之间的耦合是直接的，因为离散化的福克-普朗克方程简化为离散速率方程。然而，一旦包含几个自缺陷的簇是可移动的，离散速率方程就涉及到非相邻类之间的耦合，而福克-普朗克仍然是一种局部方法，不管∆x的值是多少，当用先前公开的方案离散时，只耦合相邻类。<br>为了把离散化的福克-普朗克方程和速率方程联系起来，有趣的是<strong>把离散化的福克-普朗克方程（32）写成涉及不同类型移动星团的部分通量之和，</strong></p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311113650032.png" alt="image-20210311113650032"></p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311113659373.png" alt="image-20210311113659373"></p>
+<p>在这个方程中，前三项和后三项分别是βn−m、mcn−mcm和αn+mcn+m的二阶近似。由于这些项在离散速率方程中同样存在，即使对于∆x=1的网格上的中心格式，福克-普朗克方程中包含的二阶近似也引入了一个误差，这可能导致离散部分和连续部分之间的界面处的物质损失。为了避免这个问题，在离散部分和连续部分之间引入了一个过渡部分（图4）。该部分中包含的类的数量为N t=max（mi，mv），因此离散部分中的簇只耦合到过渡部分，而不耦合到连续部分。在这个过渡部分∆x=1，福克-普朗克方程与中心格式一起使用。该过渡区足够薄，以避免使用中心格式引起的任何不稳定性。此外，当公式（44）中的术语是由于过渡部分和离散部分之间的交换而产生的时，如果必要的话，它们将被精确的对应项所取代，因此离散部分和过渡部分中的簇中的术语是完全一致的。在过渡部分之外，离散格式不必居中，网格步长可以增加。jn+1/2=J（n+1）−1/2这一事实确保了物质的守恒。</p>
+<p>3.3. <strong>移动集群方程</strong></p>
+<p>当使用福克-普朗克方程时，<strong>必须修改公式（15），以确保移动团簇的吸收和发射通量与福克-普朗克方程中存在的通量一致</strong></p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311113740965.png" alt="image-20210311113740965"></p>
+<p>图4：用于确保离散和连续部件之间无缝耦合的<strong>过渡部件</strong>示意图。</p>
+<p>方程式。在连续部分的给定区间[xi1，xi2]上，物质量的变化率</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311113809033.png" alt="image-20210311113809033"></p>
+<p>这里我们使用了关系式jm n+1/2=jm（n+1）−1/2。<br>最后一个表达式中的第一项和第二项对应于团簇的通量，这些团簇吸收移动团簇并因此在n=i1和n=i2处穿过界面，而第三项表示由于移动团簇被保留在间隔内的团簇吸收或发射而引起的物质变化。<br>因此，移动集群m的等式必须包含以下项： </p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311113827623.png" alt="image-20210311113827623"></p>
+<p>必须仔细选择总和指数，因为在过渡部分不使用通量jmn−1/2。完整表达式见附录A。</p>
+<p>3.4. 离散格式的数值验证及与分组方法的比较</p>
+<p>为了验证前面章节中提出的数值方案，我们考虑了中子辐照下α-铁的模拟以及参考文献[33]中使用的参数化，为了清楚起见，我们在表1中用符号进行了报告。在这个参数化中，mi=3和mv=4，这为数值格式，特别是离散和连续部分之间的耦合处理提供了一个很好的检验。空位（n&lt;0）和间隙团簇（n&gt;0）在0.2dpa（t=1.5×106s）时的团簇分布如图5所示。离散化的几何级数用于连续部分，即∆xn+1=η∆xn。在η=1.1的情况下，仅用231个类来模拟簇分布，而完全离散的模拟则需要37976个类。<br>可以看出，除了间隙部分的分布尾外，两种模拟结果非常吻合。这种差异是由于<strong>我们的数值格式通过对流项的离散化引入了数值扩散。</strong>实际上，如图5（d）所示，对于大间隙团簇δn接近1，<strong>因此数值格式（37）只是对流项的迎风格式upwind scheme。</strong>众所周知，迎风格式虽然稳定，但引入了大量数值扩散[31]。如图5（B）所示，当DC=γFC时，物理扩散项乘以</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311113906799.png" alt="image-20210311113906799"></p>
+<p>对于几何网格。<br>尽管fn/dn=1/γ很小（图5（b）），但由于∆xn的几何级数（图5（c）），wn=∆xn/γ可能非常大，这导致观察到的数值扩散。通过减少几何级数η，在不增加太多计算时间的情况下减少了数值扩散。对于η=1.03（图5（a）），得到了更好的一致性，需要455个类来再现集群分布，这仍然远远低于离散情况下的类数。<br>为了评估数值格式的精度，检查物质在t1和t2之间的守恒性也是有用的。根据间隙和空位计算以下数量：</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311113929943.png" alt="image-20210311113929943"></p>
+<p>对于空间化模拟，切片之间的通量也应包含在公式中。当存在溶质或额外的团簇群时，表达式稍微复杂一些，因为求和也应在第二个指数p上进行。对于溶质原子的守恒，也可以写一个类似的方程。<br>然后可以通过计算</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311113947155.png" alt="image-20210311113947155"></p>
+<p>数量是多少？iv在图6中表示为与之前相同的测试用例的时间函数。<br>也表示量sd=sdi+sdv和sc=sci+scv，其中sdθ（scθ）是Sθ对离散（连续）部分的限制。这样的划分允许观察连续部分中的自缺陷数量何时大于离散部分中的自缺陷数量。可以看出，没有显着的变化。当连续体的贡献变得非常大，并且保持接近机器精度时，就会发生iv。<br>有趣的是，与先前的测试相比，<strong>当数值扩散在连续部分表现出最大值时，数值扩散对团簇分布的影响是什么</strong>。Ovcharenko等人[35]对这种情况进行了处理，以证明其分组方法的准确性。从类镍金属中单空位的原子分数等于10−7开始，作者模拟了823 K时团簇分布的演化。</p>
+<p>我们在图7中显示了在t=10 5 s和t=10 8 s时获得的簇分布C（r）=C n dn/dr，考虑到所有类别，并使用我们的数字18格式，使用10个类别的离散部分，然后是包含500个类别的连续部分，几何级数等于η=1.03。我们还展示了由中心差分格式（δn=0.5）得到的结果，结果表明在团簇分布中没有产生振荡。可以看出，中心格式在这两个时刻都很好地再现了团簇分布，而Chang-Cooper格式由于数值扩散，导致了峰的大幅展宽。在t=10 5 s时获得的平均半径和密度在完全离散情况下为1.3 nm和1.03×10 13 cm−3，中心方案为1.3 nm和1.02×10 13 cm−3，Chang-Cooper方案为1.3 nm和9.40×10 13 cm−3。在t=10 8 s时，三种方法的平均半径和密度分别为7.2 nm和5.67×10 10 cm−3、7.4 nm和5.30×10 10 cm−3、7.7 nm和4.56×10 cm−3。由此可以得出结论，对于这两种方案的结果是可以接受的，即使在很大的时候，关于实验的不确定性。应该注意的是，更一般地说，在所有调查的情况下，我们都检查了平均半径和团簇密度是否可以用Fokker-Planck方法很好地再现，无论采用何种离散化方案。<br>由式（49）计算的物质守恒相对误差在所有情况下都小于10−12。</p>
+<p><strong>我们的解可以与分组方法相比较</strong>，<strong>分组方法不依赖于福克-普朗克方程的离散化</strong>。为了进行比较，我们选择了以下<strong>两种分组方法</strong>：<strong>Kiritani方法[24]（K方法）和Golubov等人[7]（Gmethod）提出的分组方法</strong>，每个簇类使用两个方程来确保簇密度守恒和物质守恒。我们将这些方法作为CRESCENDO的模块进行介绍，遵循参考文献[35]中提供的G方法的实现，这使我们能够用CVODES（见第4节）求解方程，并对所有方法在簇空间中使用相同的离散化。<br>从<strong>图7</strong>中可以看出，<strong>G</strong>方法非常好地<strong>再现了精确解</strong>，除了分布<strong>尾部存在较大负浓度的虚假振荡</strong>（图8）。用文献[35]中的修正欧拉方法也可以观察到这种振荡。关于<strong>K</strong>方法，分布比其他方案更宽，并且似乎也向大尺寸方向移动：在t=10 5 s时，平均半径和密度分别为1.39 nm和8.12×10 12 cm−3，和9.2nm和2.44×1010cm−3（t=108s）。应该注意的是，分布的变化不是来自太大的平流项。事实上，如附录B所示，并与参考文献[7]一致，<strong>相对于精确解，分布C n向n的小值移动</strong>（参见图7插图，t=10 8 s）。然而，由于19分布C（r）涉及C n乘以r 2，并且由于在K方法的情况下<strong>峰值明显更宽</strong>，因此获<strong>得了C（r）向大半径的人工偏移</strong>。由于数值扩散，<strong>福克-普朗克方程的离散化也出现了这种转变，但程度要小得多</strong>。</p>
+<p>对<strong>不同方法</strong>使用<strong>相同的ODE解算器</strong>可以<strong>直接比较方法的性能</strong>。为了进行这个测试，雅可比矩阵的有限差分计算被用于<strong>分组方法</strong>和<strong>Fokker-Planck格式</strong>。在3.07ghz处理器上，实现物理时间等于t=108s的计算时间，<strong>K方法为27s</strong>，<strong>fokkerplank方法为80s</strong>，<strong>G方法为39min</strong>。实际上，雅可比矩阵的计算需要一定的时间，而且由于<strong>G方法使用的方程是Fokker-Planck格式的两倍，因此可能会影响性能</strong>。因此，我们也用Fokker-Planck格式进行了计算，在连续部分用1000个方程代替500个方程。在这种情况下，计算时间是4分钟，仍然远远低于用G方法和500个类在连续部分完成计算所需的时间。<br><strong>原因</strong>是，在积分过程中，<strong>用G方法积分时间步长∆t通常较小</strong>，<strong>需要频繁更新雅可比矩阵</strong>（图9）。尽管我们还不清楚是什么导致了CVODES积分分组方程的困难，但这<strong>可能与团簇分布尾部出现负浓度振荡有关</strong>。
+当<strong>只考虑零阶矩</strong>时，<strong>没有</strong>发现团簇分布的<strong>振荡和</strong>积分时间步长的<strong>减小</strong>，但在这种情况下，<strong>物质守恒不能得到保证。</strong><br>总之，我们<strong>基于中心格式的Fokker-Planck方法应该在得到非振荡解时使用，因为它比Chang-Cooper格式更精确</strong>。<strong>Chang-Cooper格式</strong>是稳定的，在所有情况下都能得到平均半径和团簇密度，当结果与实验数据进行比较时通常是令人满意的，但是当<strong>团簇分布达到峰值时</strong>，它可能引入<strong>过多的数值扩散</strong>。为了避免这种扩散，可以设想<strong>高阶离散化方案</strong>（例如，参见参考文献[36]和基于这种方法的各种方案），但在我们看来，<strong>在大多数情况下，Chang-Cooper方案为预期的应用提供了足够的精度。Golubov等人的G方法虽然比Fokker-Planck方法慢，但在这里给出的测试用例中，除了存在负浓度20振荡的分布尾外，在任何时候都能很好地再现精确的分布。与其他测试方法相反，K方法得到的分布相对于参考计算有明显的偏移。</strong></p>
+<p>3.5. 高维数值格式的推广</p>
+<p><strong>在前面的章节中没有考虑溶质</strong>，这导致了一维福克-普朗克方程的离散化。<strong>当溶质原子存在且泰勒展开仅沿自缺陷轴进行时，存在类似的一维偏微分方程。</strong>对于单一的附加类型的溶质，偏微分方程是</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311114236591.png" alt="image-20210311114236591"></p>
+<p>如果含有自缺陷和溶质原子的团簇（m，q）是不可移动的，则这些团簇的吸收和发射速率为零。术语R（.，p）与纯溶质团簇交换引起的团簇间跃迁有关，而FC和DC不再涉及q的求和。可以使用与上述相同的离散化方案。</p>
+<p>如果沿溶质轴也进行泰勒展开，则得到以下方程式：</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311114305206.png" alt="image-20210311114305206"></p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311114321100.png" alt="image-20210311114321100"></p>
+<p>和以前一样，<strong>如果包含溶质和自缺陷的团簇是不可移动的，表达式可以大大简化。特别地，交叉项dxy为零，因此导出的一维Fokker-Planck方程格式可以不加修改地使用。</strong><br>一般而言，团簇空间因此可以如<strong>图10</strong>所示来表示，其中使用在前面和本节中导出的各种pde。在CRESCENDO中，由沿两个轴的Taylor展开导出的公式仅在没有同时包含<strong>自缺陷和溶质原子</strong>的移动团簇的情况下实现。为了在<strong>两个维度</strong>上检验Fokker-Planck方法，我们考虑了一个修改版本的测试用例，该测试用例在参考文献[35]中有详细说明，它包含了淬火空位人口的老化。为了获得沿着<strong>自缺陷轴</strong>和<strong>溶质轴</strong>扩展的团簇分布，对初始条件22进行了修改：在空位中淬火的原子分数为10−6而不是10−7，并且我们添加了等于空位浓度一半的氦原子浓度。其他新参数是扩散预因子和间隙氦扩散的迁移能，选择为D 0 He=8×10−4 cm 2 s−1和E m He=0.15 eV，参考文献[26]。不允许通过气泡进行环冲和间隙发射，以避免由于存在自间隙而引起的任何并发症。氦和空位的结合能由文献[16]中描述的气泡模型给出。最后，不允许形成氦团簇。图11显示了t=10 8 s时的簇分布，用于完全离散计算和我们的福克-普朗克方法，使用了Chang-Cooper方案。离散部分对应于区域[−10,0]×[0,10]，在该区域之外，使用η=1.03的几何级数。可以看出，这两种分布在簇空间的所有区域都非常接近。</p>
+<p>4数值解算器与性能问题</p>
+<p>在本节中，我们将描述上一节中描述的<strong>ODE系统求解</strong>的<strong>数值方面</strong>。为了解决ODE系统，我们使用了<strong>CVODES库</strong>[37]，它在数值方法方面有很好的适应性，并且还提供了一些有用的功能。例如，可以将<strong>正交变量</strong>添加到原始ODE系统中，该系统可用于<strong>计算微结构所有元素之间的积分通量</strong>，几乎不需要计算开销。另一个有趣的特性是，<strong>代码能够在一次计算中计算结果（团簇浓度）对输入参数（结合能和迁移能、源项等）的敏感性。</strong>这样就可以确定给定研究的关键参数。<br>我们在下面描述了我们对CVODES的原始实现所做的两个修改，它们提高了大型问题的求解效率。<strong>第一种</strong>方法与<strong>线性解算器</strong>相关，而<strong>第二种</strong>方法<strong>允许动态调整与CVODES集成的方程数量</strong>。</p>
+<p>4.1. 线性解算器</p>
+<p>ODE系统（5）在数值上是<strong>刚性</strong>的，这大致意味着<strong>一些模式相对于其他模式具有非常小的时间常数</strong>。在<strong>这种情况下，隐式积分方法是必要的</strong>。CVODES包含了后向微分公式（BDF），它对23个刚性问题是有效的。这意味着在每一步线性系统的（解决方法）（resolution）（分辨率）。<strong>CVODES提供了标准的线性解算器（直接密集的，迭代的），以及一种链接到替代解算器的简单方法。</strong>为了加快计算速度和降低内存需求，我们将CVODES与两个新的线性解算器进行了耦合：<strong>MUMPS</strong>[38，39]，这是目前最强大的直接通用解算器之一，以及<strong>一个基于Schur补码的解算器，它利用了我们系统的特殊性</strong>。</p>
+<p><strong>线性系统的矩阵</strong>是<strong>常微分方程组的单位矩阵</strong>和<strong>雅可比矩阵J</strong>的<strong>线性组合</strong>，其定义为</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311114449446.png" alt="image-20210311114449446"></p>
+<p>其中˙ci是ci的时间导数。这个矩阵通常是<strong>稀疏</strong>的，<strong>因为不可移动的簇只通过移动簇相互耦合，移动簇被假定为与簇类的总数相比只是少数。 ** **MUMPS</strong>可以处理<strong>任何</strong>类型的稀疏性，但是<strong>Schur解算器</strong>利用了矩阵的<strong>特定稀疏结构</strong>，我们现在详细介绍了这种结构。<br>正确重新排序后，雅可比矩阵可以写成</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311114509510.png" alt="image-20210311114509510"></p>
+<p>其中<strong>A是一个方阵，它包含了固定簇之间的耦合</strong>，<strong>D是一个方阵，它包含了移动簇之间的相互作用</strong>，<strong>B和C包含了移动簇和固定簇之间的耦合</strong>。当移动类数较少时，A是一个大的稀疏矩阵，D是一个小的稠密矩阵。更准确地说，A具有矩形网格上的二维离散格式的形状，因此显示为带矩阵。因此，带宽大致取决于移动簇的数目，并且当在模拟中同时引入自缺陷和溶质时，取决于沿着自缺陷或溶质的簇空间的最小尺寸。为了使带宽最小化，根据簇空间的形状，使指数沿自缺陷或沿溶质更快地变化，更精确地说是在维数N ov+N cv+N oi+N ci+1和N os+N cs+1上（图10）。矩阵A和D的性质使得使用Schur补来求解线性系统特别有趣[40]。此外，这种求解方法还可以通过将A写成块矩阵来并行化。或者，对于空间化计算，有趣的是在不同的处理器上划分不同的片，以便块包含一个或多个片的所有不可移动的簇。</p>
+<p>作为一个例子，我们在这里比较了<strong>第3.4节（参考文献[33]）中第一种情况下不同线性解算器的性能</strong>，最终物理时间等于t=10 5 s。计算中没有使用连续部分，因此需要15820个方程来模拟簇分布。<br>使用稠密解算器的计算需要3.7gb内存，在3.07ghz处理器上大约14小时后完成。使用腮腺炎（MUMPS）和舒尔（Schur）解算器导致内存使用44MB和27MB，CPU时间分别为108s和36s。一般来说，<strong>当矩阵A的带宽较小时，Schur解算器的效率更高</strong>。因此，<strong>对于没有溶质的问题（这里就是这种情况）或溶质类N os+N cs+1的总数与自缺陷类N ov+N cv+N oi+N ci+1的总数相比仍然较低的问题（反之亦然，取决于类的编号），它的表现优于MUMPS。</strong></p>
+<p>4.2. 动态团簇空间自适应</p>
+<p><strong>另一种提高数值求解效率的方法</strong>是通过<strong>忽略浓度为零时的簇类来减少方程N eq的个数</strong>。S.Sharafat和N. M. Ghoniem建议使用增长定律来先验地确定簇分布在簇空间中的位置[28]。在动态重划(remeshing)程序中应用了这一规律。最近，<strong>Xu等人提出用团簇空间边界处团簇的浓度和浓度梯度的值来确定是否应该扩大[41]。</strong>后来，这些作者使用了<strong>另一种方法</strong>，要求<strong>用一个小的簇空间进行计算，以猜测整个空间上的簇分布</strong>[42]。在这种情况下<strong>没有使用动态空间大小调整</strong>。正如作者所注意到的，通常很<strong>难猜测簇分布的演化</strong>，因此<strong>开发一种允许在不知道其长时间演化的情况下动态调整簇空间大小的方法是很有趣的</strong>，<strong>并且不会对ODE解算器的性能产生太大的影响。</strong><br><strong>对于辐照问题，如果材料以前没有被辐照过，那么团簇空间是最小的</strong>：它包含了<strong>所有可移动的团簇</strong>和<strong>可以在置换级联中生成的团簇</strong>。为了确定在给定的系统切片中是否应该扩大团簇空间，我们在每次评估ODE系统的右侧函数时，检查空间边界处的浓度（n=n i或n=−n v或p=n s）。如果它们大于给定边界处的给定阈值，则边界将偏移给定量∆N i、∆N v或∆N s。<br><strong>在CVODES的标准使用中，更改方程的数量需要重新启动解算器。在每次重新启动时，CVODES使用的时间步长最初非常小并且增长缓慢，因为过去的历史记录丢失了。因此，重新启动可能非常耗时。</strong></p>
+<p><strong>这就是为什么我们使用另一种方法来保持多步方法的效率。</strong> <strong>当用新的浓度向量检测到簇空间的变化时，积分停止，但解算器不会重新初始化。</strong>CVODES使用的内部数据结构以适当的大小重新分配，保留现有值并用零扩展。这个过程<strong>允许我们保留历史</strong>，因此不会对时间步长演化产生扰动<strong>。类似的方法可以用来减小簇空间的大小，这对于退火模拟是有用的。</strong><br>作为物理时间函数的时间步长的演变如图12所示，用于上一节中用作测试用例的模拟，具有可调整的簇空间和∆ni=∆nv=200。使用Schur解算器，当执行重新启动时，这将导致CPU时间等于t CPU=18 s，当解算器未重新初始化时，这将导致t CPU=8 s。这些值应与当使用具有15820个等式的固定簇空间时获得的CPU时间t CPU=36 s进行比较。<br>首先要注意的是，即使重新初始化了解算器，也最好使用变量集群空间。另外，如图12所示，<strong>当在每次调整大小时保持历史时，由于避免了在每次调整大小时观察到的时间步长的下降，因此获得了计算时间的实质性增益。这种方法对于空间化的模拟更为重要，对于这种模拟，每次在特定切片中发生空间调整时，解算器都会重新启动。</strong></p>
+<p><strong>5</strong> <strong>应用：气泡粗化</strong></p>
+<p>为了说明用CRESCENDO模拟大规模问题，我们在这里考虑了用60 keV氦离子在300 K下以10 16 cm−2的注量辐照样品，并用5.5×10 12 He cm−2 s−1的通量辐照样品的等温退火。这种植入通常用于通过氦热解吸来探测氦气泡的性质[43，44，45]。热脱附不能直接证明物质中发生了什么。为了更好地理解物理机制，可以将其与透射电子显微镜（TEM）结合起来[11]。然而，热脱附通常在厚样品上进行，其深度足以避免背表面对微观结构演变的影响，而透射电镜下的表面效应可能很大。因此，很难将热脱附与透射电镜联系起来。模拟提供了一种了解样品几何形状对微观结构影响的方法。这就是为什么在模拟氦注入后，我们建议模拟大块样品和薄箔在1073K下的退火，以突出表面的作用。我们更精确地关注氦气泡的演化。尽管在这个温度下，气泡被证明是可移动的[46]，我们忽略了这个现象来观察表面对Ostwald熟化粗化的影响。<br>氦注入是用渐增法模拟的，使用了一个基于马洛[48]产生的级联空间均匀化的有效源项[47]，这确保了位移级联中空间相关性的正确再现。用于计算的参数见表2和表3。为了精确模拟辐照区域并考虑足够大的系统，在N网格=20的情况下选择可变的空间网格尺寸，并使用靠近辐照表面的更密集的网格。该系统的厚度为10μm，注入结束时背面的氦向外通量小于正面氦通量的1%，因此可以安全地忽略背面的影响。需要注意的是，后面的切片只由小的簇填充，由于簇空间是自适应的，因此可以添加更多的切片而不会增加太多的计算时间。</p>
+<p>在注入后，为了模拟TEM组态，在z=180nm处靠近表面的团簇分布被用作下一步计算的输入。退火是在厚度等于100nm的样品上进行的，这是TEM观察到的样品局部厚度的数量级。表面被认为是完美的缺陷源和汇sink。为了研究表面效应，退火也以相同的团簇分布进行，但没有表面。初始簇分布如图13所示。它表现出小气泡和小的间隙型位错环。氦的量是如此之大，以至于环中充满了氦，这些环被假定在其位错线上包含尽可能多的氦原子。这可能表明小空位氦团簇在位错线上成核，这在其他实验条件下也可以看到[55]。由于模型中不存在异相成核，我们假设如果位错上的氦原子数超过最大值，它就不受环的束缚。关于气泡，为了分析其分布，我们绘制了空位的平衡线，即气泡附近基质中空位的化学势为零的线[56]，因此不存在吉布斯-汤姆逊效应（氦的存在抵消了曲率效应）。可以注意到，空位的气泡并不在平衡线上：大多数气泡都是超压的。在这张图上，缺陷到团簇的净通量为零的轨迹也显示了[57，58]，对于以下缺陷：氦原子（红色）、自间隙27（紫色）和空位（青色，在这张图上不可见）。这些净通量计算为βν，µCµ−αν，µ。气泡分布在间隙线下方而不是间隙线上方，这表明气泡在间隙线上方的发射非常高。这种发射机制类似于环冲孔[56，59]，并已在分子动力学模拟中观察到[60]。</p>
+<p>两种体系在1073K等温退火过程中团簇密度和平均半径的变化如图14所示。计算密度时考虑的气泡最小半径为r v=0.5 nm。为了分析这些曲线，图中绘制了簇分布。15和16在不同的退火时间，只对空位团簇。<br>植入后，两个系统的行为非常相似。与图13相比，团簇分布变得更窄，并且集中在与自间隙的零净通量相对应的线上（图15-（a）和16-（a））。这意味着在这个早期演化过程中，间隙对系统的动力学有很大的影响。它们主要由超压气泡释放，但也由小间隙环释放，并被压力较小的团簇捕获，导致分布变窄。对于小团簇，氦的分解和吸收也起到了一定的作用。<br>从十分之几秒到几秒，两个实验条件对应的曲线相互偏离。表面的存在使密度和半径明显增加，而团簇在体中的分布保持不变。在图15-（b）和16（b）中可以清楚地看到，团簇在体中的分布仍然保持在间隙线上，而靠近表面的团簇分布现在与空位线对齐，并且几乎达到空位的平衡线。这可以通过这样一个事实来证明，在这个时候，空位已经在表面充分生成，并且已经扩散到团簇以施加平衡。<br>由于空位只能来自团簇，所以这种状态只能在稍后的时候出现。<br>似乎在大约10 3 s后，两个系统都达到了平衡。但是氦线在分布上没有对齐，这意味着分布仍然在演化。由于氦的分解和吸收，这种缓慢的演化只能在非常大的时间尺度上看到，导致图14[61]中观察到的粗化机制。值得注意的是，在整个演化过程中，表面损失的氦量相当小，这可能是由于基质内部陷阱密度高所致：在t=107 s时，损失的氦量仅为初始量的5%。<br>因此，表面的主要作用是提供空位，而不是作为氦的吸收池。</p>
+<p><strong>6 结论</strong></p>
+<p>本文介绍了CRESCENDO程序，并描述了在团簇动力学程序中模拟<strong>辐照</strong>和<strong>热老化</strong>下大规模问题的一些通用方法。特别地，我们着重研究了<strong>fokkerplank方程</strong>与严格守恒的标准<strong>速率方程耦合</strong>时的数值解法。<br>尽管它比Golubov等人的分组方法更精确地描述了簇分布，但当分布达到峰值时，我们进行的测试的精度损失是适中的，并且计算时间大大减少，最大物理时间减少了30倍。我们还讨论了可用于提高标准团簇动力学模拟效率的数值方法。使用最先进的稀疏线性解算器，以及在不重新初始化ODE解算器的情况下动态重新划分簇大小空间，对于处理实际时间尺度上的大型系统特别有效。<br>作为一个例子，我们模拟了氦注入α-铁时的注量为10 16 cm−2，然后在1073 K下退火。我们比<strong>较了大块样品的退火和薄箔的退火</strong>，如在TEM实验中所用。根据<strong>团簇尺寸分布解释了气泡半径和密度演化的差异。</strong></p>
+<p>Acknowledges CRESCENDO由CEA和EDF R&amp;D在SINERGY计划的框架内共同开发。作者感谢A.Barbu（CEA）对渐强的建议，感谢V.Duwig和M.Barrault（EDF R&amp;D）对该准则的初步贡献。<br>CVODES中Schur解算器的接口最初由D.Guibert[62]在PARADE项目（ANR-06-TLOG-0026）的框架中开发，并在ParMat项目（ANR-06-CIS6-006）期间对我们的情况进行了调整。作者感谢D.Tromeur-Dervout允许我们使用Schur解算器和D.Guibert和E.Canc`es进行富有成效的讨论。</p>
+<p>附录A.移动集群的速率方程</p>
+<p>第3.3节概述了使用福克-普朗克方程时移动星团的方程。我们在这里导出了完整的表达式，其中特别考虑了过渡部分。</p>
+<p>我们考虑连续间隙部分（n&gt;0）的情况。我们注意到过渡部分的第一个索引。由于数值格式集中在过渡部分且∆x=1，移动团簇m&gt;0对物质变化的贡献为</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311115016493.png" alt="image-20210311115016493"></p>
+<p>如第3.2节所述，第一个和第四个求和引入了离散部分和过渡部分之间的耦合，因此在必要时用精确表达式代替。<br>在目前的情况下，发射项α被精确地再现，因此仅应对吸收项β进行改变。第二和第三个总和在过渡和连续部分之间引入了耦合，并且没有改变。<br>可以检查，如果∆x=1，如果对通量使用中心方案，并且取这些通量的精确表示，则等式（a.1）的第二项、第三项和最后一项的贡献给出的吸收通量等于 </p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311115036322.png" alt="image-20210311115036322"></p>
+<p>发射通量等于</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311115056313.png" alt="image-20210311115056313"></p>
+<p>如第3.3节所述，为了获得由过渡部分和连续部分的内部通量引起的移动簇m的方程，必须将这三个贡献除以m。<br>应该注意的是，在一般情况下，也可以写出式（A.1）中的最后一项 </p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311115112424.png" alt="image-20210311115112424"></p>
+<p>我们注意到jmn+1/2，α和jmn+1/2，β分别是由发射项和吸收项引起的jmn+1/2组分，而jmn+1/2，β中不包括cm。然后我们定义了以下部分通量jmβ和jmα，其中包含内部通量和穿过离散部分和过渡部分边界的通量的精确表示：</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311115130477.png" alt="image-20210311115130477"></p>
+<p>除了离散部分类间通量的贡献外，还添加了以下两项来说明过渡部分和连续部分的贡献：</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311115149860.png" alt="image-20210311115149860"></p>
+<p>与等式相似的表达式。对于m&lt;0和空位部分（n&lt;0），可以找到（A.3）和（A.4）。</p>
+<p>附录B.福克-普朗克方程数值格式的数值扩散</p>
+<p>在本节中，我们估计了第3.1节中描述的离散化格式引入的数值扩散量。利用公式（37），福克-普朗克方程的右边是</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311115225339.png" alt="image-20210311115225339"></p>
+<p>使用（FC）n−1、（FC）n+1、（DC）n−1和（DC）n+1的二阶泰勒级数展开式，该方程与</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311115240458.png" alt="image-20210311115240458"></p>
+<p>如果我们假设DC=γFC，我们看到离散化方案引入了一个额外的扩散项，因此扩散项应该乘以</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311115303004.png" alt="image-20210311115303004"></p>
+<p>在均匀网格上的中心格式（δn=1/2）大大减少了数值扩散。</p>
+<p>在使用几何级数（∆x n=η∆x n−1）的特定情况下，公式（B.2）变为</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311115328991.png" alt="image-20210311115328991"></p>
+<p>有趣的是，在单一类型单体（m=1）的捕获和发射的情况下，使用Kiritani方法进行相同类型的分析，以了解在第2.2.1节中进行的Ostwald成熟试验中两种方案之间的差异。3.4. 我们获得</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311115346246.png" alt="image-20210311115346246"></p>
+<p>因此，两种效应可以解释Kiritani方法向更小尺寸的转变。对于用迎风格式离散的Fokker-Planck方法（δn−1=δn=1），它引入了因子2/（1+η），略微减少了平流项。此外，通过比较F 0和F=βC 1−α，可以看出，该方法在吸收和发射之间的平衡中引入了基团大小的影响，这导致了图7插图中所示的额外偏移。</p>
+<p>References<br>[1] T. Diaz De La Rubia, M. J. Caturla, E. A. Alonso, N. Soneda, M. D. Johnson, Radiat. Eff.<br>Defects Solids 148 (1999) 95–126.<br>[2] M. J. Caturla, N. Soneda, E. Alonso, B. D. Wirth, T. Diaz de la Rubia, J. M. Perlado, J. Nucl.<br>Mater. 276 (2000) 13.<br>[3] C. Domain, C. S. Becquart, L. Malerba, J. Nucl. Mater. 335 (2004) 121.<br>[4] D. T. Gillespie, J. Comput. Phys. 22 (1976) 403–434.<br>[5] J. Marian, V. V. Bulatov, J. Nucl. Mater. 415 (2011) 84.<br>33<br>[6] W. G. Wolfer, L. K. Mansur, J. A. Sprague, in: M. L. Bleiberg, J. W. Bennett (Eds.), Radiation<br>Effects in Breeder Reactor Structural Materials (1977) 479.<br>[7] S. I. Golubov, A. M. Ovcharenko, A. V. Barashev, B. N. Singh, Philos. Mag. A 81 (2001) 643.<br>[8] R. Sizmann, J. Nucl. Mater. 69 &amp; 70 (1968) 386–412.<br>[9] T. Jourdan, C. C. Fu, L. Joly, J.-L. Bocquet, M. J. Caturla, F. Willaime, Phys. Scripta T145<br>(2011) 014049.<br>[10] T. Jourdan, F. Soisson, E. Clouet, A. Barbu, Acta Mater. 58 (2010) 3400.<br>[11] H. Lefaix-Jeuland, S. Moll, T. Jourdan, F. Legendre, J. Nucl. Mater. 434 (2013) 152–157.<br>[12] A. Hardouin-Duparc, C. Moingeon, N. Smetniansky-de-Grande, A. Barbu, J. Nucl. Mater. 302<br>(2002) 143.<br>[13] F. Christien, A. Barbu, J. Nucl. Mater. 346 (2005) 272.<br>[14] A. Perini, G. Jacucci, G. Martin, Phys. Rev. B 29 (1984) 2689.<br>[15] N. Soneda, T. D. de la Rubia, Philos. Mag. A 78 (1998) 995.<br>[16] T. Jourdan, J.-P. Crocombette, J. Nucl. Mater. 418 (2011) 98–105.<br>[17] J. P. Hirth, J. Lothe, Theory of dislocations, McGraw-Hill, 1968.<br>[18] C. H. Woo, J. Nucl. Mater. 159 (1988) 237.<br>[19] A. D. Brailsford, R. Bullough, M. R. Hayns, J. Nucl. Mater. 60 (1976) 246–256.<br>[20] R. Bullough, M. R. Hayns, M. H. Wood, J. Nucl. Mater. 90 (1980) 44.<br>[21] Z. Yao, M. Hernández-Mayoral, M. Jenkins, M. Kirk, Philos. Mag. 88 (2008) 2851–2880.<br>[22] M. Griffiths, J. Nucl. Mater. 159 (1988) 190–218.<br>[23] S. J. Zinkle, R. L. Sindelar, J. Nucl. Mater. 155-157 (1988) 1196–1200.<br>[24] M. Kiritani, J. Phys. Soc. Jpn 35 (1973) 95.<br>[25] M. R. Hayns, J. Nucl. Mater. 59 (1976) 175–182.<br>34<br>[26] S. Golubov, R. Stoller, S. Zinkle, A. Ovcharenko, J. Nucl. Mater. 261 (2007) 149.<br>[27] N. Ghoniem, S. Sharafat, J. Nucl. Mater. 92 (1980) 121.<br>[28] S. Sharafat, N. Ghoniem, Radiat. Eff. Defects Solids 113 (1990) 331.<br>[29] F. Christien, A. Barbu, J Nucl Mater 324 (2004) 90.<br>[30] A. Turkin, A. Bakai, J. Nucl. Mater. 358 (2006) 10.<br>[31] C. A. J. Fletcher, Computational Techniques for Fluid Dynamics 1: Fundamental and General<br>Techniques, Springer-Verlag, Berlin, 1991.<br>[32] J. Chang, G. Cooper, J. Comput. Phys. 6 (1970) 1.<br>[33] E. Meslin, A. Barbu, L. Boulanger, B. Radiguet, P. Pareige, K. Arakawa, C. C. Fu, J. Nucl.<br>Mater. 382 (2008) 190.<br>[34] E. Meslin, M´ ecanismes de fragilisation sous irradiation aux neutrons d’alliages mod` eles ferri-<br>tiques et d’un acier de cuve : amas de d´ efauts, Ph.D. thesis, Universit´ e de Rouen, 2007.<br>[35] A. Ovcharenko, S. Golubov, C. Woo, H. Huang, Comput. Phys. Commun. 152 (2003) 208 –<br>226.<br>[36] B. P. Leonard, Comput. Method. Appl. M. 19 (1979) 59–98.<br>[37] A. C. Hindmarsh, P. N. Brown, K. E. Grant, S. L. Lee, R. Serban, D. E. Shumaker, C. S.<br>Woodward, ACM Trans. Math. Softw. 31 (2005) 363–396.<br>[38] P. R. Amestoy, I. S. Duff, J. Koster, J.-Y. L’Excellent, SIAM J. Matrix Anal. A. 23 (2001)<br>15–41.<br>[39] P. R. Amestoy, A. Guermouche, J.-Y. L’Excellent, S. Pralet, Parallel Comput. 32 (2006) 136–<br>156.<br>[40] J. W. Demmel, Applied Numerical Linear Algebra, SIAM, Philadelphia, 1997.<br>[41] D. Xu, B. D. Wirth, M. Li, M. A. Kirk, Acta Mater. 60 (2012) 4286.<br>[42] D. Xu, X. Hu, B. D. Wirth, Appl. Phys. Lett. 102 (2013) 011904.<br>35<br>[43] R. Sugano, K. Morishita, H. Iwakiri, N. Yoshida, J. Nucl. Mater. 307-311 (2002) 941–945.<br>[44] K. Ono, K. Arakawa, H. Shibasaki, H. Kurata, I. Nakamichi, N. Yoshida, J. Nucl. Mater.<br>329-333 (2004) 933.<br>[45] D. Xu, B. D. Wirth, J. Nucl. Mater. 386-388 (2009) 395–399.<br>[46] K. Ono, M. Miyamoto, K. Arakawa, J. Nucl. Mater. 367-370 (2007) 522–526.<br>[47] T. Jourdan, J.-P. Crocombette, Phys. Rev. B 86 (2012) 054113.<br>[48] M. T. Robinson, Phys. Rev. B 40 (1989) 10717–10726.<br>[49] C. C. Fu, F. Willaime, Phys. Rev. B 72 (2005) 064117.<br>[50] S. L. Dudarev, R. Bullough, P. M. Derlet, Phys. Rev. Lett. 100 (2008) 135503.<br>[51] L. Ventelon, B. Wirth, C. Domain, J. Nucl. Mater. 351 (2006) 119.<br>[52] H. L. Heinisch, F. Gao, R. J. Kurtz, E. A. Le, J. Nucl. Mater. 351 (2006) 141–148.<br>[53] H. L. Heinisch, F. Gao, R. J. Kurtz, J. Nucl. Mater. 367–370 (2007) 311–315.<br>[54] C. J. Ortiz, M. J. Caturla, C. C. Fu, F. Willaime, Phys. Rev. B 75 (2007) 100102(R).<br>[55] D. Brimbal, B. D´ ecamps, A. Barbu, E. Meslin, J. Henry, J. Nucl. Mater. 418 (2011) 313.<br>[56] H. Trinkaus, Radiat. Eff. 78 (1983) 189.<br>[57] K. C. Russel, Acta Metall. 26 (1978) 1615–1630.<br>[58] K. Morishita, R. Sugano, J. Nucl. Mater. 353 (2006) 52.<br>[59] W. Wolfer, Philos. Mag. A 58 (1988) 285.<br>[60] D. Stewart, Y. Osetsky, R. Stoller, J. Nucl. Mater. 417 (2011) 1110–1114.<br>[61] H. Trinkaus, Scr. Metall. 23 (1989) 1773–1778.<br>[62] D. Guibert, D. Tromeur-Dervout, in: U. Langer, M. Discacciati, D. Keyes, O. Widlund,<br>W. Zulehner (Eds.), Domain Decomposition Methods in Science and Engineering XVII, vol-<br>ume 60 of Lecture Notes in Computational Science and Engineering, Springer Berlin Heidel-<br>berg, 2008, pp. 535–541</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311115434559.png" alt="image-20210311115434559"></p>
+<p>表1：参考文献[33]中描述的用于模拟测试用例的参数。复合半径riv是间隙团簇和空位团簇之间的最小相互作用距离。在参考文献[34]中描述了由环和空腔产生的吸收效率，并且只是参考文献[12]中用于单个自缺陷的移动团簇的扩展，其中包含多个自缺陷。</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311115451521.png" alt="image-20210311115451521"></p>
+<p>图5：（a）仅使用离散速率方程和福克-普朗克形式，在两种不同几何级数的情况下（∆xn+1=η∆xn，η=1.1或1.03），在0.2dpa下计算的簇分布cn。离散部分由两条垂直线限定。（b，c，d）这三个量在连续部分与福克-普朗克方程有关，本文对此进行了讨论。</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311115514718.png" alt="image-20210311115514718"></p>
+<p>图6：（a）在中子辐照α-铁的情况下，离散和连续部件中包含的自缺陷浓度。（b） 物质守恒的相对误差。</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311115530235.png" alt="image-20210311115530235"></p>
+<p>图7：参考文献[35]中提出的测试用例在t=10 5s和t=10 8s时的聚类分布，使用了两种不同的方案（Chang-Cooper和Centred），即Fokker-Planck方法，参考文献[7]中描述的Golubov方法（G方法）和Kiritani方法[24]（K方法）。t=10 8 s处的插图显示了作为n函数的分布，以显示峰值的位置（用箭头突出显示）。</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311115547463.png" alt="image-20210311115547463"></p>
+<p>图8：参考文献[35]中提出的测试用例在t=10 8 s时的聚类分布，使用了两种不同的方案（ChangCooper和Centred），用于福克-普朗克方法，参考文献[7]中描述的Golubov方法（G方法）和Kiritani方法[24]（K方法）。C的刻度在-1和1之间是线性的，在这个范围之外是对数的。</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311115603109.png" alt="image-20210311115603109"></p>
+<p>图9：在参考文献[35]的测试中使用福克-普朗克方案或G方法时，CVODES解算器采用的时间步长∆t随物理时间的变化。</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311115617304.png" alt="image-20210311115617304"></p>
+<p>图10：当使用溶质原子和额外的团簇布居数时，给定切片中的团簇空间。本示意图中省略了过渡部分。每个蓝色矩形表示一个等式，其大小反映了簇空间中的网格大小。沿给定轴（v、i或s）的离散部分和连续部分中的方程数量分别用“o”和“c”标签索引，因此例如N ci是间隙连续部分中的方程数量。不同集群种群的数量是N ol。在不同的部分使用了不同的方程式。第1部分和第1部分：等式（6）和（15）；第2部分，第2部分：等式（50）（与第3部分的等式相似）；第4部分：等式（51）。第1部分和第2部分控制着其他集群种群的进化。绿线环绕着集群可以移动的部分。</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311115645625.png" alt="image-20210311115645625"></p>
+<p>图11：使用参考文献[35]中提出的试验的修正参数化，在t=10 8 s时的簇分布，包括氦（见正文）。（a） 完全离散计算（b）采用福克-普朗克方法，沿空位轴和溶质轴的几何级数等于η=1.03的计算。灰线表示离散零件。</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311115702965.png" alt="image-20210311115702965"></p>
+<p>图12：（a）在第3.4节（b）中所述的第一次测试中，当使用群集空间调整时，方程数量的变化，作为物理时间的函数，当重新启动解算器或在群集空间调整期间保留积分历史时，解算器所取时间步长∆t的演变。</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311115716612.png" alt="image-20210311115716612"></p>
+<p>表2：用于模拟氦注入α-铁和随后样品退火的参数。文献[49]给出了间隙氦的迁移和混合能。应该注意的是，位错环在氦的存在下被认为是不可移动的，这与以前的计算一致[5]。假设退火所用的温度为[100]圈[50]。氦原子与间隙团簇的结合能符合经验势计算[51]。这与直线位错对氦的强烈俘获是一致的[52,53]。</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311115730618.png" alt="image-20210311115730618"></p>
+<p>表3：用于模拟氦注入α-铁和随后退火的空位团簇的总结合能[54]。总结合能定义为完全解离团簇的形成能与团簇的形成能之差。对于n≤−5的气泡，使用参考文献[16]中提出的气泡模型。</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311115745060.png" alt="image-20210311115745060"></p>
+<p>图13:60 keV氦以等于10 16 cm−2的注量注入α-铁后z=180 nm处的团簇分布。灰色正方形表示离散零件。标度由指数n和p给出，而不是x和y，因此在离散部分之外，标度以几何方式演化。空位的平衡线用灰色表示。紫线和红线是间隙原子和氦原子到团簇的净通量为零的位置。</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311115804224.png" alt="image-20210311115804224"></p>
+<p>图14:100nm厚箔和无表面系统中1073K，z=17nm等温退火的团簇密度和平均半径。</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311115828505.png" alt="image-20210311115828505"></p>
+<p>图15：在1073 K退火期间，在不同时间（a）10−5 s，（b）30 s，（c）3000 s，（d）10 7 s，无表面，团簇分布（仅空位团簇）。灰色线是空位的平衡线。蓝线、紫线和红线是空位、间隙和氦原子到团簇的净通量为零的位置。</p>
+<p><img src="C:%5CUsers%5CA%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311115844176.png" alt="image-20210311115844176"></p>
+<p>图16:100nm系统1073K退火期间，z=17nm和不同时间的团簇分布（仅空位团簇）：（a）10−5s，（b）30s，（c）3000s，（d）107 s。青色、紫色和红色线是空位、间隙和氦原子到团簇的净通量为零的轨迹。</p>
+
+        
+      </div>
+      
+      
+      
+    </div>
+    
+    
+    
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">yumeko</p>
+              <p class="site-description motion-element" itemprop="description">a blog</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yumeko</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

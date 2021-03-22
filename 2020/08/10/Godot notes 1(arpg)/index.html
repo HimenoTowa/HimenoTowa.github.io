@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="Chinese">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="title: 关于Godot的一些笔记date: 2020-08-21 09:28:45tags: Godot lerp and slerp插值。曲线插值。 lerp就是一条直线均匀插值。 slerp就是一条曲线插值。S形状。回忆一下mmd动画的曲线。 what is license?（开源软件用） gdscript guidehttps://docs.godotengine.org/en/sta">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Yumeko">
+<meta property="og:url" content="http://yoursite.com/2020/08/10/Godot notes 1(arpg)/index.html">
+<meta property="og:site_name" content="Yumeko">
+<meta property="og:description" content="title: 关于Godot的一些笔记date: 2020-08-21 09:28:45tags: Godot lerp and slerp插值。曲线插值。 lerp就是一条直线均匀插值。 slerp就是一条曲线插值。S形状。回忆一下mmd动画的曲线。 what is license?（开源软件用） gdscript guidehttps://docs.godotengine.org/en/sta">
+<meta property="og:locale" content="Chinese">
+<meta property="og:image" content="f:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200919113142301.png">
+<meta property="og:image" content="f:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200915202951776.png">
+<meta property="og:image" content="f:%5C0HimenoTowa%5Cpublic%5Cimages%5Cpics%5Cimage-20200822165713245.png">
+<meta property="og:image" content="f:%5C0HimenoTowa%5Cpublic%5Cimages%5Cpics%5Cimage-20200822180204090.png">
+<meta property="og:updated_time" content="2020-10-17T12:30:46.878Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Yumeko">
+<meta name="twitter:description" content="title: 关于Godot的一些笔记date: 2020-08-21 09:28:45tags: Godot lerp and slerp插值。曲线插值。 lerp就是一条直线均匀插值。 slerp就是一条曲线插值。S形状。回忆一下mmd动画的曲线。 what is license?（开源软件用） gdscript guidehttps://docs.godotengine.org/en/sta">
+<meta name="twitter:image" content="f:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200919113142301.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/08/10/Godot notes 1(arpg)/">
+
+
+
+
+
+  <title> | Yumeko</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="Chinese">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yumeko</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/10/Godot notes 1(arpg)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yumeko">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yumeko">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-08-10T09:40:58+08:00">
+                2020-08-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>title: 关于Godot的一些笔记<br>date: 2020-08-21 09:28:45<br>tags: Godot</p>
+<h2 id="lerp-and-slerp"><a href="#lerp-and-slerp" class="headerlink" title="lerp and slerp"></a>lerp and slerp</h2><p>插值。曲线插值。</p>
+<p>lerp就是一条直线均匀插值。</p>
+<p>slerp就是一条曲线插值。S形状。回忆一下mmd动画的曲线。</p>
+<h2 id="what-is-license-（开源软件用）"><a href="#what-is-license-（开源软件用）" class="headerlink" title="what is license?（开源软件用）"></a>what is license?（开源软件用）</h2><p><img src="F:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200919113142301.png" alt="image-20200919113142301"></p>
+<h2 id="gdscript-guide"><a href="#gdscript-guide" class="headerlink" title="gdscript guide"></a>gdscript guide</h2><p><a href="https://docs.godotengine.org/en/stable/getting_started/scripting/gdscript/gdscript_basics.html#doc-gdscript" target="_blank" rel="noopener">https://docs.godotengine.org/en/stable/getting_started/scripting/gdscript/gdscript_basics.html#doc-gdscript</a></p>
+<h2 id="godot-issue"><a href="#godot-issue" class="headerlink" title="godot issue"></a>godot issue</h2><p><a href="https://github.com/godotengine/godot/issues" target="_blank" rel="noopener">https://github.com/godotengine/godot/issues</a></p>
+<h2 id="svg"><a href="#svg" class="headerlink" title="svg"></a>svg</h2><p>svg 矢量图片，用xml定义图形，可伸缩，任何分辨率打印保持清晰。</p>
+<p><a href="https://www.runoob.com/svg/svg-examples.html" target="_blank" rel="noopener">https://www.runoob.com/svg/svg-examples.html</a></p>
+<h1 id="快捷操作"><a href="#快捷操作" class="headerlink" title="快捷操作"></a>快捷操作</h1><p>拖动一个.gd到另一个.gd文件中的extend后边，可以继承。</p>
+<p>一个tscn为另一个tscn的子节点，那么他们会受到相同伤害，相同动作</p>
+<p>给一个属性设置了 onready var health = max_health setget</p>
+<p>func set_health(value):</p>
+<p>​    health = value</p>
+<p>​    if(health&lt;0):</p>
+<p>​        queue_free()</p>
+<p>那么在其他地方调用health-=damage，不需要判断是否为零，它会进入set_health去判断。</p>
+<p>双击一个node重命名</p>
+<p>点击最下方的导航栏，可以将下方窗口暂时收起</p>
+<p>editor-》setting-》shortcut 查看快捷键</p>
+<p>ctrl+K 注释</p>
+<p>在.gd编程界面，</p>
+<p>右上角有一个searchHelp可以点击查询api，在里面搜area2d，就有对应的一堆使用方法</p>
+<p>google godot documentary也是可以的</p>
+<p>var GrassEffect = load()   可以将.tscn文件拖动到括号中</p>
+<p>PS: 可改为 const GrassEffect = preload(“res://Effects/GrassEffect.tscn”)</p>
+<p>这样不用每次都载入了。其他语句写函数里，被hit的时候调用</p>
+<p>PS2: 可以把下面的加特效封装成一个函数（如create_hitEffect)，而不是在信号函数里用。想用就用</p>
+<p>然后 var grassEffect = GrassEffect.instance()</p>
+<p>var world = get_tree().current_scene </p>
+<p>world.add_child(grassEffect)</p>
+<p># 上面两句可改为 get_parent().add_child(grassEffect)</p>
+<p>grassEffect.global_position = global_position  # 有时可以 - Vector2(0,8)来让位置偏移 、或者给特效的初始位置设一个（0，-8）来实现</p>
+<p>.gd页面，暂时将周围的窗口收起，可以按.gd编辑窗口右上角的展开图表（和全屏长得差不多）（distraction-free mode)无干扰模式</p>
+<p>export(bool) var show_hit = true</p>
+<p>if show_hit:</p>
+<pre><code>do some special thing</code></pre><p>为了将这个代码重用给不同node，比如蝙蝠和草，而又有不同效果，就可以用这个show_hit在游戏外界调初始值，草不显示show_hit，蝙蝠显示show_hit</p>
+<p>实时看到碰撞区域：Debug -&gt; visible Collision shapes</p>
+<p>建立一个area2d的scene，添加子节点collisionShape，这个shape可以先不忙设置实际的大小形状；将这个area2d的scene添加到其他node的子节点后，再右键make editable child，编辑实际大小形状。</p>
+<p>关于信号里的areaEnterred，bodyEnterred，指着不放有解释。</p>
+<p>area是其他area进入，body是其他kinetic2d进入或者tilemap进入，可操纵进入的东西，也可获得值</p>
+<p>Scene-&gt;new inherited scene 选Stats.tscn，重命名playerStats.（快速建scene）</p>
+<p>添加.tscn为全局变量：Project-&gt;Project setting-&gt;AutoLoad-&gt;选择playerstats.tscn，add即可</p>
+<p>之后在任何地方只需要var stats = PlayerStats 即可访问</p>
+<p>只要是个Area2d，都别忘了选择-&gt;collision里layer（自己在那一层）和mask（和哪一层交互）</p>
+<p>layer和mask的级别在project setting里general里layer Names里2d physics里设置</p>
+<p>已经连接过的信号，可以双击，再连接给一个node。可以连多个（比如一个播放受击特效（连本node），另一个给主角减血（连主角node））</p>
+<p>sprite.flip_h = velocity.x &lt; 0  # 让动画左右翻转！达到向左飞，向右飞的图像效果</p>
+<p>（原本是向右飞的图）（flip_h是个布尔值，代表是否要水平翻转）</p>
+<p>自己写了signal之后，也可以在godot窗口右侧双击连接；发射信号用函数emit_signal()</p>
+<p>报错信息： debug-》errors</p>
+<p>MONITORING: 检测交互对象（mask）</p>
+<p>MONITORABLE: 自己可被检测（layer）  在敌人enter之后，通过关闭该选项（player的monitorable）再打开，可以再次激活敌人enter效果，从而不产生只进不出就不受伤的bug</p>
+<p>记住，给一个变量设置了setget set_xxx，那么之后每次修改这个变量，都会触发其set_xxx函数;</p>
+<p>在set_xxx中，可以给变量值做临界判断，可以发信号，等等</p>
+<p>如果在set_xxx中，要调用本node里的其他var变量，必须确保要调用的变量在xxx前面声明，并且在_ready函数中进行赋值，否则会找不到，报can‘t convert from nil to xxx</p>
+<p>staticBody</p>
+<p>rigidBody</p>
+<p>kinematicBody</p>
+<p>CollisionShape2D Area2D  只要继承自shape2d，都别忘了设置layer和mask，在collision里边</p>
+<pre><code>if softCollision.is_colliding():
+    velocity += softCollision.get_push_vector() * delta * 400  # 这里的+=很关键，改成=就会非常咔咔壳壳
+velocity = move_and_slide(velocity)</code></pre><p>把player的hurtbox的layer关闭，这样player就无敌了</p>
+<h1 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h1><p>Stats.tscn PlayerStats.tscn 才是真正的控制状态数据 （并发信号告知其他node）有setget</p>
+<p>UI node 只是为了展示状态数据给用户看（接收stats发的信号）也有setget</p>
+<p>60fps，delta≈0.0166…</p>
+<h1 id="信号"><a href="#信号" class="headerlink" title="信号"></a>信号</h1><p>建立信号可以带参数 signal healthChanged(value)</p>
+<p>对应发信号emit_signal(“healthChanged”, health)</p>
+<p>信号操作： 1 建立信号 2 发射信号 3 写信号函数 4 连接信号<br>默认信号： 1 连接信号 写信号函数</p>
+<p>连接信号例子：stats.connect(“no_health”,self,”queue_free”)（当前在Player.gd中）</p>
+<p>意思是：stats有信号”no_health”，发信号时，调用self（就是PLyaer.gd)的queue_free函数。</p>
+<p>如果还有第四个参数，那么第四个参数就是信号函数传递的参数。注：第四个参数类型需要是数组形式，加个[]即可</p>
+<h1 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h1><p>run时，在godot界面左边，选remote，可以看到整体scene中的每个node的属性值，便于编程</p>
+<p>run时，在godot界面下边，点debugger，选monitor/profiler-&gt;start 选择一个点（帧位置） 可以查看哪个方法耗时最多 和 call次数</p>
+<h1 id="UI"><a href="#UI" class="headerlink" title="UI"></a>UI</h1><p>建一个control的node，取名HealthUI                            右键save branch as scene</p>
+<p>将其他control下的小元素比如label拖到这个node下边</p>
+<p>给control添加.gd进行编程</p>
+<p>textureRect 用来放生命心图标，拉单个生命图标到texture，选中tile，向右拉长即可生成多个爱心</p>
+<p>点击texture可以看到当前图片的大小（像素*像素）</p>
+<p>HeartUIFull.rect_size.x = xxx就可以设置宽度，从而控制血量显示  注意expand要打上勾（size flag下的expand去掉勾），这样才能设置到0</p>
+<h1 id="信号函数："><a href="#信号函数：" class="headerlink" title="信号函数："></a>信号函数：</h1><p>func _on_Hurtbox_area_entered(area):</p>
+<p>​    create_grass_effect()</p>
+<p>​    queue_free()</p>
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>导入的像素图片素材很糊：</p>
+<p>先导入一张图片</p>
+<p>找到素材位置，选中，选import，去掉filter的勾，preset选2d pixel，reimport，然后再点preset，set as default（这时如果已经建立node，还不会立即看到结果，要重建）（有时又可以看到结果）</p>
+<p>现在，可以将工程所有图片导入，都会自动按这个设置。</p>
+<p>clamp（夹住，固定）</p>
+<p>func set_hearts(value):</p>
+<p>​    hearts = clamp(value, 0, max_hearts)</p>
+<p>让value的值卡在0到maxhearts之间，大于max_hearts就取max_hearts，0同理</p>
+<p>E 0:00:02.036   set_monitorable: Function blocked during in/out signal. Use set_deferred(“monitorable”, true/false).<br>  &lt;C++ Error&gt;   Condition “locked || (is_inside_tree() &amp;&amp; Physics2DServer::get_singleton()-&gt;is_flushing_queries())” is true.<br>  &lt;C++ Source&gt;  scene/2d/area_2d.cpp:424 @ set_monitorable()<br>  <stack trace> Hurtbox.gd:40 @ _on_Hurtbox_invincibility_started()<br>                Hurtbox.gd:17 @ set_invincible()<br>                Hurtbox.gd:22 @ start_invincibiblity()<br>                Player.gd:96 @ _on_Hurtbox_area_entered()</stack></p>
+<p>不能在physics运行中给这些monitor打勾或取消，需要用set_deferred(“monitorable”,false/true)，等physics函数执行完后再改。</p>
+<p>另外，再set_xxx这种setget函数中，可以添加Timer，timer.start(duration)，这样可以控制时间间隔，比如对monitorable的切换时间间隔为0.5秒。duration=0.5</p>
+<h1 id="来自文档"><a href="#来自文档" class="headerlink" title="来自文档"></a>来自文档</h1><p><a href="https://docs.godotengine.org/en/latest/tutorials/physics/physics_introduction.html?#doc-physics-introduction" target="_blank" rel="noopener">https://docs.godotengine.org/en/latest/tutorials/physics/physics_introduction.html?#doc-physics-introduction</a></p>
+<h2 id="RigidBody2D"><a href="#RigidBody2D" class="headerlink" title="RigidBody2D"></a>RigidBody2D</h2><p>You can modify a rigid body’s behavior via properties such as “Mass”, “Friction”, or “Bounce”, which can be set in the Inspector.</p>
+<p>The body’s behavior is also affected by the world’s properties, as set in Project Settings -&gt; Physics, or by entering an <a href="https://docs.godotengine.org/en/latest/classes/class_area2d.html#class-area2d" target="_blank" rel="noopener">Area2D</a> that is overriding the global physics properties.</p>
+<p>A rigid body can be set to one of four modes:</p>
+<ul>
+<li><strong>Rigid</strong> - The body behaves as a physical object. It collides with other bodies and responds to forces applied to it. This is the default mode.</li>
+<li><strong>Static</strong> - The body behaves like a <a href="https://docs.godotengine.org/en/latest/classes/class_staticbody2d.html#class-staticbody2d" target="_blank" rel="noopener">StaticBody2D</a> and does not move.</li>
+<li><strong>Character</strong> - Similar to “Rigid” mode, but the body cannot rotate.</li>
+<li><strong>Kinematic</strong> - The body behaves like a <a href="https://docs.godotengine.org/en/latest/classes/class_kinematicbody2d.html#class-kinematicbody2d" target="_blank" rel="noopener">KinematicBody2D</a> and must be moved by code.</li>
+</ul>
+<h3 id="Using-RigidBody2D"><a href="#Using-RigidBody2D" class="headerlink" title="Using RigidBody2D"></a>Using RigidBody2D</h3><p>One of the benefits of using a rigid body is that a lot of behavior can be had “for free” without writing any code. For example, if you were making an “Angry Birds”-style game with falling blocks, you would only need to create RigidBody2Ds and adjust their properties. Stacking, falling, and bouncing would automatically be calculated by the physics engine.</p>
+<p>However, if you do wish to have some control over the body, you should take care - altering the <code>position</code>, <code>linear_velocity</code>, or other physics properties of a rigid body can result in unexpected behavior. If you need to alter any of the physics-related properties, you should use the <a href="https://docs.godotengine.org/en/latest/classes/class_rigidbody2d.html#class-rigidbody2d-method-integrate-forces" target="_blank" rel="noopener">_integrate_forces()</a> callback instead of <code>_physics_process()</code>. In this callback, you have access to the body’s <a href="https://docs.godotengine.org/en/latest/classes/class_physics2ddirectbodystate.html#class-physics2ddirectbodystate" target="_blank" rel="noopener">Physics2DDirectBodyState</a>, which allows for safely changing properties and synchronizing them with the physics engine.</p>
+<p>For example, here is the code for an “Asteroids” style spaceship:</p>
+<p>GDScript / C#</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">extends RigidBody2D</span><br><span class="line"></span><br><span class="line">var thrust = Vector2(0, 250)  # 推力</span><br><span class="line">var torque = 20000  # 扭矩 即汽车发动机的转动力，瞬间爆发力</span><br><span class="line"></span><br><span class="line">func _integrate_forces(state):</span><br><span class="line">    if Input.is_action_pressed(&quot;ui_up&quot;):</span><br><span class="line">        applied_force = thrust.rotated(rotation)</span><br><span class="line">    else:</span><br><span class="line">        applied_force = Vector2()</span><br><span class="line">    var rotation_dir = 0</span><br><span class="line">    if Input.is_action_pressed(&quot;ui_right&quot;):</span><br><span class="line">        rotation_dir += 1</span><br><span class="line">    if Input.is_action_pressed(&quot;ui_left&quot;):</span><br><span class="line">        rotation_dir -= 1</span><br><span class="line">    applied_torque = rotation_dir * torque</span><br></pre></td></tr></table></figure>
+
+<p>Note that we are not setting the <code>linear_velocity</code> or <code>angular_velocity</code> properties directly, but rather applying forces (<code>thrust</code> and <code>torque</code>) to the body and letting the physics engine calculate the resulting movement.</p>
+<p>Note</p>
+<p>When a rigid body goes to sleep, the <code>_integrate_forces()</code> function will not be called. To override this behavior, you will need to keep the body awake by creating a collision, applying a force to it, or by disabling the <a href="https://docs.godotengine.org/en/latest/classes/class_rigidbody2d.html#class-rigidbody2d-property-can-sleep" target="_blank" rel="noopener">can_sleep</a> property. Be aware that this can have a negative effect on performance.</p>
+<h2 id="move-and-slide"><a href="#move-and-slide" class="headerlink" title="move_and_slide()"></a>move_and_slide()</h2><p>Vector2 move_and_slide(linear_velocity: Vector2, up_direction: Vector2 = Vector2( 0, 0 ), stop_on_slope: bool = false, max_slides: int = 4, floor_max_angle: float = 0.785398, infinite_inertia: bool = true)</p>
+<p>Moves the body along a vector. If the body collides with another, it will slide along the other body rather than stop immediately. If the other body is a KinematicBody2D or RigidBody2D, it will also be affected by the motion of the other body. You can use this to make moving or rotating platforms, or to make nodes push other nodes.</p>
+<p>This method should be used in Node._physics_process() (or in a method called by Node._physics_process()), as it uses the physics step’s delta value automatically in calculations. Otherwise, the simulation will run at an incorrect speed.</p>
+<p>linear_velocity is the velocity vector in pixels per second. Unlike in move_and_collide(), you should not multiply it by delta — the physics engine handles applying the velocity. </p>
+<p>up_direction is the up direction, used to determine what is a wall and what is a floor or a ceiling. If set to the default value of Vector2(0, 0), everything is considered a wall. This is useful for topdown games.</p>
+<p>If stop_on_slope is true, body will not slide on slopes when you include gravity in linear_velocity and the body is standing still.</p>
+<p>If the body collides, it will change direction a maximum of max_slides times before it stops.</p>
+<p>floor_max_angle is the maximum angle (in radians) where a slope is still considered a floor (or a ceiling), rather than a wall. The default value equals 45 degrees.</p>
+<p>If infinite_inertia is true, body will be able to push RigidBody2D nodes, but it won’t also detect any collisions with them. If false, it will interact with RigidBody2D nodes like with StaticBody2D.</p>
+<p>Returns the linear_velocity vector, rotated and/or scaled if a slide collision occurred. To get detailed information about collisions that occurred, use get_slide_collision().</p>
+<h1 id="p20-超短关于camera内容"><a href="#p20-超短关于camera内容" class="headerlink" title="p20 超短关于camera内容"></a>p20 超短关于camera内容</h1><p>将背景Sprite拉大（下边textureRegion)</p>
+<p>camera2d作为player子节点，可以让相机跟随player</p>
+<p>camera有两个选项可以勾上，一个是smoothing，一个是current      zoom可以控制拉近拉远</p>
+<p>当player死亡，camera回到原位，这看着super awkward</p>
+<p>改成：camera2d结点不作为player子节点，放外边。player子节点添加remoteTransform2d，然后添加相机即可，可解决上面的问题。</p>
+<p>UI跟随相机：把之前的control结点ui，添加为CanvasLayer结点的子节点就完事了</p>
+<h1 id="p21"><a href="#p21" class="headerlink" title="p21"></a>p21</h1><p>Timer 可以设置one shot 和 autostart  鼠标悬停在上面有解释</p>
+<p>WanderController   先记录最开始的位置，然后随机生成目标位置（都以最开始位置为起点）</p>
+<p>用Timer，每段时间更新一次（wander一次）</p>
+<p>在bat的.gd中写一下wander调用状态</p>
+<p>list.shuffle 洗牌的意思，随机打乱</p>
+<p>list.pop_front() 取第一个</p>
+<p>randomize() # 更新随机种子（避免每次重开游戏随机数都是一样的）</p>
+<h1 id="p22"><a href="#p22" class="headerlink" title="p22"></a>p22</h1><p>添加音效   给玩家添加audio node  （不选2d，2d有靠近改变音量大小的功能）</p>
+<p>在animatePlayer里边添加新的track，然后添加关键帧播放音乐</p>
+<p>如果是animateSprite，只需要添加audio node，然后往node右侧的stream拖.wav音频文件即可</p>
+<p>注意autoplay打上勾</p>
+<p>如果玩家死了，audio立刻消失；</p>
+<p>不让audio消失，那么为玩家死亡做一个死亡state，但是蝙蝠还是会追，这会造成大量修改，所以：</p>
+<p>可以把audio单独制作成一个scene（playHurtSound），添加hurt.wav，记得autoplay打勾。</p>
+<p>给audio的scene添加脚本，手动连接finished和queue_free信号connect(“finished”,self,”queue_free”)。</p>
+<p>在玩家脚本里var PlayHurtSound = preload(这个audio scene拖进来)，在要用到的时候（比如受伤，因为最后一下受伤才死）进行var playHurtSound = PlayHurtSound.instance()</p>
+<p>get_tree().current_scene.add_child(playHurtSound)</p>
+<p>对于函数没用到的参数，可以再前面加个underscore 即 _</p>
+<p>在sprite里建立shader  第一次建立，可以存储（点击shader的下拉三角，点edit，在出来的窗口点右上角的扳手，save as），之后可以重用</p>
+<p>​    shader的编程比较像conventional的c++   GLSL</p>
+<blockquote>
+<p>OpenGL着色语言（OpenGL Shading Language）是用来在<a href="https://baike.baidu.com/item/OpenGL/238984" target="_blank" rel="noopener">OpenGL</a>中着色编程的语言，也即开发人员写的短小的自定义程序，他们是在<a href="https://baike.baidu.com/item/图形卡/5358331" target="_blank" rel="noopener">图形卡</a>的GPU （Graphic Processor Unit图形处理单元）上执行的，代替了固定的<a href="https://baike.baidu.com/item/渲染管线/2297474" target="_blank" rel="noopener">渲染管线</a>的一部分，使渲染管线中不同层次具有可编程性。比如：视图转换、投影转换等。GLSL（GL Shading Language）的<a href="https://baike.baidu.com/item/着色器/411001" target="_blank" rel="noopener">着色器</a>代码分成2个部分：Vertex Shader（顶点着色器）和Fragment（片断着色器），有时还会有Geometry Shader（几何着色器）。负责运行顶点着色的是<a href="https://baike.baidu.com/item/顶点着色器/4104625" target="_blank" rel="noopener">顶点着色器</a>。它可以得到当前OpenGL 中的状态，GLSL内置变量进行传递。GLSL其使用C语言作为基础高阶着色语言，避免了使用<a href="https://baike.baidu.com/item/汇编语言/61826" target="_blank" rel="noopener">汇编语言</a>或硬件规格语言的复杂性。</p>
+</blockquote>
+<p>error(1): Expected ‘shader_type’ at the beginning of shader. Valid types are: ‘canvas_item’（2D用的）, ‘particles’（粒子效果）, ‘spatial’（3D用的）</p>
+<p><a href="https://docs.godotengine.org/en/stable/tutorials/shading/shading_reference/index.html" target="_blank" rel="noopener">https://docs.godotengine.org/en/stable/tutorials/shading/shading_reference/index.html</a></p>
+<p>例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">shader_type canvas_item;</span><br><span class="line"></span><br><span class="line">uniform bool active = true;   //uniform 让godot编辑器右侧可以看到这个属性  并且可以拿到animationPlayer里面k帧</span><br><span class="line"></span><br><span class="line">void fragment()&#123;</span><br><span class="line">    COLOR = vec4(1.0,1.0,1.0,1.0); //把每个像素变白了   一个大矩形</span><br><span class="line">                      red green blue alpha</span><br><span class="line">	vec4 previous_color = texture(TEXTURE, UV); //从texture里取色，uv是坐标，输入UV就是每个位置都找一遍，都取值存起来</span><br><span class="line">	COLOR = previous_color; //啥也不干</span><br><span class="line">	vec4 white_color = vec4(1.0,1.0,1.0,previous_color.a);//alpha    ;  is  semicomma</span><br><span class="line">	COLOR = while_color; //主角有颜色的地方全变白</span><br><span class="line">	</span><br><span class="line">	vec4 new_color = previous_color;</span><br><span class="line">	if(active == true) &#123;</span><br><span class="line">		new_color = white_color;</span><br><span class="line">	&#125;</span><br><span class="line">	COLOR = new_color;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>给player再单独建一个animattionplayer 取名blinkanimate</p>
+<p>建立两个状态 start stop ， </p>
+<p>添加sprite这个track，就可以用shader里面的active来k帧</p>
+<p>k帧，blink0.1秒，动画设置循环</p>
+<p>这样在invincibility start的触发后，比如共0.6s invincibility时间，那么会闪烁六次</p>
+<p>bat-&gt;animatedSprite-&gt;material-&gt;resource-&gt;Local To Scene 打上勾 这样就不会共享资源 造成一直蝙蝠受伤，所有蝙蝠闪烁 每个蝙蝠都单独创建资源</p>
+<p>warning有助于优化code</p>
+<p>（在debugger里面）</p>
+<h1 id="p23-bonus"><a href="#p23-bonus" class="headerlink" title="p23 bonus"></a>p23 bonus</h1><p>修改了invincibility，将collisionShape2d的disabled 设为true 就无敌。</p>
+<p>相机 加两个position2d，用来确定limit的坐标，这样相机不会超过limit属性的位置。</p>
+<p>中间加了个node，目的就是切断继承性，不让posion2d跟着相机移动。</p>
+<p>单独移动节点的话，选中节点，然后按alt再拖动。</p>
+<h1 id="游戏打包"><a href="#游戏打包" class="headerlink" title="游戏打包"></a>游戏打包</h1><p>project -&gt; export 选择操作系统 路径</p>
+<p>导出 第一次没对应软件，按提示下载即可（挂vpn才能下载（同样很慢）（实验室的网太垃圾了，改连手机热点））所以到网上去godot官网找，然后用godot从文件下载</p>
+<p><a href="https://godotengine.org/download/windows" target="_blank" rel="noopener">https://godotengine.org/download/windows</a></p>
+<p>往下拉，可看见Export templates(standard)</p>
+<p>右键使用IDM下载</p>
+<p>8线程也只有70KB/s左右 不知道为啥这么慢！</p>
+<p>下完，导入后，就能打包了吧，吃饭去了</p>
+<p>还没吃饭。又试了下打开vpn，暂停IDM，重开，可以了，2M/s。不错</p>
+<p>打包的时候，最右边script，选择后，下面可选择encrypted加密，解包密码自己设置（16进制数字串）具体步骤：</p>
+<p><a href="https://docs.godotengine.org/en/stable/development/compiling/compiling_with_script_encryption_key.html" target="_blank" rel="noopener">https://docs.godotengine.org/en/stable/development/compiling/compiling_with_script_encryption_key.html</a></p>
+<p>在上面的网页里点击this service链接生成key</p>
+<p>或者点这个链接<a href="https://asecuritysite.com/encryption/keygen" target="_blank" rel="noopener">https://asecuritysite.com/encryption/keygen</a></p>
+<p>导出后 用cmd运行，可以看到报错信息</p>
+<p>设置main scene（必须）project -&gt;project setting-&gt;Application-&gt;Run</p>
+<h1 id="让导出的游戏只有exe，没有pck"><a href="#让导出的游戏只有exe，没有pck" class="headerlink" title="让导出的游戏只有exe，没有pck"></a>让导出的游戏只有exe，没有pck</h1><p><img src="F:%5C0HimenoTowa%5Cpublic%5Cimages%5Cimage-20200915202951776.png" alt="image-20200915202951776"></p>
+<p>导出时候的options-&gt;embed Pck 打上勾</p>
+<p>选好导出位置</p>
+<p>export all （可能是灰色的，在options里面随便点个按钮，再取消掉，好像就不会灰色）</p>
+<h1 id="一些小名词"><a href="#一些小名词" class="headerlink" title="一些小名词"></a>一些小名词</h1><p>Exp Edit 指数增长（不是线性增长）</p>
+<p>Rounded 求整</p>
+<p>Ticks on Borders   显示刻度</p>
+<p>HScrollBar 添加 label节点，label添加脚本，process里写 text = String(get_parent().value)</p>
+<p>CanvasItem-&gt;Control-&gt;Range-&gt;TextureProgress（比progressBar要好）自定义加载条（图片）（可以充当加载条，血条等等）还可以用圆形素材 Fill Mode</p>
+<p>spinbox 计数器 显示钱等等 （实用）</p>
+<p>ItemList 上方 Items便捷加入</p>
+<p>右侧 Allow Reselect 可以多次选择，发信号</p>
+<p>Allow Rmb Select 允许右键点击</p>
+<p>脚本里 sort_item_by_text 根据text排序item</p>
+<p>label:</p>
+<p>clip text 超出框的文字消失</p>
+<p>visible Characters -1（显示全部）  1 显示一个     可以用来做打字机效果</p>
+<p>Percent Visible 也可以</p>
+<p>MaxLines Visible 可以做字幕一行一行来</p>
+<p>skip line  跳过某行</p>
+<p>[b][/b]</p>
+<p>[i][/i]</p>
+<p>[color=aqua][/color] 水色 湖绿色</p>
+<p>docs.godotengine.org/en/3.2/tutorials/gui/bbcode_in_richtextlabel.html</p>
+<p>caret 就是输入文字时闪烁的光标</p>
+<p>blink 打勾，那么就闪烁，speed 0.65</p>
+<p>textedit 可以用来让用户输入名字   godot的脚本编辑器就是一个textedit</p>
+<p>NinePatchRect</p>
+<p><img src="F:%5C0HimenoTowa%5Cpublic%5Cimages%5Cpics%5Cimage-20200822165713245.png" alt="image-20200822165713245"></p>
+<p>再把 Axis Stretch 设置成 Tile</p>
+<p>就自然地缩放这种血条</p>
+<p>tabContainer里面每添加一个节点都会在里面自动生成一个子标签</p>
+<p>textureRect 可以添加各种图片</p>
+<p>Image   :     mmd导出的bmp图片</p>
+<p>stream ： png图片</p>
+<p><img src="F:%5C0HimenoTowa%5Cpublic%5Cimages%5Cpics%5Cimage-20200822180204090.png" alt="image-20200822180204090"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/08/01/tar命令详解/" rel="next" title="tar命令详解">
+                <i class="fa fa-chevron-left"></i> tar命令详解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/08/16/对axis的理解/" rel="prev" title="Python 对axis的理解">
+                Python 对axis的理解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">yumeko</p>
+              <p class="site-description motion-element" itemprop="description">a blog</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#lerp-and-slerp"><span class="nav-number">1.</span> <span class="nav-text">lerp and slerp</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#what-is-license-（开源软件用）"><span class="nav-number">2.</span> <span class="nav-text">what is license?（开源软件用）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gdscript-guide"><span class="nav-number">3.</span> <span class="nav-text">gdscript guide</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#godot-issue"><span class="nav-number">4.</span> <span class="nav-text">godot issue</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#svg"><span class="nav-number">5.</span> <span class="nav-text">svg</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#快捷操作"><span class="nav-number"></span> <span class="nav-text">快捷操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#结构"><span class="nav-number"></span> <span class="nav-text">结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#信号"><span class="nav-number"></span> <span class="nav-text">信号</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#调试"><span class="nav-number"></span> <span class="nav-text">调试</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#UI"><span class="nav-number"></span> <span class="nav-text">UI</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#信号函数："><span class="nav-number"></span> <span class="nav-text">信号函数：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#问题"><span class="nav-number"></span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#来自文档"><span class="nav-number"></span> <span class="nav-text">来自文档</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#RigidBody2D"><span class="nav-number">1.</span> <span class="nav-text">RigidBody2D</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Using-RigidBody2D"><span class="nav-number">1.1.</span> <span class="nav-text">Using RigidBody2D</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#move-and-slide"><span class="nav-number">2.</span> <span class="nav-text">move_and_slide()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#p20-超短关于camera内容"><span class="nav-number"></span> <span class="nav-text">p20 超短关于camera内容</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#p21"><span class="nav-number"></span> <span class="nav-text">p21</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#p22"><span class="nav-number"></span> <span class="nav-text">p22</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#p23-bonus"><span class="nav-number"></span> <span class="nav-text">p23 bonus</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#游戏打包"><span class="nav-number"></span> <span class="nav-text">游戏打包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#让导出的游戏只有exe，没有pck"><span class="nav-number"></span> <span class="nav-text">让导出的游戏只有exe，没有pck</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一些小名词"><span class="nav-number"></span> <span class="nav-text">一些小名词</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yumeko</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

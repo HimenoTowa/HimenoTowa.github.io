@@ -79,19 +79,19 @@
 
 
 
-<meta name="description" content="1 open Atom2 ctrl + ,3 download following packagelinterlinter-gcclinter-ui-defaultgcc-make-run(dowload TDM-GCC if you use Atom on Windows.Then enter gcc-make-run‘s setting, edit  make utility as mingw">
+<meta name="description" content="1 open Atom2 ctrl + ,3 download following packagelinterlinter-gcclinter-ui-defaultgcc-make-run(dowload TDM-GCC if you use Atom on Windows.Open gcc-make-run‘s setting, edit  make utility as mingw32-mak">
 <meta name="keywords" content="c++,atom">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Atom c++ 环境">
 <meta property="og:url" content="http://yoursite.com/2020/03/03/Atomcpp/index.html">
 <meta property="og:site_name" content="Yumeko">
-<meta property="og:description" content="1 open Atom2 ctrl + ,3 download following packagelinterlinter-gcclinter-ui-defaultgcc-make-run(dowload TDM-GCC if you use Atom on Windows.Then enter gcc-make-run‘s setting, edit  make utility as mingw">
+<meta property="og:description" content="1 open Atom2 ctrl + ,3 download following packagelinterlinter-gcclinter-ui-defaultgcc-make-run(dowload TDM-GCC if you use Atom on Windows.Open gcc-make-run‘s setting, edit  make utility as mingw32-mak">
 <meta property="og:locale" content="Chinese">
 <meta property="og:image" content="http://yoursite.com/images/pics/pic.jpg">
-<meta property="og:updated_time" content="2020-08-24T03:08:13.028Z">
+<meta property="og:updated_time" content="2020-10-06T02:12:23.505Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Atom c++ 环境">
-<meta name="twitter:description" content="1 open Atom2 ctrl + ,3 download following packagelinterlinter-gcclinter-ui-defaultgcc-make-run(dowload TDM-GCC if you use Atom on Windows.Then enter gcc-make-run‘s setting, edit  make utility as mingw">
+<meta name="twitter:description" content="1 open Atom2 ctrl + ,3 download following packagelinterlinter-gcclinter-ui-defaultgcc-make-run(dowload TDM-GCC if you use Atom on Windows.Open gcc-make-run‘s setting, edit  make utility as mingw32-mak">
 <meta name="twitter:image" content="http://yoursite.com/images/pics/pic.jpg">
 
 
@@ -302,8 +302,9 @@
       
 
       
-        <p>1 open Atom<br>2 ctrl + ,<br>3 download following package<br><strong>linter</strong><br><strong>linter-gcc</strong><br><strong>linter-ui-default</strong><br><strong>gcc-make-run</strong><br>(dowload <a href="https://jmeubank.github.io/tdm-gcc/download/" target="_blank" rel="noopener">TDM-GCC</a> if you use Atom on Windows.<br>Then enter <strong>gcc-make-run</strong>‘s <strong>setting</strong>,
-edit  <strong>make utility</strong> as <em>mingw32-make</em> )<br>4 shutdown 360/电脑管家</p>
+        <p>1 open Atom<br>2 ctrl + ,<br>3 download following package<br><strong>linter</strong><br><strong>linter-gcc</strong><br><strong>linter-ui-default</strong><br><strong>gcc-make-run</strong><br>(dowload <a href="https://jmeubank.github.io/tdm-gcc/download/" target="_blank" rel="noopener">TDM-GCC</a> if you use Atom on Windows.<br>Open <strong>gcc-make-run</strong>‘s <strong>setting</strong>, edit  <strong>make utility</strong> as <em>mingw32-make</em> )<br>4 shutdown 360/电脑管家</p>
+<p>5 Open <strong>gcc-make-run</strong>‘s <strong>setting</strong>, edit  <strong>link libraries</strong> as <em>-std=c++11</em></p>
+<p>6 click F6 to run</p>
 <a id="more"></a>
 
 <p><br><br><br><br><br></p>
@@ -323,10 +324,10 @@ edit  <strong>make utility</strong> as <em>mingw32-make</em> )<br>4 shutdown 360
 </ul>
 <p>出现问题：<br>linter on-the-fly不实时检测代码错误，甚至不显示代码错误。<br>解决：<br>停用autosave这个包<br>退出所有已经打开的文件，退出项目文件，文件夹名不要带中文，关闭atom，重启atom。</p>
 <p>PS3：按了F6之后，等个七八秒才编译成功。linter on-the-fly也极度地卡，没法用。<br>解决：<strong>关闭360/电脑管家。</strong><br>PS of PS3: 这个问题可真是困扰我好久咧。</p>
-<p>PS4：若需要使用auto（c++11）<br>比如循环</p>
+<p>PS4：<strong>若需要使用auto（c++11）</strong><br>比如循环</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; vt;</span><br><span class="line">vt.push_back(<span class="number">1</span>);</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> x:vt)<span class="built_in">cout</span>&lt;&lt;x&lt;&lt;<span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
 
-<p>在gcc-make-run里link libraries栏中加入 -std=c++11</p>
+<p><strong>在gcc-make-run里link libraries栏中加入 -std=c++11</strong></p>
 <p><img src="/images/pics/pic.jpg" alt></p>
 
       
@@ -438,7 +439,7 @@ edit  <strong>make utility</strong> as <em>mingw32-make</em> )<br>4 shutdown 360
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -451,7 +452,7 @@ edit  <strong>make utility</strong> as <em>mingw32-make</em> )<br>4 shutdown 360
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
@@ -488,7 +489,7 @@ edit  <strong>make utility</strong> as <em>mingw32-make</em> )<br>4 shutdown 360
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
